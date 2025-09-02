@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100 overflow-hidden">
+
+<!-- Navbar -->
+<div class="nav flex justify-between h-20 items-center shadow-lg p-4 bg-gray-700">
+    <!-- Logo -->
+    <div class="flex items-center text-4xl font-bold">
+        <img src="logoRS.jpg" alt="RoofScout Logo" class="h-16 w-16 mr-2 bg-cover bg-center rounded-full">
+        <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+        <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex space-x-4 text-white">
+        <span>Admin</span>
+        <a href="index.html" class="hover:text-blue-600">Logout</a>
+    </div>
+</div>
+ 
+    
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="bg-gray-900 text-white w-64 min-h-screen p-4 space-y-6">
+            <div class="space-y-4">
+                
+                <a href="#" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-duotone fa-solid fa-house text-blue-800"></i> Houses </a>
+                <a href="#" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-solid fa-user text-purple-800"></i> Buyer/Seller</a>
+                <a href="#" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-regular fa-building text-amber-400"></i> Properties</a>
+                <a href="#" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-solid fa-person text-cyan-300"></i> Tenants</a>
+                <a href="#" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-regular fa-money-bill-1 text-green-500"></i> Payment</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <h2 class="text-2xl font-bold mb-4">Welcome Admin</h2>
+
+            <!-- Cards Grid -->
+            <div class="grid lg:grid-cols-4 gap-6  md:grid-cols-3 gap-6 sm:grid-cols-2">
+                <div class="bg-blue-500 text-white p-6 rounded shadow text-center">
+                    <p class="text-3xl font-bold">4</p>
+                    <p>Houses Sold</p>
+                    <a href="#" class="mt-2 inline-block text-white underline">View Details →</a>
+                </div>
+                <div class="bg-green-500 text-white p-6 rounded shadow text-center">
+                    <p class="text-3xl font-bold">4</p>
+                    <p>Tenants</p>
+                    <a href="#" class="mt-2 inline-block text-white underline">View Details →</a>
+                </div>
+                <div class="bg-yellow-400 text-white p-6 rounded shadow text-center">
+                    <p class="text-3xl font-bold">4</p>
+                    <p>Payment</p>
+                    <a href="#" class="mt-2 inline-block text-white underline">View Details →</a>
+                </div>
+                <div class="bg-red-500 text-white p-6 rounded shadow text-center">
+                    <p class="text-3xl font-bold">4</p>
+                    <p>Request Pending</p>
+                    <a href="#" class="mt-2 inline-block text-white underline">View Details →</a>
+                </div>
+                <div class="bg-gray-600 text-white p-6 rounded shadow text-center">
+                    <p class="text-3xl font-bold">415273</p>
+                    <p>Rent Collected</p>
+                    <a href="#" class="mt-2 inline-block text-white underline">View Details →</a>
+                </div>
+                <div class="bg-red-600 text-white p-6 rounded shadow text-center">
+                    <p class="text-3xl font-bold">67354</p>
+                    <p>All Balance</p>
+                    <a href="#" class="mt-2 inline-block text-white underline">View Details →</a>
+                </div>
+               
+                <div class="bg-teal-500 text-white p-6 rounded shadow text-center">
+                    <p class="text-3xl font-bold">7</p>
+                    <p>Vacant House</p>
+                    <a href="#" class="mt-2 inline-block text-white underline">View Details →</a>
+                </div>
+            </div>
+
+            <!-- New Tenants Section -->
+            <div class="bg-pink-100 mt-8 p-4 rounded shadow">
+                <h3 class="font-semibold mb-2">New Tenants</h3>
+                <table class="w-full text-left border border-gray-300">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="p-2 border">Name</th>
+                            <th class="p-2 border">Date</th>
+                            <th class="p-2 border">States</th>
+                            <th class="p-2 border">Check</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-2 border">Rohit Sharma</td>
+                            <td class="p-2 border">28-8-2025</td>
+                            <td class="p-2 border">done</td>
+                            <td class="p-2 border">false</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 border">Nitish Rana</td>
+                            <td class="p-2 border">28-8-2025</td>
+                            <td class="p-2 border">done</td>
+                            <td class="p-2 border">false</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" class="block text-center mt-2 text-blue-500 hover:underline">View All Tenants</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

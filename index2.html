@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoofScout</title>
+  <link rel="icon" type="image/jpg" href="logoRS.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+ <style>
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  </style>
+<body >
+  <div class="sticky top-0 z-50  nav flex gap-10 h-20 items-center shadow-lg p-4 bg-white overflow-visible relative">
+    <!-- Logo -->
+  <div class="flex items-center text-4xl font-bold">
+    <img src="logoRS.jpg" alt="RoofScout Logo" class="h-18 w-20 mr-2 bg-cover bg-center">
+    <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+    <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+  </div>
+
+  <div class="flex items-center space-x-4">
+  <!-- Dropdown (Buy) -->
+  <div class="relative">
+    <div class="dropdown">
+      <button class="flex items-center justify-between w-8 bg-white border-b-2 border-gray-500 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50">
+        Rent
+      </button>
+      <div class="dropdown-menu absolute hidden h-auto flex pt-4">
+        <ul class="block w-full bg-white shadow">
+          <li class="py-1 px-2"><a href="index.html">Buy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <!-- Search Box -->
+  <div class="relative w-1/2 flex items-center">
+    <input type="text" placeholder="Enter Locality/Project/Society/Landmark" class="w-full rounded-xl shadow-xl h-12 p-4 border border-gray-500">
+    <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex items-center ml-16 space-x-4">
+    <button class="bg-blue-500 text-white rounded-lg px-3 py-2 hover:bg-blue-600">
+      <a href="postproperty.html">Post Property</a>
+      <sup class="ml-1 text-xs bg-green-500 border border-gray-900 text-white px-1 rounded-md">Free</sup>
+    </button>
+    <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
+      <a href="login.html">Login/ SignUp</a>
+    </button>
+  </div>
+
+</div>
+  <main class="flex-1 bg-gradient-to-br from-blue-100 via-green-100 to-pink-200">
+      <section class="flex flex-col md:flex-row items-center p-6 gap-10 py-10 min-h-[500px]">
+            <div class="md:w-1/2 flex flex-col gap-5">
+                <h1 class="text-5xl font-bold">Your idle-property</h1>
+                <h1 class="text-5xl font-bold">Companion.</h1>
+                <h3 class="text-gray-600 font-bold text-lg">Rent Sell Purchase. All at your fingertips.</h3>
+                <div class="relative w-full md:w-2/3 mt-4">
+                    <input type="text" placeholder="What's Your email" class="w-full h-full p-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <button class="text-black bg-yellow-300 p-2 rounded-lg whitespace-nowrap absolute bottom-1 right-1">Get Started for free</button>
+                </div>
+                <div>
+                    <p class="font-bold italic text-gray-600 text-2xl mt-2">"Simplifying property, one click at a time."</p>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center items-center mt-8 md:mt-0">
+                <img src="newhomeproperty.png" class="rounded-lg  w-full max-w-lg object-contain" alt="Property" />
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 p-10">
+          <div class="w-full h-64 p-6 rounded-xl shadow-md flex flex-col items-center justify-center transition-transform duration-300 hover:scale-105 bg-green-200">
+           <h2 class="text-4xl font-bold text-gray-700 counter" data-target="5000">0</h2>
+            <p class="text-xl font-bold text-gray-800">Homes provided</p>
+          </div>
+         <div class="w-full h-64 p-6 rounded-xl shadow-md flex flex-col items-center justify-center transition-transform duration-300 hover:scale-105 bg-yellow-100">
+           <h2 class="text-4xl font-bold text-gray-700 counter" data-target="120">0</h2>
+           <p class="text-xl font-bold text-gray-800">Cities covered</p>
+        </div>
+        <div class="w-full h-64 p-6 rounded-xl shadow-md flex flex-col items-center justify-center transition-transform duration-300 hover:scale-105 bg-blue-100">
+          <h2 class="text-4xl font-bold text-gray-700 counter" data-target="200">0</h2>
+          <p class="text-xl font-bold text-gray-800">Happy Buyers</p>
+        </div>
+       </section>
+
+        <section class="flex flex-col p-6 gap-7 text-start">
+            <div class="text-gray-600 font-serif flex flex-col items-center justify-center text-lg">Over 1,000 lives have found a roof they love with RoofScout.</div>
+            <p class="text-black-600 text-lg">RoofScout Product Suite</p>
+            <h1 class="font-bold text-2xl">MEET ROOFSCOUT</h1>
+            <p class="text-xl max-w-3xl items-start">From search to saved favorites, RoofScout is the complete property companion that makes your home journey faster, smarter, and stress-free.</p>
+        </section>
+
+        <section class="p-3 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-center bg-no-repeat p-10 w-full h-full bg-cover rounded-lg min-h-[300px]" style="background-image: url('service.jpg')">
+                <h3 class="col-span-full text-yellow-400 font-bold text-3xl italic mb-6 p-2 rounded-lg text-center md:text-left">Our Services</h3>
+                
+                <div class="bg-white bg-opacity-80 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-semibold mb-2">Easy Buying Process</h3>
+                    <p>We simplify the home buying process with our user-friendly platform and an exclusive option of choosing your dream home under your budget</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-80 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-semibold mb-2">Easy Rental Process</h3>
+                    <p>We make renting hassle-free with our streamlined process, ensuring you find the perfect rental property quickly and easily.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-80 p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-semibold mb-2">Easy Selling Process</h3>
+                    <p>We simplify the home selling process with our expert guidance and a platform that connects you with potential buyers efficiently.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <div class="flex flex-row items-center justify-between px-8 mb-6">
+                <h1 class="font-bold italic text-gray-900 text-xl">OUR PROPERTIES</h1>
+                <div class="flex flex-row items-center gap-2 transition-transform duration-300 hover:scale-105 cursor-pointer">
+                    <a href="allproperties.html" class="font-bold text-lg m-0 text-gray-900">All Properties ></a>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-8 justify-center px-6">
+                <div class="w-[350px] h-[500px] rounded-xl shadow-md flex flex-col justify-end text-white font-bold text-xl relative transition-transform duration-300 hover:scale-105"
+                    style="background-image: url('homehouse1.jpg'); background-size: cover; background-position: center;">
+                    <div class="bg-black bg-opacity-40 p-3 w-full flex flex-col gap-2 rounded-b-xl">
+                        <span class="font-semibold">405 Lock House, Goa</span>
+                        <span class="text-sm">Luxury villa with sea view near Baga Beach.</span>
+                        <div class="border-2 border-blue-600 rounded-xl px-4 py-1 w-fit bg-white text-green-700">rent | $100</div>
+                        <div class="text-sm italic text-blue-500 hover:underline cursor-pointer">View Details ></div>
+                    </div>
+                </div>
+
+                <div class="w-[350px] h-[500px] rounded-xl shadow-md flex flex-col justify-end text-white font-bold text-xl relative transition-transform duration-300 hover:scale-105"
+                    style="background-image: url('homehouse2.jpg'); background-size: cover; background-position: center;">
+                    <div class="bg-black bg-opacity-40 p-3 w-full flex flex-col gap-2 rounded-b-xl">
+                        <span class="font-semibold">308, Ganga Sagar House, Nashik</span>
+                        <span class="text-sm">Spacious 3BHK apartment with city view.</span>
+                        <div class="border-2 border-blue-600 rounded-xl px-4 py-1 w-fit bg-white text-green-700">buy | $100000</div>
+                        <div class="text-sm italic text-blue-500 hover:underline cursor-pointer">View Details ></div>
+                    </div>
+                </div>
+
+                <div class="w-[350px] h-[500px] rounded-xl shadow-md flex flex-col justify-end text-white font-bold text-xl relative transition-transform duration-300 hover:scale-105"
+                    style="background-image: url('homehouse3.jpg'); background-size: cover; background-position: center;">
+                    <div class="bg-black bg-opacity-40 p-3 w-full flex flex-col gap-2 rounded-b-xl">
+                        <span class="font-semibold">566, 3BHK House, Delhi</span>
+                        <span class="text-sm">Modern home in the heart of the city.</span>
+                        <div class="border-2 border-blue-600 rounded-xl px-4 py-1 w-fit bg-white text-green-700">rent | $100</div>
+                        <div class="text-sm italic text-blue-500 hover:underline cursor-pointer">View Details ></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 px-8 border-t-2 border-black">
+            <h2 class="text-blue-600 text-3xl font-extrabold mb-12 text-center tracking-wide">TESTIMONIALS</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="flex justify-center">
+                    <img src="https://thumbs.dreamstime.com/b/beautiful-happy-family-standing-front-their-new-house-parnets-holding-children-keys-focus-keys-family-holding-239824741.jpg"
+                        alt="Testimonial from Palbo & Emma"
+                        class="rounded-xl shadow-xl max-w-lg w-full object-cover transition-transform duration-300 hover:scale-105" />
+                </div>
+                <div class="bg-white bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg p-6">
+                    <div class="flex flex-col">
+                        <div class="flex items-start gap-3">
+                            <p class="text-gray-700 leading-relaxed italic text-lg">
+                                “Don’t let little things stop you from moving forward. Stay focused, stay consistent, and you’ll overcome challenges.”
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client"
+                                class="w-12 h-12 rounded-full shadow-md border hover:scale-105 transition-transform" />
+                            <span class="font-semibold text-gray-900 text-lg">Palbo & Emma</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+  </main>
+    <footer  class="bg-[#1e6091] text-gray-800 py-8 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div class="space-y-4">
+          <div class="flex items-center font-bold text-4xl">
+            <h1 class="text-2xl font-bold text-yellow-500">
+              <a href="index.html">Roof</a>
+            </h1>
+            <h1 class="text-2xl font-bold text-blue-600 ml-1">
+              <a href="index.html">Scout</a>
+            </h1>
+          </div>
+          <p class="text-sm text-gray-400">
+            Your trusted property partner for buying and renting homes.
+          </p>
+          <div class="flex  space-x-4 mt-4 gap-4 text-white ">
+                  <a href="https://www.facebook.com/" target="_blank">
+                    <i class="fab fa-facebook "></i>
+                  </a>
+                  <a href="https://www.instagram.com/" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="https://www.linkedin.com/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://wa.me/" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </div>
+        </div>
+        <div class="md:ml-12">
+          <h3 class="text-lg font-semibold text-white">Quick Links</h3>
+          <ul class="mt-4 space-y-3">
+            <li>
+              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white ">Home</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white">Buy Property</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white">Sell Property</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-white">Explore</h3>
+          <ul class="mt-4 space-y-3">
+            <li>
+              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white">Apartments for Rent</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white">Houses for Sale</a>
+            </li>
+            <li>
+              <a href="Punjab.html" class="hover:text-[#d9ed92] transition-colors text-white">Properties in Haryana</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-white">Contact Us</h3>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li class="flex items-center">
+              <span class="mr-3 text-yellow-500">📞</span>
+              <a href="tel:+911234567890" class="hover:text-[#d9ed92] transition-colors text-white">+91 12345 67890</a>
+            </li>
+            <li class="flex items-center">
+              <span class="mr-3 text-yellow-500">📧</span>
+              <a href="mailto:hello@gmail.com" class="hover:text-[#d9ed92] transition-colors text-white">RoofScout@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  //  Search function
+  const searchIcon = document.querySelector(".fa-magnifying-glass");
+  const searchInput = document.querySelector("input[type='text']");
+
+  searchIcon.addEventListener("click", function() {
+    const states = searchInput.value.trim().toLowerCase();
+
+    if (states === "punjab") {
+      window.location.href = "punjab.html";
+    } else if (states === "haryana") {
+      window.location.href = "haryana.html";
+    } else if (states === "delhi") {
+      window.location.href = "delhi.html";
+    } else if (states === "chandigarh") {
+      window.location.href = "chandigarh.html";
+    } else {
+      alert("No matching location found!");
+    }
+  });
+
+  //  Enter to search
+  searchInput.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      searchIcon.click();
+    }
+  });
+
+  // increasing number animation 
+  const counters = document.querySelectorAll(".counter");
+
+  counters.forEach(counter => {
+    let target = +counter.getAttribute("data-target");
+    let count = 0;
+    let step = Math.ceil(target / 100);
+
+    let interval = setInterval(() => {
+      count += step;
+      if (count >= target) {
+        count = target;
+        clearInterval(interval);
+      }
+      counter.innerText = count + "+";
+    }, 20);
+  });
+});
+</script>
+
+</html>

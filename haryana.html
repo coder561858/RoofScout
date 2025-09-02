@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoofScout</title>
+  <link rel="icon" type="image/jpg" href="logoRS.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+ <style>
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  </style>
+<body class="flex flex-col min-h-screen bg-gradient-to-br from-blue-100 via-green-100 to-pink-200">
+<nav class="bg-gray-200 shadow-md flex justify-between">
+  <div class=" flex justify-between items-center px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      
+      <!-- Logo -->
+      <div class="flex justify-start  space-x-2">
+        <img src="LogoRS.png" alt="RoofScout Logo" class="h-10 w-12">
+        <h1 class="text-2xl font-bold text-yellow-500">Roof</h1>
+        <h1 class="text-2xl font-bold text-blue-600">Scout</h1>
+      </div>
+
+      <!-- Search & Menu (Desktop) -->
+      <div class="hidden lg:flex flex-1 items-center justify-center space-x-6">
+        
+        <!-- Buy -->
+        <div class="relative">
+          <button class="font-bold text-gray-700 border-b-2 border-gray-500 pb-1 hover:text-blue-600">Buy</button>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="relative w-1/2">
+          <input type="text" placeholder="Enter Locality/Project/Society/Landmark" class="w-full h-12 rounded-xl border border-gray-500 shadow-md px-4">
+          <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="hidden lg:flex items-center space-x-4">
+        <button class="bg-blue-500 text-white rounded-lg px-3 py-2 hover:bg-blue-600 flex items-center">
+          <a href="postproperty.html">Post Property</a>
+          <sup class="ml-1 text-xs bg-green-500 border border-gray-900 text-white px-1 rounded-md">Free</sup>
+        </button>
+        <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
+          <a href="login.html">Login/ SignUp</a>
+        </button>
+      </div>
+
+      <!-- Hamburger Menu (Mobile) -->
+      <div class="lg:hidden">
+        <button id="menu-btn" class="flex flex-col space-y-1">
+          <span class="block w-6 h-1 bg-gray-700"></span>
+          <span class="block w-6 h-1 bg-gray-700"></span>
+          <span class="block w-6 h-1 bg-gray-700"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden px-4 pb-4 space-y-4">
+    <button class="block w-full text-left font-bold">Buy</button>
+    <input type="text" placeholder="Enter Locality/Project/Society/Landmark" class="w-full h-12 rounded-xl border border-gray-500 shadow-md px-4">
+    <button class="bg-blue-500 text-white rounded-lg px-3 py-2 hover:bg-blue-600 w-full">
+      Post Property <sup class="ml-1 text-xs bg-green-500 border border-gray-900 text-white px-1 rounded-md">Free</sup>
+    </button>
+    <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 w-full">Login/ SignUp</button>
+  </div>
+</nav>
+
+<main class="flex-1 py-8 px-8">
+    <p class="flex justify-start text-4xl font-semibold py-8">Properties For Sale in Haryana</p>
+      <!-- Grid Container -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+    <!-- Card 1 -->
+    <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105   hover:shadow-green-600/40">
+      <img src="house1pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
+        <h3 class="text-white text-lg font-bold">Sompur , Harayan</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105   hover:shadow-green-600/40">
+      <img src="house2pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
+        <h3 class="text-white text-lg font-bold">405 Jilla, Harayan</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+
+    <!-- Repeat similar cards -->
+     <div class="relative rounded-lg overflow-hidden shadow-lg  relative transition-transform duration-300 hover:scale-105   hover:shadow-green-600/40 bg-centre">
+      <img src="house3pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
+        <h3 class="text-white text-lg font-bold">324 Tara Place, Pune</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+    <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105   hover:shadow-green-600/40">
+      <img src="house4pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
+        <h3 class="text-white text-lg font-bold">324 Tara Place, Pune</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+    
+     <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105   hover:shadow-green-600/40">
+      <img src="house5pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
+        <h3 class="text-white text-lg font-bold">324 Tara Place, Pune</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+    
+     <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105   hover:shadow-green-600/40">
+      <img src="house6pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
+        <h3 class="text-white text-lg font-bold">324 Tara Place, Pune</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-center mt-16">
+    <ul class="flex space-x-2">
+      <li><a href="#" class="bg-green-500 text-white px-3 py-1 rounded">1</a></li>
+      <li><a href="#" class="bg-gray-200 text-gray-700 px-3 py-1 rounded">2</a></li>
+      <li><a href="#" class="bg-gray-200 text-gray-700 px-3 py-1 rounded">&gt;</a></li>
+    </ul>
+  </div>
+  </main>
+    <footer  class="bg-[#1e6091] text-gray-800 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div class="space-y-4">
+          <div class="flex items-center font-bold text-4xl">
+            <h1 class="text-2xl font-bold text-yellow-500">
+              <a href="index.html">Roof</a>
+            </h1>
+            <h1 class="text-2xl font-bold text-blue-600 ml-1">
+              <a href="index.html">Scout</a>
+            </h1>
+          </div>
+          <p class="text-sm text-gray-400">
+            Your trusted property partner for buying and renting homes.
+          </p>
+          <div class="flex  space-x-4 mt-4 gap-4 text-white ">
+                  <a href="https://www.facebook.com/" target="_blank">
+                    <i class="fab fa-facebook "></i>
+                  </a>
+                  <a href="https://www.instagram.com/" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="https://www.linkedin.com/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://wa.me/" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </div>
+        </div>
+        <div class="md:ml-12">
+          <h3 class="text-lg font-semibold text-white">Quick Links</h3>
+          <ul class="mt-4 space-y-3">
+            <li>
+              <a href="index.html" class="hover:text-[#d9ed92] transition-colors text-white ">Home</a>
+            </li>
+            <li>
+              <a href="index.html" class="hover:text-[#d9ed92] transition-colors text-white">Buy Property</a>
+            </li>
+            <li>
+              <a href="postproperty.html" class="hover:text-[#d9ed92] transition-colors text-white">Sell Property</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-white">Explore</h3>
+          <ul class="mt-4 space-y-3">
+            <li>
+              <a href="index2.html" class="hover:text-[#d9ed92] transition-colors text-white">Apartments for Rent</a>
+            </li>
+            <li>
+              <a href="index.html" class="hover:text-[#d9ed92] transition-colors text-white">Houses for Sale</a>
+            </li>
+            <li>
+              <a href="punjab.html" class="hover:text-[#d9ed92] transition-colors text-white">Properties in Punjab</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-white">Contact Us</h3>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li class="flex items-center">
+              <span class="mr-3 text-yellow-500">📞</span>
+              <a href="tel:+911234567890" class="hover:text-[#d9ed92] transition-colors text-white">+91 12345 67890</a>
+            </li>
+            <li class="flex items-center">
+              <span class="mr-3 text-yellow-500">📧</span>
+              <a href="mailto:hello@gmail.com" class="hover:text-[#d9ed92] transition-colors text-white">RoofScout@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+<script>
+   const menuBtn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu');
+  menuBtn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+  document.addEventListener("DOMContentLoaded", function() {
+    
+    const searchIcon = document.querySelector(".fa-magnifying-glass");
+    const searchInput = document.querySelector("input[type='text']");
+
+    searchIcon.addEventListener("click", function() {
+      const states = searchInput.value.trim().toLowerCase();
+
+      if (states === "punjab") {
+        window.location.href = "punjab.html";
+      } else if (states === "haryana") {
+        window.location.href = "haryana.html";
+      } else if (states === "delhi") {
+        window.location.href = "delhi.html";
+      } else if (states=== "chandigarh") {
+        window.location.href = "chandigarh.html";
+      } else {
+        alert("No matching location found!");
+      }
+    });
+
+    // Optional: Press Enter to search
+    searchInput.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        searchIcon.click();
+      }
+    });
+  });
+</script>
+
+</html>
