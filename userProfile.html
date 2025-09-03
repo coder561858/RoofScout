@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-100 min-h-screen">
+    <!-- navbar -->
+     <header class="bg-white shadow-md ">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center text-4xl font-bold">
+            <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+            <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+            </div>
+        </nav>
+    </header>
+
+    <div class="flex items-start justify-center h-screen pt-12">
+    <div class=" w-[50%] bg-white border-0 shadow-2xl rounded-lg  ">
+        <div class="h-[12%] p-6 ">
+            <h1 class="text-2xl font-bold">Edit Your Profile</h1>
+            <p class="text-gray-600">Update your photo and personal details here.</p>
+        </div>
+        <hr class="mx-4">
+
+        <div class="h-[60%] w-full flex mb-8 ">
+            <!-- left wali pfp -->
+            <div class="w-1/2 flex flex-col  items-center ">
+                <div class="mt-10">
+                <div class="bg-gray-100 border-0 shadow-md h-[150px] w-[150px] rounded-full ">
+                     <img src="https://avatar.iran.liara.run/public/boy?username=Ash" alt="">
+                </div>
+
+                <div class="mt-[10px] bg-gray-100 rounded py-2 shadow-sm px-8">
+                     <label for="pfp" class="text-gray-600 font-semibold">Choose File</label>
+                    <input type="file" id="pfp" class=" hidden">
+                    </div>
+                </div>
+
+            
+            </div>
+            
+         
+                <div class=" w-full flex flex-col gap-8 pt-10 ">
+                    <div class="flex flex-col">
+                    <label for="name" class="text-gray-700 font-semibold">Full Name</label>
+                    <input type="text" id="name" class="border-2 p-2 rounded mr-6">
+                    </div>
+
+                    <div class="flex flex-col">
+                    <label for="address" class="text-gray-700 font-semibold">Address</label>
+                    <input type="text" id="address" class="border-2 p-2 rounded mr-6">
+                    </div>
+                    <div class="flex flex-col">
+                    <label for="pno" class="text-gray-700 font-semibold">Phone Number</label>
+                    <input type="tel" id="pno" class="border-2 p-2 rounded mr-6">
+                    </div>
+
+                    <div class="flex flex-col">
+                    <label for="mail" class="text-gray-700 font-semibold">Email Address</label>
+                    <input type="email" id="mail" class="border-2 p-2 rounded mr-6">
+                    </div>
+
+                    <div class="flex flex-col">
+                    <label for="pass" class="text-gray-700 font-semibold">Change Password</label>
+                    <input type="password" id="pass" class="border-2 p-2 rounded mr-6 text-gray-600" placeholder="Enter new password">
+                    </div>
+
+                </div>
+            
+            <!-- ============================================= -->
+            <!-- END OF THE MISSING DIV -->
+            <!-- ============================================= -->
+
+        </div>
+
+        <hr class="mx-4">
+
+        <div class="flex justify-end mt-4 mr-6 mb-4">
+            <button class="text-white font-semibold p-2 bg-blue-600 rounded-xl">Save Changes</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
