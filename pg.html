@@ -1,114 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>List Your PG - RoofScout</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-100 min-h-screen">
-    <div class="flex items-center justify-center my-10">
-      <div class="w-[50%] bg-white border-0 shadow-2xl rounded-lg">
-        
-        <div class="flex items-center justify-center pt-6 text-4xl font-bold">
-          <h1 class="bg-gradient-to-r from-blue-700 via-indigo-600 to-fuchsia-600 bg-clip-text text-transparent text-center">
-            List Your PG / Co-Living Space
-          </h1>
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+</head>
+<body class="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-100 min-h-screen">
+    <div class="flex items-center justify-center my-10 ">
+    <div class="w-full md:w-[50%] bg-white border-0 shadow-2xl rounded-lg">
+        <div class=" flex items-center justify-center text-2xl md:text-4xl font-bold pt-4 ">
+            <h1 class="bg-gradient-to-r from-blue-700 via-indigo-600 to-fuchsia-600 bg-clip-text text-transparent mt-2">List Your PG / Co-Living Space</h1>
         </div>
-        <div class="flex items-center justify-center mt-2 text-gray-600 px-4 text-center">
-          <p>Fill out the details below to list your Paying Guest accommodation.</p>
+        <div class="flex items-center justify-center mt-2 mb-8">
+            <p class="text-gray-600">Fill out the details below to list your Paying Guest accommodation</p>
         </div>
 
-        <div class="bg-blue-100 shadow-lg m-4 mt-8 rounded-lg">
-          <div class="flex gap-2 text-2xl p-4 text-gray-700 font-bold">
-            <i class="ri-home-4-line"></i>
+        <div class="bg-blue-100 shadow-lg m-4 rounded-lg">
+        <div class="text-2xl mt-4 p-4 text-gray-700 font-bold">
+            <div class="flex gap-2">
+            <i><i class="ri-home-4-line"></i></i>
             <p>Basic Information</p>
-          </div>
-
-          <div class="flex flex-col p-4 pt-0">
-            <label for="pg-title" class="text-gray-700 font-semibold mb-1">PG Name / Title</label>
-            <input id="pg-title" type="text" placeholder="e.g., Sunrise Student PG" class="border-2 rounded h-12 p-2"/>
-          </div>
-
-          <div class="flex flex-col p-4 pt-0">
-            <label for="full-address" class="text-gray-700 font-semibold mb-1">Full Address</label>
-            <textarea id="full-address" name="address" placeholder="Enter the full property address" rows="3" class="border-2 rounded p-2"></textarea>
-          </div>
+        </div>
         </div>
 
-        <div class="bg-green-100 shadow-lg m-4 rounded-lg">
-          <div class="flex gap-2 text-2xl p-4 text-gray-700 font-bold">
-            <i class="ri-money-rupee-circle-line"></i>
+        <div class="flex flex-col text-gray-600 px-4 font-semibold">
+            <label for="pgname">PG Name / Title</label>
+            <input type="text" id="pgname" class="border-2 rounded h-12 p-2">
+        </div>
+        <div class="flex flex-col px-4 py-4">
+            <label for="address" class="text-gray-600 font-semibold">Full Address</label>
+            <textarea name="" id="address" rows="3" class="border-2 rounded p-2" placeholder="Enter the full property address"></textarea>
+        </div>
+        </div>
+
+
+        <!-- room aur price details -->
+         <div class="bg-green-100 shadow-lg m-4 pb-4 rounded-lg">
+         <div class="text-2xl text-gray-700 font-bold p-4 mt-4">
+            <div class="flex gap-2">
+            <i class="ri-price-tag-3-line"></i>
             <p>Room & Pricing Details</p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 pt-0">
-            <div>
-              <label for="pg-for" class="text-gray-700 font-semibold mb-1">Best For</label>
-              <select id="pg-for" class="w-full border-2 rounded h-12 p-2">
-                <option value="boys">Boys Only</option>
-                <option value="girls">Girls Only</option>
-                <option value="co-ed">Co-ed</option>
-              </select>
-            </div>
-            <div>
-              <label for="sharing-type" class="text-gray-700 font-semibold mb-1">Sharing Type</label>
-              <select id="sharing-type" class="w-full border-2 rounded h-12 p-2">
-                <option value="1">Single</option>
-                <option value="2">Double</option>
-                <option value="3">Triple</option>
-                <option value="4+">4 or more</option>
-              </select>
-            </div>
-             <div>
-              <label for="price" class="text-gray-700 font-semibold mb-1">Price per Bed (₹)</label>
-              <input type="number" id="price" placeholder="e.g., 8000" class="w-full border-2 rounded h-12 p-2">
-            </div>
-          </div>
         </div>
-        
-        <div class="bg-yellow-100 shadow-lg m-4 rounded-lg">
-            <div class="flex gap-2 text-2xl p-4 text-gray-700 font-bold">
-                <i class="ri-service-line"></i>
-                <p>Amenities & Services</p>
+         </div>
+         <div class="flex flex-col md:flex-row gap-4 px-4">
+            <div class="flex flex-col w-full">
+            <label for="bestfor" class="text-gray-600 font-semibold">Best For</label>
+            <select name="" id="bestfor" class="border-2 rounded h-12 p-2">
+                <option value="">Boys only</option>
+                <option value="">Girls only</option>
+                <option value="">Boys only</option>
+            </select>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 p-4 pt-0 text-gray-700">
-                <label class="flex items-center gap-2"><input type="checkbox" name="amenities[]" value="food" class="h-4 w-4"> Food Included</label>
-                <label class="flex items-center gap-2"><input type="checkbox" name="amenities[]" value="wifi" class="h-4 w-4"> Wi-Fi</label>
-                <label class="flex items-center gap-2"><input type="checkbox" name="amenities[]" value="ac" class="h-4 w-4"> AC Rooms</label>
-                <label class="flex items-center gap-2"><input type="checkbox" name="amenities[]" value="laundry" class="h-4 w-4"> Laundry Service</label>
-                <label class="flex items-center gap-2"><input type="checkbox" name="amenities[]" value="power-backup" class="h-4 w-4"> Power Backup</label>
-                <label class="flex items-center gap-2"><input type="checkbox" name="amenities[]" value="housekeeping" class="h-4 w-4"> Housekeeping</label>
+
+            <div class="flex flex-col w-full">
+            <label for="stype" class="text-gray-600 font-semibold">Sharing Type</label>
+            <select name="" id="stype" class="border-2 rounded h-12 p-2">
+                <option value="">Single</option>
+                <option value="">Double</option>
+                <option value="">Triple</option>
+                <option value="">4 or more</option>
+            </select>
             </div>
+
+            <div class="flex flex-col sm:flex-col w-full">
+            <label for="price" class="text-gray-600 font-semibold">Price per Bed (₹)</label>
+            <input type="text" id="price" class="border-2 rounded h-12 p-2">
+            <!-- arrows laane ke liye type="number" min="0" step="100" -->
+             <!-- agar range lagani ho type="range min="2000" max="15000" step="500" -->
+            </div>
+         </div>
         </div>
 
-        <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-100 m-4">
-          <div class="flex gap-2 text-2xl p-4 text-gray-700 font-bold">
-            <i class="ri-image-add-line"></i>
+         <!-- amenities wgera -->
+        <div class="bg-yellow-100 shadow-lg m-4 rounded-lg ">
+         <div class="text-2xl text-gray-700 font-bold px-4 pt-4 mt-4"> 
+            <div class="flex gap-2">
+            <i class="ri-service-line"></i>
+            <p>Amenities & Services</p>
+        </div>
+         </div>
+         <div class="grid grid-cols-1 md:grid-cols-3 p-4 gap-4">
+            <label for="food" class="flex gap-2"><input type="checkbox" id="food">Food Included</label>
+            <label for="wifi" class="flex gap-2"><input type="checkbox" id="wifi">Wi-Fi</label>
+            <label for="ac" class="flex gap-2"><input type="checkbox" id="ac">AC Rooms</label>
+            <label for="laundry" class="flex gap-2"><input type="checkbox" id="laundry">Laundry Service</label>
+            <label for="power" class="flex gap-2"><input type="checkbox" id="power">Power Backup</label>
+            <label for="housekeeping" class="flex gap-2"><input type="checkbox" id="housekeeping">Housekeeping</label>
+            
+         </div>
+        </div>
+
+         <!-- photo section -->
+          <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-100 m-4">
+         <div class="text-2xl text-gray-700 font-bold px-4 mt-4"> 
+            <div class="flex gap-2">
+             <i class="ri-image-add-line"></i>
             <p>Upload Photos</p>
-          </div>
-          <div class="p-4 pt-0">
-            <input type="file" multiple class="w-full text-sm text-gray-500
-              file:mr-4 file:py-2 file:px-4
-              file:rounded-full file:border-0
-              file:text-sm file:font-semibold
-              file:bg-blue-50 file:text-blue-700
-              hover:file:bg-blue-100">
-          </div>
         </div>
-        
-        <div class="w-full md:w-1/2 mx-auto flex justify-center px-6 pb-8 pt-4">
-            <button class="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 px-6 py-3 text-white font-semibold shadow-lg hover:shadow-xl active:scale-[.99] focus:outline-none focus:ring-4 focus:ring-emerald-400/40 transition">
-              Submit PG Listing
-              <span class="text-white/90">→</span>
-            </button>
+         </div>
+         <div class="text-blue-600 p-4 py-4">
+        <input type="file" class="file:border-2 file:rounded file:text-blue-600 file:bg-black">
         </div>
-
-      </div>
     </div>
-  </body>
+
+        <!-- button -->
+        <div class="w-full md:w-1/2 mx-auto flex justify-center px-6 pb-8">
+          <button class="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 px-6 py-3 text-white font-semibold shadow-lg hover:shadow-xl ">
+            Submit Property
+            <span class="text-white/90">→</span>
+          </button>
+        </div>
+    </div>
+    </div>
+</body>
 </html>
