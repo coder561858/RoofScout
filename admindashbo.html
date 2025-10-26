@@ -9,35 +9,42 @@
 </head>
 <body class="bg-gray-100 ">
 
-<!-- Navbar -->
-<div class="nav flex justify-between h-20 items-center shadow-lg p-4 bg-gray-700">
-    <!-- Logo -->
+ <!-- Navbar -->
+  <div class="nav flex justify-between h-20 items-center shadow-lg p-4 bg-gray-700">
     <div class="flex items-center text-4xl font-bold">
-        <img src="logoRS.jpg" alt="RoofScout Logo" class="h-16 w-16 mr-2 bg-cover bg-center rounded-full">
-        <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
-        <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+      <img src="logoRS.jpg" alt="RoofScout Logo" class="h-16 w-16 mr-2 rounded-full">
+      <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+      <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
     </div>
-
-    <!-- Buttons -->
     <div class="flex space-x-4 text-white">
-        <span>Admin</span>
-        <a href="index.html" class="hover:text-blue-600">Logout</a>
+      <span>Admin</span>
+      <a href="index.html" class="hover:text-blue-400">Logout</a>
     </div>
-</div>
- 
-    
-    <div class="flex">
-        <!-- Sidebar -->
-        <div class="bg-gray-900 text-white w-64 min-h-screen p-4 space-y-6">
-            <div class="space-y-4">
-                
-                <a href="admhouses.html" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-duotone fa-solid fa-house text-blue-800"></i> Houses </a>
-                <a href="#" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-solid fa-user text-purple-800"></i> Buyer/Seller</a>
-                <a href="admpropt.html" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-regular fa-building text-amber-400"></i> Properties</a>
-                <a href="#" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-solid fa-person text-cyan-300"></i> Tenants</a>
-                <a href="#" class="block hover:bg-gray-700 p-2 rounded"><i class="fa-regular fa-money-bill-1 text-green-500"></i> Payment</a>
-            </div>
-        </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside class="bg-gray-900 text-white w-64 min-h-screen p-4 space-y-4">
+        <a href="admindashbo.html" class="flex items-center gap-3 bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-circle-info text-blue-700"></i><span>Info</span>
+      </a>
+      <a href="adm-houses.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-house text-blue-400"></i><span>Houses</span>
+      </a>
+      <a href="adm-client1.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-user text-purple-400"></i><span>Buyer/Seller</span>
+      </a>
+      <a href="adm-propt.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-regular fa-building text-amber-400"></i><span>Properties</span>
+      </a>
+      <a href="adm-tenant.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-user text-cyan-400"></i><span>Tenants</span>
+      </a>
+      <a href="adm-payment.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-regular fa-money-bill-1 text-green-500"></i><span>Payment</span>
+      </a>
+    </aside>
 
         <!-- Main Content -->
         <div class="flex-1 p-6">
@@ -110,7 +117,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <a href="#" class="block text-center mt-2 text-blue-500 hover:underline">View All Tenants</a>
+                <a href="adm-tenant.html" class="block text-center mt-2 text-blue-500 hover:underline">View All Tenants</a>
             </div>
         </div>
     </div>

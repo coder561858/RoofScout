@@ -17,7 +17,7 @@
 <body >
 
   <!-- navbar -->
-  <div class="sticky top-0 z-50 flex gap-10 h-20 p-4 items-center bg-white shadow-lg shadow-gray-200/20  ">
+  <div id="navbar" class="sticky top-0 z-50 flex gap-10 h-20 p-4  items-center bg-white shadow-lg shadow-gray-200/20 rounded-none transition-all duration-300">
             
       <div class="flex items-center ">
               <img src="LogoRS.png" alt="Logo" class="h-16 w-16 bg-cover bg-center mr-2 hidden sm:block">
@@ -32,18 +32,18 @@
         <div class="hidden sm:flex items-center space-x-4">
             <div class="relative">
                 <div class="dropdown">
-                    <button class="flex items-center justify-between w-8 py-2 bg-white border-b-2 border-black text-sm font-bold hover:bg-gray-50">Buy</button>
+                    <button class="flex items-center justify-between w-8 py-2  border-b-2 border-black text-sm font-bold hover:bg-gray-50">Buy</button>
                     <div class="dropdown-menu absolute hidden h-auto bg-white flex pt-4 text-sm font-bold">
                         <ul class="block w-full  bg-white ">
-                            <li class="py-1 px-2">Rent</li> 
+                            <a href="index2.html" class="py-1 px-2">Rent</a>  
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="relative flex items-center w-1/2 border-2 border-gray-200 rounded-xl shadow-lg sm:w-40 md:w-1/2 ml-12 ">
-            <input type="text" placeholder="  Search States..." class="w-full rounded-xl h-10 sm:h-12 border border-gray-500 text-sm md:text-base">
+        <div class="relative flex items-center w-1/2 border-2 border-gray-200 rounded-xl shadow-lg sm:w-40 md:w-1/2 ml-8 ">
+            <input type="text" placeholder="  Search States..." class="w-full rounded-xl h-10 sm:h-12 border border-gray-400 text-sm md:text-base bg-gray-200/20">
              <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
         </div>
 
@@ -80,6 +80,8 @@
             </button>
           </div>
     </div>
+
+    <!-- MAIN Section -->
   <main class="flex-1 bg-gradient-to-br from-blue-100 via-green-100 to-pink-200">
       <section class="flex flex-col md:flex-row items-center p-6 py-0 gap-10 min-h-[450px] ">
             <div class="md:w-1/2 flex flex-col gap-5">
@@ -88,7 +90,7 @@
                 <h3 class="text-gray-600 font-bold text-lg">Rent Sell Purchase. All at your fingertips.</h3>
                 <div class="relative w-full md:w-2/3 mt-4">
                     <input type="text" placeholder="What's Your email" class="w-full h-full p-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <button class="text-black bg-yellow-300 p-2 rounded-lg whitespace-nowrap absolute bottom-1 right-1">Get Started for free</button>
+                    <button class="text-black bg-yellow-300 p-2 rounded-lg whitespace-nowrap absolute bottom-1 right-1">Get Started for
                 </div>
                 <div>
                     <p class="font-bold italic text-gray-600 text-2xl mt-2">"Simplifying property, one click at a time."</p>
@@ -242,13 +244,13 @@
           <h3 class="text-lg font-semibold text-white">Quick Links</h3>
           <ul class="mt-4 space-y-3">
             <li>
-              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white ">Home</a>
+              <a href="index.html" class="hover:text-[#d9ed92] transition-colors text-white ">Home</a>
             </li>
             <li>
-              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white">Buy Property</a>
+              <a href="allproperties.html" class="hover:text-[#d9ed92] transition-colors text-white">Buy Property</a>
             </li>
             <li>
-              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white">Sell Property</a>
+              <a href="postproperty.html" class="hover:text-[#d9ed92] transition-colors text-white">Sell Property</a>
             </li>
           </ul>
         </div>
@@ -256,13 +258,13 @@
           <h3 class="text-lg font-semibold text-white">Explore</h3>
           <ul class="mt-4 space-y-3">
             <li>
-              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white">Apartments for Rent</a>
+              <a href="allproperties.html" class="hover:text-[#d9ed92] transition-colors text-white">Apartments for Rent</a>
             </li>
             <li>
-              <a href="#" class="hover:text-[#d9ed92] transition-colors text-white">Houses for Sale</a>
+              <a href="allproperties.html" class="hover:text-[#d9ed92] transition-colors text-white">Houses for Sale</a>
             </li>
             <li>
-              <a href="Punjab.html" class="hover:text-[#d9ed92] transition-colors text-white">Properties in Haryana</a>
+              <a href="states.html" class="hover:text-[#d9ed92] transition-colors text-white">Properties in Punjab</a>
             </li>
           </ul>
         </div>
@@ -271,7 +273,7 @@
           <ul class="mt-4 space-y-3 text-sm">
             <li class="flex items-center">
               <span class="mr-3 text-yellow-500">📞</span>
-              <a href="tel:+911234567890" class="hover:text-[#d9ed92] transition-colors text-white">+91 12345 67890</a>
+              <a href="tel:+911234567890" class="hover:text-[#d9ed92] transition-colors text-white">+91 1234567890</a>
             </li>
             <li class="flex items-center">
               <span class="mr-3 text-yellow-500">📧</span>
@@ -284,58 +286,114 @@
   </footer>
 </body>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  //  Search function
-  const searchIcon = document.querySelector(".fa-magnifying-glass");
-  const searchInput = document.querySelector("input[type='text']");
+document.addEventListener("DOMContentLoaded", function () {
+  // safe helpers
+  const el = (sel) => document.querySelector(sel);
 
-  searchIcon.addEventListener("click", function() {
-    const states = searchInput.value.trim().toLowerCase();
+  // SEARCH: redirect to states.html?state=...
+  try {
+    const searchIcon = el(".fa-magnifying-glass");
+    const searchInput = el("input[type='text']");
 
-    if (states === "punjab") {
-      window.location.href = "punjab.html";
-    } else if (states === "haryana") {
-      window.location.href = "haryana.html";
-    } else if (states === "delhi") {
-      window.location.href = "delhi.html";
-    } else if (states === "chandigarh") {
-      window.location.href = "chandigarh.html";
-    } else {
-      alert("No matching location found!");
+    const doSearch = () => {
+      const raw = (searchInput?.value || "").trim();
+      if (!raw) {
+        alert("Please enter a state to search.");
+        return;
+      }
+      const state = raw.toLowerCase();
+      // Redirect to states page (states.html should read ?state=...)
+      window.location.href = `states.html?state=${encodeURIComponent(state)}`;
+    };
+
+    if (searchIcon) searchIcon.addEventListener("click", doSearch);
+    if (searchInput) searchInput.addEventListener("keypress", (ev) => {
+      if (ev.key === "Enter") doSearch();
+    });
+  } catch (err) {
+    console.error("Search handler error:", err);
+  }
+
+  // MENU toggle (guarded)
+  try {
+    const menuBtn = document.getElementById("menu-btn");
+    const mobilemenu = document.getElementById("mobile-menu");
+    if (menuBtn && mobilemenu) {
+      menuBtn.addEventListener("click", () => mobilemenu.classList.toggle("hidden"));
     }
-  });
+  } catch (err) {
+    console.error("Menu toggle error:", err);
+  }
 
-  //  Enter to search
-  searchInput.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-      searchIcon.click();
-    }
-  });
-
-  // sm and md view
-  const menuBtn = document.getElementById('menu-btn');
-  const mobilemenu= document.getElementById('mobile-menu');
-  menuBtn.addEventListener('click',() => {
-    mobilemenu.classList.toggle('hidden');
-  });
-
-  // increasing number animation 
+  // COUNTER animation (guarded)
   const counters = document.querySelectorAll(".counter");
-
-  counters.forEach(counter => {
-    let target = +counter.getAttribute("data-target");
+  counters.forEach((counter) => {
+    const target = Number(counter.getAttribute("data-target")) || 0;
     let count = 0;
-    let step = Math.ceil(target / 100);
-
-    let interval = setInterval(() => {
+    const step = Math.max(1, Math.ceil(target / 100));
+    const t = setInterval(() => {
       count += step;
       if (count >= target) {
-        count = target;
-        clearInterval(interval);
+        counter.innerText = String(target) + (target ? "+" : "");
+        clearInterval(t);
+      } else {
+        counter.innerText = String(count) + "+";
       }
-      counter.innerText = count + "+";
     }, 20);
   });
+
+
+  // NAVBAR rounding on scroll (guarded)
+  try {
+    const navbar = document.getElementById("navbar");
+    if (navbar) {
+      const threshold = 12;
+      // Tailwind's 'lg' breakpoint
+      const lgBreakpoint = 1024; 
+      
+      // Removed duplicate "rounded-3xl" from your original array
+      const addClasses = [
+          'rounded-3xl', 'w-5/6', 'ml-[148px]', "rounded-5xl", 
+          "shadow-2xl", 'bg-gray-200/20', 'backdrop-blur-xl', 
+          'border-2', 'border-blue-800', 'mt-8'
+        ];
+      const removeClasses = ["rounded-none", "shadow-lg", 'bg-white'];
+
+      function updateNavbar() {
+        // Check if we are on a large screen
+        const isLargeScreen = window.innerWidth >= lgBreakpoint;
+
+        if (isLargeScreen) {
+          // LG+ screens: Apply scroll logic
+          if (window.scrollY > threshold) {
+            navbar.classList.add(...addClasses);
+            navbar.classList.remove(...removeClasses);
+            navbar.style.backdropFilter = "saturate(125%) blur(36px)";
+          } else {
+            navbar.classList.remove(...addClasses);
+            navbar.classList.add(...removeClasses);
+            navbar.style.backdropFilter = "";
+          }
+        } else {
+          // MD/SM/XS screens: ALWAYS force default state, even if scrolled
+          navbar.classList.remove(...addClasses);
+          navbar.classList.add(...removeClasses);
+          navbar.style.backdropFilter = "";
+        }
+      }
+      
+      // Run on initial load to set the correct state
+      updateNavbar();
+      
+      // Run on scroll
+      window.addEventListener("scroll", updateNavbar, { passive: true });
+      
+      // Run on resize to catch breakpoint changes
+      window.addEventListener("resize", updateNavbar, { passive: true });
+    }
+  } catch (err) {
+    console.error("Navbar rounding error:", err);
+  }
 });
 </script>
 

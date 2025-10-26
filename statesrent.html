@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoofScout - Properties for Rent</title>
+  <link rel="icon" type="image/jpg" href="logoRS.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen bg-gradient-to-br from-blue-100 via-green-100 to-pink-200">
+
+  <!-- Navbar -->
+  <div id="navbar" class="sticky top-0 z-50 flex gap-10 h-20 p-4 items-center bg-white shadow-lg shadow-gray-200/20 rounded-none transition-all duration-300">
+    <div class="flex items-center">
+      <img src="LogoRS.png" alt="Logo" class="h-16 w-16 bg-cover bg-center mr-2 hidden sm:block">
+      <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+      <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+    </div>
+
+    <div class="hidden sm:flex items-center space-x-4">
+      <div class="relative">
+        <div class="dropdown">
+          <button class="flex items-center justify-between w-8 py-2 border-b-2 border-black text-sm font-bold hover:bg-gray-50">Rent</button>
+          <div class="dropdown-menu absolute hidden h-auto bg-white flex pt-4 text-sm font-bold">
+            <ul class="block w-full bg-white">
+              <a href="index2.html" class="py-1 px-2">Buy</a> 
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative flex items-center w-1/2 border-2 border-gray-200 rounded-xl shadow-lg sm:w-40 md:w-1/2 ml-8">
+      <input type="text" placeholder="  Search States..." class="w-full rounded-xl h-10 sm:h-12 border border-gray-400 text-sm md:text-base bg-gray-200/20">
+      <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+    </div>
+
+    <button id="menu-btn" class="lg:hidden ml-auto text-3xl text-gray-700">☰</button>
+
+    <div class="hidden lg:flex items-center ml-2 space-x-4">
+      <button class="bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-3 py-2">
+        <a href="postproperty.html">Post Property</a>
+        <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
+      </button>
+      <button class="bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
+        <a href="login.html">Login/SignUp</a>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden flex-col flex justify-end items-end space-y-4 p-4 bg-gradient-to-br from-blue-100 to-green-100 lg:hidden">
+    <div class="sm:hidden space-y-3 mt-4 w-40">
+      <a href="index.html" class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-3 py-2">Buy</a>
+      <a href="index2.html" class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-3 py-2">Rent</a>
+    </div>
+
+    <div class="flex flex-col items-center space-y-3 mt-2 w-40">
+      <button class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-3 py-2">
+        <a href="postproperty.html">Post Property</a>
+        <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
+      </button>
+      <button class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
+        <a href="login.html">Login/SignUp</a>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Section -->
+  <main class="flex-1 py-8 px-8">
+    <div class="flex justify-between items-center mb-8">
+      <p id="state-title" class="flex justify-start text-4xl font-semibold py-8">Loading Properties...</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="w-full md:w-11/12 lg:w-3/4 max-w-4xl mx-auto justify-center mb-8 p-4 bg-white rounded-lg shadow flex flex-wrap gap-4 items-center">
+      <div class="flex items-center space-x-2">
+        <label class="text-sm font-medium">Type:</label>
+        <select id="filter-type" class="px-3 py-2 border rounded">
+          <option value="all">All</option>
+          <option value="house">House</option>
+          <option value="plot">Plot</option>
+        </select>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <label class="text-sm font-medium">Rent (₹)</label>
+        <input id="price-min" type="number" placeholder="min" class="w-16 px-1 py-1 border rounded" />
+        <input id="price-max" type="number" placeholder="max" class="w-16 px-1 py-1 border rounded" />
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <label class="text-sm font-medium">Area (sqft)</label>
+        <input id="area-min" type="number" placeholder="min" class="w-16 px-1 py-1 border rounded" />
+        <input id="area-max" type="number" placeholder="max" class="w-16 px-1 py-1 border rounded" />
+      </div>
+
+      <div class="flex items-center space-x-2 ml-auto">
+        <button id="apply-filters" class="bg-blue-500 text-white px-4 py-2 rounded">Apply</button>
+        <button id="clear-filters" class="bg-gray-200 px-4 py-2 rounded">Clear</button>
+      </div>
+    </div>
+
+    <!-- Property Grid -->
+    <div id="property-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#1e6091] text-gray-800 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div class="space-y-4">
+          <div class="flex items-center font-bold text-4xl">
+            <h1 class="text-2xl font-bold text-yellow-500"><a href="index.html">Roof</a></h1>
+            <h1 class="text-2xl font-bold text-blue-600 ml-1"><a href="index.html">Scout</a></h1>
+          </div>
+          <p class="text-sm text-gray-400">Your trusted property partner for renting and buying homes.</p>
+          <div class="flex space-x-4 mt-4 gap-4 text-white">
+            <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://wa.me/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="md:ml-12">
+          <h3 class="text-lg font-semibold text-white">Quick Links</h3>
+          <ul class="mt-4 space-y-3">
+            <li><a href="index.html" class="hover:text-[#d9ed92] transition-colors text-white">Home</a></li>
+            <li><a href="index2.html" class="hover:text-[#d9ed92] transition-colors text-white">Rent Property</a></li>
+            <li><a href="postproperty.html" class="hover:text-[#d9ed92] transition-colors text-white">Post Property</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-white">Explore</h3>
+          <ul class="mt-4 space-y-3">
+            <li><a href="index2.html" class="hover:text-[#d9ed92] transition-colors text-white">Apartments for Rent</a></li>
+            <li><a href="statesrent.html?state=punjab" class="hover:text-[#d9ed92] transition-colors text-white">Properties for Rent in Punjab</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-white">Contact Us</h3>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li class="flex items-center">
+              <span class="mr-3 text-yellow-500">📞</span>
+              <a href="tel:+911234567890" class="hover:text-[#d9ed92] transition-colors text-white">+91 12345 67890</a>
+            </li>
+            <li class="flex items-center">
+              <span class="mr-3 text-yellow-500">📧</span>
+              <a href="mailto:RoofScout@gmail.com" class="hover:text-[#d9ed92] transition-colors text-white">RoofScout@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+  
+  // === 1. ALL YOUR PROPERTY DATA ===
+  const statePropertiesRent = {
+  // --- States ---
+  'andhrapradesh': [
+    { id: 'RAP001', title: 'Vijayawada, Andhra Pradesh', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 },
+    { id: 'RAP002', title: 'Visakhapatnam, Andhra Pradesh', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 },
+    { id: 'RAP003', title: 'Guntur, Andhra Pradesh', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 }
+  ],
+  'arunachalpradesh': [
+    { id: 'RAR001', title: 'Itanagar, Arunachal Pradesh', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 },
+    { id: 'RAR002', title: 'Tawang, Arunachal Pradesh', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 }
+  ],
+  'assam': [
+    { id: 'RAS001', title: 'Guwahati, Assam', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 },
+    { id: 'RAS002', title: 'Dispur, Assam', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RAS003', title: 'Silchar, Assam', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 }
+  ],
+  'bihar': [
+    { id: 'RBR001', title: 'Patna, Bihar', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 },
+    { id: 'RBR002', title: 'Gaya, Bihar', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 },
+    { id: 'RBR003', title: 'Bhagalpur, Bihar', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 }
+  ],
+  'chhattisgarh': [
+    { id: 'RCG001', title: 'Raipur, Chhattisgarh', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 },
+    { id: 'RCG002', title: 'Bilaspur, Chhattisgarh', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 }
+  ],
+  'goa': [
+    { id: 'RGA001', title: 'Panaji, Goa', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 },
+    { id: 'RGA002', title: 'Margao, Goa', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RGA003', title: 'Vasco da Gama, Goa', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 }
+  ],
+  'gujarat': [
+    { id: 'RGJ001', title: 'Ahmedabad, Gujarat', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 },
+    { id: 'RGJ002', title: 'Surat, Gujarat', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 },
+    { id: 'RGJ003', title: 'Vadodara, Gujarat', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 }
+  ],
+  'haryana': [
+    { id: 'RHR001', title: 'Gurgaon, Haryana', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 },
+    { id: 'RHR002', title: 'Faridabad, Haryana', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RHR003', title: 'Panipat, Haryana', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 }
+  ],
+  'himachalpradesh': [
+    { id: 'RHP001', title: 'Shimla, Himachal Pradesh', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 },
+    { id: 'RHP002', title: 'Manali, Himachal Pradesh', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 }
+  ],
+  'jharkhand': [
+    { id: 'RJH001', title: 'Ranchi, Jharkhand', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 },
+    { id: 'RJH002', title: 'Jamshedpur, Jharkhand', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 }
+  ],
+  'karnataka': [
+    { id: 'RKA001', title: 'Bangalore, Karnataka', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 },
+    { id: 'RKA002', title: 'Mysore, Karnataka', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RKA003', title: 'Hubli, Karnataka', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 }
+  ],
+  'kerala': [
+    { id: 'RKL001', title: 'Kochi, Kerala', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 },
+    { id: 'RKL002', title: 'Trivandrum, Kerala', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 },
+    { id: 'RKL003', title: 'Kozhikode, Kerala', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 }
+  ],
+  'madhyapradesh': [
+    { id: 'RMP001', title: 'Bhopal, Madhya Pradesh', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 },
+    { id: 'RMP002', title: 'Indore, Madhya Pradesh', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 },
+    { id: 'RMP003', title: 'Jabalpur, Madhya Pradesh', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 }
+  ],
+  'maharashtra': [
+    { id: 'RMH001', title: 'Mumbai, Maharashtra', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 },
+    { id: 'RMH002', title: 'Pune, Maharashtra', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RMH003', title: 'Nagpur, Maharashtra', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 }
+  ],
+  'manipur': [
+    { id: 'RMN001', title: 'Imphal, Manipur', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 },
+    { id: 'RMN002', title: 'Bishnupur, Manipur', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 }
+  ],
+  'meghalaya': [
+    { id: 'RML001', title: 'Shillong, Meghalaya', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 },
+    { id: 'RML002', title: 'Tura, Meghalaya', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 }
+  ],
+  'mizoram': [
+    { id: 'RMZ001', title: 'Aizawl, Mizoram', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 },
+    { id: 'RMZ002', title: 'Lunglei, Mizoram', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 }
+  ],
+  'nagaland': [
+    { id: 'RNL001', title: 'Kohima, Nagaland', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 },
+    { id: 'RNL002', title: 'Dimapur, Nagaland', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 }
+  ],
+  'odisha': [
+    { id: 'ROR001', title: 'Bhubaneswar, Odisha', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 },
+    { id: 'ROR002', title: 'Cuttack, Odisha', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 },
+    { id: 'ROR003', title: 'Rourkela, Odisha', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 }
+  ],
+  'punjab': [
+    { id: 'RPB001', title: 'Ludhiana, Punjab', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 },
+    { id: 'RPB002', title: 'Amritsar, Punjab', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 },
+    { id: 'RPB003', title: 'Jalandhar, Punjab', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 },
+    { id: 'RPB004', title: 'Patiala, Punjab', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 }
+  ],
+  'rajasthan': [
+    { id: 'RRJ001', title: 'Jaipur, Rajasthan', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 },
+    { id: 'RRJ002', title: 'Jodhpur, Rajasthan', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RRJ003', title: 'Udaipur, Rajasthan', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 }
+  ],
+  'sikkim': [
+    { id: 'RSK001', title: 'Gangtok, Sikkim', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 },
+    { id: 'RSK002', title: 'Pelling, Sikkim', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 }
+  ],
+  'tamilnadu': [
+    { id: 'RTN001', title: 'Chennai, Tamil Nadu', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 },
+    { id: 'RTN002', title: 'Coimbatore, Tamil Nadu', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 },
+    { id: 'RTN003', title: 'Madurai, Tamil Nadu', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 }
+  ],
+  'telangana': [
+    { id: 'RTG001', title: 'Hyderabad, Telangana', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 },
+    { id: 'RTG002', title: 'Warangal, Telangana', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RTG003', title: 'Nizamabad, Telangana', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 }
+  ],
+  'tripura': [
+    { id: 'RTR001', title: 'Agartala, Tripura', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 },
+    { id: 'RTR002', title: 'Udaipur, Tripura', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 }
+  ],
+  'uttarpradesh': [
+    { id: 'RUP001', title: 'Lucknow, Uttar Pradesh', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 },
+    { id: 'RUP002', title: 'Kanpur, Uttar Pradesh', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 },
+    { id: 'RUP003', title: 'Noida, Uttar Pradesh', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 },
+    { id: 'RUP004', title: 'Agra, Uttar Pradesh', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 }
+  ],
+  'uttarakhand': [
+    { id: 'RUK001', title: 'Dehradun, Uttarakhand', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 },
+    { id: 'RUK002', title: 'Haridwar, Uttarakhand', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RUK003', title: 'Rishikesh, Uttarakhand', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 }
+  ],
+  'westbengal': [
+    { id: 'RWB001', title: 'Kolkata, West Bengal', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 },
+    { id: 'RWB002', title: 'Darjeeling, West Bengal', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 },
+    { id: 'RWB003', title: 'Howrah, West Bengal', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 }
+  ],
+
+  // --- Union Territories ---
+  'andamanandnicobarislands': [
+    { id: 'RAN001', title: 'Port Blair, Andaman & Nicobar', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 },
+    { id: 'RAN002', title: 'Havelock, Andaman & Nicobar', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 }
+  ],
+  'chandigarh': [
+    { id: 'RCH001', title: 'Sector 17, Chandigarh', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 },
+    { id: 'RCH002', title: 'Sector 35, Chandigarh', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RCH003', title: 'Manimajra, Chandigarh', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 }
+  ],
+  'dadraandnagarhavelianddamananddiu': [
+    { id: 'RDD001', title: 'Daman, Daman & Diu', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 },
+    { id: 'RDD002', title: 'Silvassa, Dadra & Nagar Haveli', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 }
+  ],
+  'delhi': [
+    { id: 'RDL001', title: 'Saket, Delhi', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 },
+    { id: 'RDL002', title: 'Vasant Kunj, Delhi', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 },
+    { id: 'RDL003', title: 'Dwarka, Delhi', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 }
+  ],
+  'jammuandkashmir': [
+    { id: 'RJK001', title: 'Srinagar, Jammu & Kashmir', priceText: '₹50,000 / month', area: 2200, type: 'house', image: 'house3pb.jpg', dataPrice: 50, beds: 3, baths: 2, garages: 1 },
+    { id: 'RJK002', title: 'Jammu, Jammu & Kashmir', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 },
+    { id: 'RJK003', title: 'Gulmarg, Jammu & Kashmir', priceText: '₹40,000 / month', area: 2400, type: 'house', image: 'house2pb.jpg', dataPrice: 40, beds: 4, baths: 3, garages: 2 }
+  ],
+  'ladakh': [
+    { id: 'RLA001', title: 'Leh, Ladakh', priceText: '₹25,000 / month', area: 1800, type: 'house', image: 'house1pb.jpg', dataPrice: 25, beds: 3, baths: 2, garages: 1 },
+    { id: 'RLA002', title: 'Kargil, Ladakh', priceText: '₹45,000 / month', area: 2500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5', dataPrice: 45 }
+  ],
+  'lakshadweep': [
+    { id: 'RLD001', title: 'Kavaratti, Lakshadweep', priceText: '₹70,000 / month', area: 3000, type: 'house', image: 'house4pb.jpg', dataPrice: 70, beds: 5, baths: 4, garages: 2 },
+    { id: 'RLD002', title: 'Agatti, Lakshadweep', priceText: '₹55,000 / month', area: 1800, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 55 }
+  ],
+  'puducherry': [
+    { id: 'RPY001', title: 'White Town, Puducherry', priceText: '₹90,000 / month', area: 2800, type: 'house', image: 'house1pb.jpg', dataPrice: 90, beds: 4, baths: 3, garages: 2 },
+    { id: 'RPY002', title: 'Karaikal, Puducherry', priceText: '₹20,000 / month', area: 1500, type: 'plot', image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5', dataPrice: 20 }
+  ]
+};
+
+  // === 2. HELPER FUNCTIONS ===
+
+  // Creates the HTML for a single property card
+  function createCardHtml(prop) {
+    const typeTag = prop.type === 'house'
+      ? `<span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>`
+      : `<span class="inline-block bg-amber-500 text-white text-xs px-2 py-1 rounded">Plot</span>`;
+
+    return `
+      <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+           data-price="${prop.dataPrice}" data-area="${prop.area}" data-type="${prop.type}" data-house-id="${prop.id}"
+           data-beds="${prop.beds || ''}" data-baths="${prop.baths || ''}" data-garages="${prop.garages || ''}">
+        <img src="${prop.image}" alt="Property Image" class="w-full h-64 object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
+          <h3 class="text-white text-lg font-bold">${prop.title}</h3>
+          <p class="text-green-400 font-bold">${prop.priceText}</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-white text-sm">Area: ${prop.area} sqft</span>
+            ${typeTag}
+          </div>
+          <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        </div>
+      </div>
+    `;
+  }
+
+  // **FIX 3.1: ADDED matchesFilter function**
+  // Checks if a card matches the filters
+  function matchesFilter(card, filters) {
+    // dataPrice is in thousands (e.g., 25), so we'll convert the filter to match.
+    const price = parseFloat(card.dataset.price || 0); 
+    const area = parseFloat(card.dataset.area || 0);
+    const type = (card.dataset.type || "").toLowerCase();
+
+    if (filters.type !== 'all' && filters.type !== '' && type !== filters.type) return false;
+
+    // Get min/max from filter (e.g., 20000, 50000)
+    let priceMin = filters.priceMin !== '' && !isNaN(filters.priceMin) ? Number(filters.priceMin) : null;
+    let priceMax = filters.priceMax !== '' && !isNaN(filters.priceMax) ? Number(filters.priceMax) : null;
+    
+    // Convert filter values to thousands (e.g., 20, 50) to match dataPrice
+    if (priceMin !== null) priceMin = priceMin / 1000;
+    if (priceMax !== null) priceMax = priceMax / 1000;
+
+    if (priceMin !== null && price < priceMin) return false;
+    if (priceMax !== null && price > priceMax) return false;
+    if (filters.areaMin !== '' && !isNaN(filters.areaMin) && area < Number(filters.areaMin)) return false;
+    if (filters.areaMax !== '' && !isNaN(filters.areaMax) && area > Number(filters.areaMax)) return false;
+
+    return true;
+  }
+
+  // **FIX 3.2: ADDED applyFilters function**
+  // Applies the filters to all cards
+  function applyFilters() {
+    const filters = {
+        type: document.getElementById('filter-type').value,
+        priceMin: document.getElementById('price-min').value, // No priceUnit
+        priceMax: document.getElementById('price-max').value,
+        areaMin: document.getElementById('area-min').value,
+        areaMax: document.getElementById('area-max').value
+    };
+
+    const cards = document.querySelectorAll('.property-card');
+    let noMatchFound = true;
+    cards.forEach(card => {
+        if (matchesFilter(card, filters)) {
+            card.classList.remove('hidden');
+            noMatchFound = false;
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+
+    if (noMatchFound) {
+        alert('No properties match your filters.');
+    }
+  }
+
+  // **FIX 3.3: ADDED clearFilters function**
+  // Clears all filters and shows all cards
+  function clearFilters() {
+    document.getElementById('filter-type').value = 'all';
+    document.getElementById('price-min').value = '';
+    document.getElementById('price-max').value = '';
+    document.getElementById('area-min').value = '';
+    document.getElementById('area-max').value = '';
+    document.querySelectorAll('.property-card').forEach(c => c.classList.remove('hidden'));
+  }
+
+
+  // Helper to generate random numbers for "View Details"
+  function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+
+  // === 3. MAIN SCRIPT: RUNS WHEN THE PAGE IS LOADED ===
+  document.addEventListener("DOMContentLoaded", function() {
+      
+      // --- PART A: LOAD DYNAMIC CONTENT ---
+      const urlParams = new URLSearchParams(window.location.search);
+      const state = (urlParams.get('state') || 'punjab').toLowerCase();
+      
+      // **FIX 1: Use statePropertiesRent**
+      const propertyData = statePropertiesRent[state]; 
+      
+      const titleElement = document.getElementById('state-title');
+      const gridElement = document.getElementById('property-grid');
+
+      if (propertyData) {
+          const stateName = state.charAt(0).toUpperCase() + state.slice(1);
+          
+          // **FIX 2: Change title to "For Rent"**
+          titleElement.textContent = `Properties For Rent in ${stateName}`; 
+          
+          let gridHtml = '';
+          propertyData.forEach(prop => {
+              gridHtml += createCardHtml(prop);
+          });
+          gridElement.innerHTML = gridHtml;
+      } else {
+          const stateName = state.charAt(0).toUpperCase() + state.slice(1);
+          titleElement.textContent = `No Properties Found for "${stateName}"`;
+          gridElement.innerHTML = '<p class="text-center col-span-3 text-gray-700">Sorry, we do not have listings for this location yet.</p>';
+      }
+
+      // --- PART B: SETUP SEARCH BAR ---
+      const searchIcon = document.querySelector(".fa-magnifying-glass");
+      const searchInput = document.querySelector("input[type='text']");
+
+      searchIcon.addEventListener("click", function() {
+          const states = searchInput.value.trim().toLowerCase();
+          
+          // **FIX 4: Check statePropertiesRent**
+          if (statePropertiesRent.hasOwnProperty(states)) { 
+              // **FIX 5: Redirect to statesrent.html**
+              window.location.href = `statesrent.html?state=${states}`; 
+          } else {
+              alert("No matching location found!");
+          }
+      });
+      searchInput.addEventListener("keypress", function(event) {
+          if (event.key === "Enter") {
+              searchIcon.click();
+          }
+      });
+
+      // --- PART C: SETUP MOBILE MENU ---
+      const menuBtn = document.getElementById('menu-btn');
+      const mobilemenu = document.getElementById('mobile-menu');
+      menuBtn.addEventListener('click', () => {
+          mobilemenu.classList.toggle('hidden');
+      });
+
+      // --- PART D: SETUP FILTER BUTTONS ---
+      // This will now work because the functions are defined
+      const applyBtn = document.getElementById('apply-filters');
+      const clearBtn = document.getElementById('clear-filters');
+      applyBtn.addEventListener('click', applyFilters);
+      clearBtn.addEventListener('click', clearFilters);
+  });
+
+
+
+  // NAVBAR rounding on scroll (guarded)
+  try {
+    const navbar = document.getElementById("navbar");
+    if (navbar) {
+      const threshold = 12;
+      const lgBreakpoint = 1024; // Tailwind's 'lg' breakpoint
+      
+      const addClasses = [
+          'rounded-3xl', 'w-5/6', 'ml-[148px]', "rounded-5xl", 
+          "shadow-2xl", 'bg-gray-200/20', 'backdrop-blur-xl', 
+          'border-2', 'border-blue-800', 'mt-8'
+        ];
+      const removeClasses = ["rounded-none", "shadow-lg", 'bg-white'];
+
+      function updateNavbar() {
+        const isLargeScreen = window.innerWidth >= lgBreakpoint;
+        if (isLargeScreen) {
+          if (window.scrollY > threshold) {
+            navbar.classList.add(...addClasses);
+            navbar.classList.remove(...removeClasses);
+            navbar.style.backdropFilter = "saturate(125%) blur(36px)";
+          } else {
+            navbar.classList.remove(...addClasses);
+            navbar.classList.add(...removeClasses);
+            navbar.style.backdropFilter = "";
+          }
+        } else {
+          navbar.classList.remove(...addClasses);
+          navbar.classList.add(...removeClasses);
+          navbar.style.backdropFilter = "";
+        }
+      }
+      
+      updateNavbar(); // Run on initial load
+      window.addEventListener("scroll", updateNavbar, { passive: true }); // Run on scroll
+      window.addEventListener("resize", updateNavbar, { passive: true }); // Run on resize
+    }
+  } catch (err) {
+    console.error("Navbar rounding error:", err);
+  }
+
+
+  // === 4. "VIEW DETAILS" CLICK HANDLER ===
+  // This logic is correct and remains unchanged.
+  document.addEventListener('click', function (e) {
+      const link = e.target.closest('a');
+      if (!link || !link.getAttribute('href').includes('viewdetail.html')) {
+        return;
+      }
+
+      e.preventDefault(); 
+      
+      const card = link.closest('.property-card');
+      if (!card) {
+        window.location.href = 'viewdetail.html'; 
+        return;
+      }
+
+      const allCards = Array.from(document.querySelectorAll('.property-card'));
+      const index = allCards.indexOf(card);
+      const generatedId = card.dataset.houseId || ('s' + (index + 1));
+
+      const title = card.querySelector('h3')?.textContent?.trim() || '';
+      const priceText = card.querySelector('p')?.textContent?.trim() || '';
+      const image = card.querySelector('img')?.src || '';
+      const area = card.dataset.area ? card.dataset.area + ' sqft' : '';
+      const type = (card.dataset.type || '').toLowerCase();
+      const district = title;
+      const desc = title + (priceText ? ' — ' + priceText : '');
+      
+      // Use the data attributes from the "Rent" card
+      const beds = card.dataset.beds || (type === 'house' ? String(randInt(2, 6)) : null);
+      const baths = card.dataset.baths || (type === 'house' ? String(randInt(1, 4)) : null);
+      const garages = card.dataset.garages || (type === 'house' ? String(randInt(0, 3)) : null);
+
+      const params = new URLSearchParams();
+      if (generatedId) params.set('houseId', generatedId);
+      if (title) params.set('title', title);
+      if (desc) params.set('desc', desc);
+      if (priceText) params.set('priceText', priceText);
+      if (image) params.set('image', image);
+      if (area) params.set('area', area);
+      if (type) params.set('type', type);
+      if (district) params.set('district', district);
+      if (beds !== null) params.set('beds', beds);
+      if (baths !== null) params.set('baths', baths);
+      if (garages !== null) params.set('garages', garages);
+
+      window.location.href = 'viewdetailsrent.html?' + params.toString();
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Tenants - RoofScout Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <div class="nav flex justify-between h-20 items-center shadow-lg p-4 bg-gray-700">
+    <div class="flex items-center text-4xl font-bold">
+      <img src="logoRS.jpg" alt="RoofScout Logo" class="h-16 w-16 mr-2 rounded-full">
+      <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+      <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+    </div>
+    <div class="flex space-x-4 text-white">
+      <span>Admin</span>
+      <a href="index.html" class="hover:text-blue-400">Logout</a>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="flex">
+     <!-- Sidebar -->
+    <aside class="bg-gray-900 text-white w-64 min-h-screen p-4 space-y-4">
+      <a href="admindashbo.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-circle-info text-blue-700"></i><span>Info</span>
+      <a href="adm-houses.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-house text-blue-400"></i><span>Houses</span>
+      </a>
+      <a href="adm-client1.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-user text-purple-400"></i><span>Buyer/Seller</span>
+      </a>
+      <a href="adm-propt.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-regular fa-building text-amber-400"></i><span>Properties</span>
+      </a>
+      <a href="adm-tenant.html" class="flex items-center gap-3 bg-gray-700 p-2 rounded ">
+        <i class="fa-solid fa-user text-cyan-400"></i><span>Tenants</span>
+      </a>
+      <a href="adm-payment.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-regular fa-money-bill-1 text-green-500"></i><span>Payment</span>
+      </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 bg-white">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-gray-700">All Tenants</h2>
+        <input id="searchInput" type="text" placeholder="Search The Tenant..." class="border border-gray-400 bg-gray-100 focus:outline-none focus:border-blue-500 p-1 text-sm w-64">
+      </div>
+
+      <p class="text-gray-500 mb-4 text-sm">Tenants Details...</p>
+
+      <!-- Table + Details Grid -->
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Table -->
+        <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+          <table id="tenantTable" class="min-w-full text-sm">
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th class="px-4 py-2 border">ID</th>
+                <th class="px-4 py-2 border">Name</th>
+                <th class="px-4 py-2 border">Email</th>
+                <th class="px-4 py-2 border">House</th>
+                <th class="px-4 py-2 border">Status</th>
+              </tr>
+            </thead>
+            <tbody id="tenantList"></tbody>
+          </table>
+        </div>
+
+        <!-- Tenant Details -->
+        <div id="tenantDetails" class="p-6 border border-gray-200 rounded-lg shadow-sm bg-gray-50 text-gray-700 hidden">
+          <h3 class="text-xl font-semibold mb-2">Select a tenant to view details</h3>
+          <p class="text-gray-500">Click on any row from the table to view tenant details.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Script -->
+  <script>
+    // D tenant data
+    const tenants = [
+      { id: 1, name: "Swati Misra", email: "swati@gmail.com", house: "566 Pound Apartment, Nashik", phone: "8465757575", status: "Done", checked: true, photo: "https://i.pravatar.cc/100?img=4", rentDuration: "12 Months", startDate: "2024-05-10" },
+      { id: 2, name: "Rohit Sharma", email: "rohit@gmail.com", house: "324 Tara Place, Pune", phone: "7789855757", status: "Done", checked: true, photo: "https://i.pravatar.cc/100?img=5", rentDuration: "6 Months", startDate: "2024-09-01" },
+      { id: 3, name: "Nitish Rana", email: "nitish@gmail.com", house: "34  Azad Nagar,Rajura, Punjab", phone: "7789855757", status: "Dismiss", checked: false, photo: "https://i.pravatar.cc/100?img=2", rentDuration: "3 Months", startDate: "2024-05-28" },
+      { id: 4, name: "Suhas Pande", email: "suhas@gmail.com", house: "Ganga Sagar House 388, Nashik", phone: "7869678967", status: "Done", checked: true, photo: "https://i.pravatar.cc/100?img=3", rentDuration: "9 Months", startDate: "2024-03-15" },
+    ];
+
+    const tenantList = document.getElementById("tenantList");
+    const tenantDetails = document.getElementById("tenantDetails");
+
+    // Render tenant table
+    const renderTable = (list) => {
+      tenantList.innerHTML = "";
+      list.forEach(t => {
+        const tr = document.createElement("tr");
+        tr.classList = "hover:bg-gray-50 cursor-pointer";
+        tr.innerHTML = `
+          <td class="px-4 py-2 border">${t.id}</td>
+          <td class="px-4 py-2 border">${t.name}</td>
+          <td class="px-4 py-2 border">${t.email}</td>
+          <td class="px-4 py-2 border">${t.house}</td>
+          <td class="px-4 py-2 border ${t.status === "Done" ? "text-green-600" : "text-red-600"}">${t.status}</td>
+        `;
+        tr.addEventListener("click", () => showDetails(t));
+        tenantList.appendChild(tr);
+      });
+    };
+
+    // Show tenant details on the right
+    const showDetails = (tenant) => {
+      tenantDetails.classList.remove("hidden");
+      tenantDetails.innerHTML = `
+        <div class="flex items-center space-x-6">
+          <img src="${tenant.photo}" alt="${tenant.name}" class="h-40 w-40 rounded-lg object-cover shadow">
+          <div>
+            <h2 class="text-2xl font-bold text-gray-800">${tenant.name}</h2>
+            <p class="text-sm text-blue-600">${tenant.house}</p>
+            <p><strong>Email:</strong> ${tenant.email}</p>
+            <p><strong>Phone:</strong> ${tenant.phone}</p>
+            <p><strong>Status:</strong> <span class="${tenant.status === "Done" ? "text-green-600" : "text-red-600"}">${tenant.status}</span></p>
+            <p><strong>Admin Check:</strong> ${tenant.checked ? "✅ Verified" : "❌ Pending"}</p>
+            <p><strong>Rent Duration:</strong> ${tenant.rentDuration}</p>
+            <p><strong>Start Date:</strong> ${tenant.startDate}</p>
+
+            <div class="mt-4 flex space-x-3">
+              <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-sm">Cancel Rent</button>
+              <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">Contact Tenant</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 text-gray-600 text-sm leading-relaxed">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eveniet dolore, sequi ex natus, nobis laboriosam?</p>
+        </div>
+      `;
+    };
+
+    // Search tenants
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      const term = e.target.value.toLowerCase();
+      const filtered = tenants.filter(t => t.name.toLowerCase().includes(term));
+
+      renderTable(filtered);
+
+      // Hide detail panel if cleared or no results
+      if (term === "" || filtered.length === 0) {
+        tenantDetails.classList.add("hidden");
+      }
+    });
+
+    // Initial render
+    renderTable(tenants);
+  </script>
+</body>
+</html>

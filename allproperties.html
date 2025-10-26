@@ -17,7 +17,7 @@
 
 
 <body class="flex flex-col min-h-screen ">
-  <div class="sticky top-0 z-50 flex gap-10 h-20 p-4 items-center bg-white shadow-lg shadow-gray-200/20  ">
+  <div id="navbar" class="sticky top-0 z-50 flex gap-10 h-20 p-4  items-center bg-white shadow-lg shadow-gray-200/20 rounded-none transition-all duration-300">
             
       <div class="flex items-center ">
               <img src="LogoRS.png" alt="Logo" class="h-16 w-16 bg-cover bg-center mr-2 hidden sm:block">
@@ -32,18 +32,18 @@
         <div class="hidden sm:flex items-center space-x-4">
             <div class="relative">
                 <div class="dropdown">
-                    <button class="flex items-center justify-between w-8 py-2 bg-white border-b-2 border-black text-sm font-bold hover:bg-gray-50">Buy</button>
+                    <button class="flex items-center justify-between w-8 py-2  border-b-2 border-black text-sm font-bold hover:bg-gray-50">Buy</button>
                     <div class="dropdown-menu absolute hidden h-auto bg-white flex pt-4 text-sm font-bold">
                         <ul class="block w-full  bg-white ">
-                            <li class="py-1 px-2">Rent</li> 
+                            <a href="index2.html" class="py-1 px-2">Rent</a>  
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="relative flex items-center w-1/2 border-2 border-gray-200 rounded-xl shadow-lg sm:w-40 md:w-1/2 ml-12 ">
-            <input type="text" placeholder="  Search States..." class="w-full rounded-xl h-10 sm:h-12 border border-gray-500 text-sm md:text-base">
+        <div class="relative flex items-center w-1/2 border-2 border-gray-200 rounded-xl shadow-lg sm:w-40 md:w-1/2 ml-8 text-gray-300">
+            <input type="text" placeholder="  Search States..." class="w-full rounded-xl h-10 sm:h-12 text-black border border-gray-400 text-sm md:text-base bg-white/20">
              <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
         </div>
 
@@ -51,31 +51,31 @@
           <button id="menu-btn" class="lg:hidden ml-auto text-3xl text-gray-700">☰</button>
           <!-- desktop : lg and above -->
           <div class="hidden lg:flex items-center ml-2 space-x-4 ">
-             <button class=" bg-blue-500 text-white font-semibold rounded-md  items-center px-3 py-2">
+             <button class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-3 py-2">
                 <a href="postproperty.html">Post Property</a>
                 <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
             </button>
-            <button class=" bg-blue-500 text-white font-semibold rounded-md  items-center px-4 py-2">
+            <button class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
                 <a href="login.html">Login/SignUp</a>
             </button>
           </div>
     </div>
 
         <!-- md and sm -->
-        <div id="mobile-menu" class="hidden  flex-col flex justify-end items-end space-y-4 p-4 lg:hidden">
+        <div id="mobile-menu" class="hidden  flex-col flex justify-end items-end space-y-4 p-4 bg-gradient-to-br from-blue-100 to-green-100 lg:hidden">
           <div class="sm:hidden space-y-3 mt-4 w-40">
             
-              <a href="index.html" class="flex bg-blue-500 text-white font-semibold rounded-md  items-center px-3 py-2">Buy</a>
-              <a href="index2.html" class="flex bg-blue-500 text-white font-semibold rounded-md  items-center px-3 py-2 ">Rent</a>
+              <a href="index.html" class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-3 py-2">Buy</a>
+              <a href="index2.html" class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-3 py-2 ">Rent</a>
           </div>
         
 
         <div class="flex flex-col items-center space-y-3 mt-2 w-40">
-             <button class="flex bg-blue-500 text-white font-semibold rounded-md  items-center px-3 py-2">
+             <button class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-3 py-2">
                 <a href="postproperty.html">Post Property</a>
                 <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
             </button>
-            <button class="flex bg-blue-500 text-white font-semibold rounded-md  items-center px-4 py-2">
+            <button class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
                 <a href="login.html">Login/SignUp</a>
             </button>
           </div>
@@ -83,118 +83,300 @@
 <!-- Main section  -->
 <main class="flex-1 py-8 px-8 bg-gradient-to-br from-blue-100 via-green-100 to-pink-200">
     
-      <!-- Grid Container -->
+  <!-- Filter bar copied from state.html -->
+  <div class="w-full md:w-11/12 lg:w-3/4 max-w-4xl mx-auto justify-center mb-8 p-4 bg-white rounded-lg shadow flex flex-wrap gap-4 items-center">
+    <div class="flex items-center space-x-2">
+      <label class="text-sm font-medium">Type:</label>
+      <select id="filter-type" class="px-3 py-2 border rounded">
+        <option value="all">All</option>
+        <option value="house">House</option>
+        <option value="plot">Plot</option>
+      </select>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <label class="text-sm font-medium">Price</label>
+      <select id="price-unit" class="px-3 py-2 border rounded">
+        <option value="lacs">Lacs</option>
+        <option value="crores">Crores</option>
+      </select>
+      <input id="price-min" type="number" placeholder="min" class="w-16 px-1 py-1 border rounded" />
+      <input id="price-max" type="number" placeholder="max" class="w-16 px-1 py-1 border rounded" />
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <label class="text-sm font-medium">Area (sqft)</label>
+      <input id="area-min" type="number" placeholder="min" class="w-16 px-1 py-1 border rounded" />
+      <input id="area-max" type="number" placeholder="max" class="w-16 px-1 py-1 border rounded" />
+    </div>
+
+    <div class="flex items-center space-x-2 ml-auto">
+      <button id="apply-filters" class="bg-blue-500 text-white px-4 py-2 rounded">Apply</button>
+      <button id="clear-filters" class="bg-gray-200 px-4 py-2 rounded">Clear</button>
+    </div>
+  </div>
+
+  <!-- Grid Container -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
     <!-- Card 1 -->
-    <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40">
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="15" data-area="900" data-type="house" data-house-id="A001">
       <img src="house1.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
         <h3 class="text-white text-lg font-bold">Sector 14 , Chandigarh</h3>
         <p class="text-yellow-400 font-bold">₹15-32 Lacs</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 900 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
 
     <!-- Card 2 -->
-    <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40">
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="100" data-area="3000" data-type="house" data-house-id="A002">
       <img src="house2ch.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
         <h3 class="text-white text-lg font-bold">405 Lock House , Sector 12 , Chandigarh</h3>
         <p class="text-yellow-400 font-bold">₹1-7 Cr</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 3000 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
 
-    <!-- Repeated  cards -->
-     <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40 bg-centre">
+    <!-- Repeated  cards (updated with data attributes and links) -->
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40 bg-centre"
+         data-price="60" data-area="1200" data-type="house" data-house-id="A003">
       <img src="house3ch.png" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
         <h3 class="text-white text-lg font-bold">324 Tara Place, Sector 16 , Chandigarh</h3>
         <p class="text-yellow-400 font-bold">₹50-84 Lacs</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 1200 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
-    <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40">
+
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="1500" data-area="6000" data-type="house" data-house-id="A004">
       <img src="house4ch.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
         <h3 class="text-white text-lg font-bold">44 Timber Road, Chandigarh</h3>
         <p class="text-yellow-400 font-bold">₹15-35 Cr</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 6000 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
     
-     <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40">
+     <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+          data-price="500" data-area="3500" data-type="house" data-house-id="A005">
       <img src="house5ch.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
         <h3 class="text-white text-lg font-bold">Sector 26, Chandigarh</h3>
         <p class="text-yellow-400 font-bold">₹5-19 Cr</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 3500 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
     
-     <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40">
+     <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+          data-price="170" data-area="1100" data-type="house" data-house-id="A006">
       <img src="house6ch.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
         <h3 class="text-white text-lg font-bold">PGI road , Sector 16 , Chandigarh</h3>
         <p class="text-yellow-400 font-bold">₹16-27 Lacs</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 1100 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
-    <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40">
+
+    <!-- Punjab cards -->
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="500" data-area="4200" data-type="house" data-house-id="A007">
       <img src="house1pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
         <h3 class="text-white text-lg font-bold">Mansa , Punjab</h3>
         <p class="text-yellow-400 font-bold">₹5 Cr</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 4200 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40">
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="500" data-area="3500" data-type="house" data-house-id="A008">
       <img src="house2pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
         <h3 class="text-white text-lg font-bold">405 Dera Bassi, Punjab</h3>
         <p class="text-yellow-400 font-bold">₹5 Cr</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 3500 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
 
-    <!-- Repeat similar cards -->
-     <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40 bg-centre">
+    <!-- Repeat similar cards (updated) -->
+     <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40 bg-centre"
+          data-price="500" data-area="1200" data-type="house" data-house-id="A009">
       <img src="house3pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
         <h3 class="text-white text-lg font-bold">324 Tara Place, Pune</h3>
         <p class="text-yellow-400 font-bold">₹5 Cr</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 1200 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
-    <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40">
+
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="500" data-area="1800" data-type="house" data-house-id="A010">
       <img src="house4pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
         <h3 class="text-white text-lg font-bold">324 Tara Place, Pune</h3>
         <p class="text-yellow-400 font-bold">₹5 Cr</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 1800 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
     
-     <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40">
+     <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+          data-price="500" data-area="4200" data-type="house" data-house-id="A011">
       <img src="house5pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
         <h3 class="text-white text-lg font-bold">324 Tara Place, Pune</h3>
         <p class="text-yellow-400 font-bold">₹5 Cr</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 4200 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
     
-     <div class="relative rounded-lg overflow-hidden shadow-lg relative transition-transform duration-300 hover:scale-105  hover:shadow-green-600/40">
+     <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105  hover:shadow-green-600/40"
+          data-price="500" data-area="5000" data-type="house" data-house-id="A012">
       <img src="house6pb.jpg" alt="Property Image" class="w-full h-64 object-cover">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
         <h3 class="text-white text-lg font-bold">324 Tara Place, Pune</h3>
         <p class="text-yellow-400 font-bold">₹5 Cr</p>
-        <a href="#" class="text-white mt-2 inline-block">View All Details &gt;</a>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 5000 sqft</span>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">House</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
       </div>
     </div>
+
+    <!-- Plots (updated: tag color green) -->
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="500" data-area="5000" data-type="plot" data-house-id="5060">
+      <img src="https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
+        <h3 class="text-white text-lg font-bold">Mansa , Punjab</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 5000 sqft</span>
+          <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded">Plot</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="500" data-area="5000" data-type="plot" data-house-id="5061">
+      <img src="https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
+        <h3 class="text-white text-lg font-bold">405 Dera Bassi, Punjab</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 5000 sqft</span>
+          <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded">Plot</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40 bg-centre"
+         data-price="500" data-area="5000" data-type="plot" data-house-id="5062">
+      <img src="https://th.bing.com/th/id/OIP.8XehqTzGtglzlbPglw_jxQHaEJ?w=328&h=184&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
+        <h3 class="text-white text-lg font-bold">324 Tara Place, Punjab</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 5000 sqft</span>
+          <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded">Plot</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="500" data-area="5000" data-type="plot" data-house-id="5063">
+      <img src="https://th.bing.com/th/id/OIP.t5si8dD57J5rZX4fWK5jagAAAA?w=224&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
+        <h3 class="text-white text-lg font-bold">324 Tara Place, Punjab</h3>
+        <p class="text-yellow-400 font-bold">₹5 Cr</p>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 5000 sqft</span>
+          <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded">Plot</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="400" data-area="5000" data-type="plot" data-house-id="5064">
+      <img src="https://th.bing.com/th/id/OIP.S-nsr8yVkJzy9AFgomOHYwAAAA?w=230&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-10">
+        <h3 class="text-white text-lg font-bold">324 Tara Place, Punjab</h3>
+        <p class="text-yellow-400 font-bold">₹4 Cr</p>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 5000 sqft</span>
+          <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded">Plot</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+
+    <div class="property-card relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-green-600/40"
+         data-price="200" data-area="5000" data-type="plot" data-house-id="5065">
+      <img src="https://th.bing.com/th/id/OIP.5k9mVM1IqxncdzJL8fA5jgHaFj?w=254&h=191&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Property Image" class="w-full h-64 object-cover">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 hover:bg-opacity-20">
+        <h3 class="text-white text-lg font-bold">324 Tara Place, Punjab</h3>
+        <p class="text-yellow-400 font-bold">₹2 Cr</p>
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-white text-sm">Area: 5000 sqft</span>
+          <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded">Plot</span>
+        </div>
+        <a href="viewdetail.html" class="text-white mt-2 inline-block">View All Details &gt;</a>
+      </div>
+    </div>
+
   </div>
 
   </main>
@@ -274,41 +456,216 @@
   </footer>
 </body>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const searchIcon = document.querySelector(".fa-magnifying-glass");
-    const searchInput = document.querySelector("input[type='text']");
 
-    searchIcon.addEventListener("click", function() {
-      const states = searchInput.value.trim().toLowerCase();
-
-      if (states === "punjab") {
-        window.location.href = "punjab.html";
-      } else if (states === "haryana") {
-        window.location.href = "haryana.html";
-      } else if (states === "delhi") {
-        window.location.href = "delhi.html";
-      } else if (states=== "chandigarh") {
-        window.location.href = "chandigarh.html";
-      } else {
-        alert("No matching location found!");
-      }
-    });
-
-    // Optional: Press Enter to search
-    searchInput.addEventListener("keypress", function(event) {
-      if (event.key === "Enter") {
-        searchIcon.click();
-      }
-    });
-  });
-
-   // sm and md view
+  // sm and md view menu toggle
   const menuBtn = document.getElementById('menu-btn');
   const mobilemenu= document.getElementById('mobile-menu');
-  menuBtn.addEventListener('click',() => {
-    mobilemenu.classList.toggle('hidden');
+  if (menuBtn && mobilemenu) {
+    menuBtn.addEventListener('click',() => {
+      mobilemenu.classList.toggle('hidden');
+    });
+  }
+
+ document.addEventListener("DOMContentLoaded", function () {
+  // safe helpers
+  const el = (sel) => document.querySelector(sel);
+
+  // SEARCH: redirect to states.html?state=...
+  try {
+    const searchIcon = el(".fa-magnifying-glass");
+    const searchInput = el("input[type='text']");
+
+    const doSearch = () => {
+      const raw = (searchInput?.value || "").trim();
+      if (!raw) {
+        alert("Please enter a state to search.");
+        return;
+      }
+      const state = raw.toLowerCase();
+      // Redirect to states page (states.html should read ?state=...)
+      window.location.href = `states.html?state=${encodeURIComponent(state)}`;
+    };
+
+    if (searchIcon) searchIcon.addEventListener("click", doSearch);
+    if (searchInput) searchInput.addEventListener("keypress", (ev) => {
+      if (ev.key === "Enter") doSearch();
+    });
+  } catch (err) {
+    console.error("Search handler error:", err);
+  }
+});
+
+  // FILTER SCRIPT (copied from state.html)
+  const applyBtn = document.getElementById('apply-filters');
+  const clearBtn = document.getElementById('clear-filters');
+
+  function matchesFilter(card, filters) {
+    const price = parseFloat(card.dataset.price || 0); // stored in Lacs
+    const area = parseFloat(card.dataset.area || 0);
+    const type = (card.dataset.type || "").toLowerCase();
+
+    if (filters.type !== 'all' && filters.type !== '' && type !== filters.type) return false;
+
+    // Normalize price filters to Lacs (cards use Lacs)
+    let priceMin = filters.priceMin !== '' && !isNaN(filters.priceMin) ? Number(filters.priceMin) : null;
+    let priceMax = filters.priceMax !== '' && !isNaN(filters.priceMax) ? Number(filters.priceMax) : null;
+    if (filters.priceUnit === 'crores') {
+      if (priceMin !== null) priceMin = priceMin * 100; // 1 Crore = 100 Lacs
+      if (priceMax !== null) priceMax = priceMax * 100;
+    }
+
+    if (priceMin !== null && price < priceMin) return false;
+    if (priceMax !== null && price > priceMax) return false;
+
+    if (filters.areaMin !== '' && !isNaN(filters.areaMin) && area < Number(filters.areaMin)) return false;
+    if (filters.areaMax !== '' && !isNaN(filters.areaMax) && area > Number(filters.areaMax)) return false;
+
+    return true;
+  }
+
+  function applyFilters() {
+    if (!applyBtn) return;
+    const filters = {
+      type: document.getElementById('filter-type').value,
+      priceUnit: document.getElementById('price-unit').value || 'lacs',
+      priceMin: document.getElementById('price-min').value,
+      priceMax: document.getElementById('price-max').value,
+      areaMin: document.getElementById('area-min').value,
+      areaMax: document.getElementById('area-max').value
+    };
+
+    const cards = document.querySelectorAll('.property-card');
+    let allVisible = false;
+    cards.forEach(card => {
+      if (matchesFilter(card, filters)) {
+        card.classList.remove('hidden');
+        allVisible = true;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    if (!allVisible) {
+      alert('No properties match your filters.');
+    }
+  }
+
+  function clearFilters() {
+    if (!clearBtn) return;
+    document.getElementById('filter-type').value = 'all';
+    document.getElementById('price-unit').value = 'lacs';
+    document.getElementById('price-min').value = '';
+    document.getElementById('price-max').value = '';
+    document.getElementById('area-min').value = '';
+    document.getElementById('area-max').value = '';
+    document.querySelectorAll('.property-card').forEach(c => c.classList.remove('hidden'));
+  }
+
+  if (applyBtn) applyBtn.addEventListener('click', applyFilters);
+  if (clearBtn) clearBtn.addEventListener('click', clearFilters);
+
+  // Delegated click handler to send card data to viewdetail.html
+  document.addEventListener('click', function (e) {
+    const link = e.target.closest('a');
+    if (!link) return;
+    const href = link.getAttribute('href') || '';
+    if (!href.includes('viewdetail.html')) return;
+
+    e.preventDefault();
+    const card = link.closest('.property-card') || link.closest('.relative');
+    if (!card) {
+      window.location.href = 'viewdetail.html';
+      return;
+    }
+
+    // generate an id if not present
+    const allCards = Array.from(document.querySelectorAll('.property-card'));
+    const index = allCards.indexOf(card);
+    const generatedId = card.dataset.houseId || ('ap' + (index + 1));
+
+    const title = card.querySelector('h3')?.textContent?.trim() || '';
+    const priceText = card.querySelector('p')?.textContent?.trim() || (card.dataset.priceText || '');
+    const image = card.querySelector('img')?.src || '';
+    const areaText = card.dataset.area ? (card.dataset.area + ' sqft') : (card.querySelector('span')?.textContent?.replace('Area:', '').trim() || '');
+    const type = (card.dataset.type || 'house');
+    const district = title;
+    const desc = title + (priceText ? ' — ' + priceText : '');
+
+    // helper to generate sensible random sample values for houses
+    function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+    // prefer explicit dataset values, otherwise provide sample values for houses
+    const beds = card.dataset.beds ?? (type.toLowerCase() === 'house' ? String(randInt(2, 6)) : null);
+    const baths = card.dataset.baths ?? (type.toLowerCase() === 'house' ? String(randInt(1, 4)) : null);
+    const garages = card.dataset.garages ?? (type.toLowerCase() === 'house' ? String(randInt(0, 3)) : null);
+
+    const params = new URLSearchParams();
+    if (generatedId) params.set('houseId', generatedId);
+    if (title) params.set('title', title);
+    if (desc) params.set('desc', desc);
+    if (priceText) params.set('priceText', priceText);
+    if (image) params.set('image', image);
+    if (areaText) params.set('area', areaText);
+    if (type) params.set('type', type);
+    if (district) params.set('district', district);
+    if (beds !== null) params.set('beds', beds);
+    if (baths !== null) params.set('baths', baths);
+    if (garages !== null) params.set('garages', garages);
+
+    window.location.href = 'viewdetail.html?' + params.toString();
   });
 
+  // NAVBAR rounding on scroll (guarded)
+  try {
+    const navbar = document.getElementById("navbar");
+    if (navbar) {
+      const threshold = 12;
+      // Tailwind's 'lg' breakpoint
+      const lgBreakpoint = 1024; 
+      
+      // Removed duplicate "rounded-3xl" from your original array
+      const addClasses = [
+          'rounded-3xl', 'w-5/6', 'ml-[148px]', "rounded-5xl", 
+          "shadow-2xl", 'bg-gray-200/20', 'backdrop-blur-xl', 
+          'border-2', 'border-blue-800', 'mt-8'
+        ];
+      const removeClasses = ["rounded-none", "shadow-lg", 'bg-white'];
+
+      function updateNavbar() {
+        // Check if we are on a large screen
+        const isLargeScreen = window.innerWidth >= lgBreakpoint;
+
+        if (isLargeScreen) {
+          // LG+ screens: Apply scroll logic
+          if (window.scrollY > threshold) {
+            navbar.classList.add(...addClasses);
+            navbar.classList.remove(...removeClasses);
+            navbar.style.backdropFilter = "saturate(125%) blur(36px)";
+          } else {
+            navbar.classList.remove(...addClasses);
+            navbar.classList.add(...removeClasses);
+            navbar.style.backdropFilter = "";
+          }
+        } else {
+          // MD/SM/XS screens: ALWAYS force default state, even if scrolled
+          navbar.classList.remove(...addClasses);
+          navbar.classList.add(...removeClasses);
+          navbar.style.backdropFilter = "";
+        }
+      }
+      
+      // Run on initial load to set the correct state
+      updateNavbar();
+      
+      // Run on scroll
+      window.addEventListener("scroll", updateNavbar, { passive: true });
+      
+      // Run on resize to catch breakpoint changes
+      window.addEventListener("resize", updateNavbar, { passive: true });
+    }
+  } catch (err) {
+    console.error("Navbar rounding error:", err);
+  }
 </script>
 
 </html>

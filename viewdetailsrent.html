@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RoofScout - Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800">
+
+  <div class="sticky top-0 z-50 flex gap-10 h-20 p-4 items-center bg-white shadow-lg">
+    <div class="flex items-center">
+      <img src="LogoRS.png" alt="Logo" class="h-16 w-16 mr-2 hidden sm:block">
+      <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+      <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+    </div>
+  </div>
+
+  <div class="px-6 py-3 text-sm text-gray-600">
+    <a href="index.html" class="hover:text-black">Home</a> /
+    <a href="allproperties.html" class="hover:text-black">Properties</a> /
+    <span id="breadcrumb-title">Property Details</span>
+  </div>
+
+  <!-- Property Image -->
+  <section class="w-1/2 mx-auto mt-4">
+    <img id="prop-image" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994" alt="Property" class="w-full h-96 object-cover">
+  </section>
+
+  <!-- Price and Description -->
+  <section class="p-8 flex flex-col lg:flex-row gap-8">
+    <div class="flex-1">
+      <div id="prop-price" class="flex items-center text-green-600 text-3xl font-bold mb-4">₹ 1000 <span class="text-base text-gray-500 ml-2">/month</span></div>
+      <h2 id="prop-title" class="text-2xl font-semibold mb-2">Property Description</h2>
+      <p id="prop-desc" class="text-gray-600 leading-relaxed">
+        Default description. Clicked card info will populate here when available.
+      </p>
+      <p class="mt-4 text-gray-700"><span class="font-semibold">Address:</span> <span id="prop-address">Unknown</span></p>
+    </div>
+
+    <div class="w-full lg:w-1/3 border-2 border-gray-400 p-4">
+      <h3 class="text-xl font-semibold mb-4 flex justify-center items-center">Quick Summary</h3>
+      <ul class="space-y-2 text-gray-700">
+        <li><span class="font-semibold">Property ID:</span> <span id="quick-id">-</span></li>
+        <li><span class="font-semibold">Location:</span> <span id="quick-location">-</span></li>
+        <li><span class="font-semibold">Property Type:</span> <span id="quick-type">-</span></li>
+        <li><span class="font-semibold">Status:</span> <span id="quick-status">Rent</span></li>
+        <li><span class="font-semibold">Area:</span> <span id="quick-area">-</span></li>
+        <li><span class="font-semibold">Beds:</span> <span id="quick-beds">-</span></li>
+        <li><span class="font-semibold">Bath:</span> <span id="quick-bath">-</span></li>
+        <li><span class="font-semibold">Garages:</span> <span id="quick-garage">-</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    // read query params and populate the page
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const houseId = params.get('houseId');
+
+      // DATA map fallback (local known data)
+      const DATA = {
+        '4060': {
+          title: 'Mansa, Punjab',
+          priceText: '₹2-10 Cr',
+          desc: 'Spacious property in Mansa with good connectivity and amenities.',
+          address: 'Mansa, Punjab',
+          location: 'Mansa, Punjab',
+          type: 'House',
+          area: '2200 sqft',
+          owner: 'Admin',
+          image: 'house1pb.jpg',
+          beds: 4,
+          baths: 3,
+          garages: 2
+        },
+        '4061': {
+          title: '405 Dera Bassi, Punjab',
+          priceText: '₹5-19 Cr',
+          desc: 'Large family home in Dera Bassi with expansive grounds.',
+          address: '405 Dera Bassi, Punjab',
+          location: 'Dera Bassi, Punjab',
+          type: 'House',
+          area: '3500 sqft',
+          owner: 'Admin',
+          image: 'house2pb.jpg',
+          beds: 5,
+          baths: 4,
+          garages: 3
+        },
+        '4062': {
+          title: '324 Tara Place, Punjab',
+          priceText: '₹50-90 Lacs',
+          desc: 'Comfortable home at Tara Place, ideal for small families.',
+          address: '324 Tara Place, Punjab',
+          location: 'Tara Place, Punjab',
+          type: 'House',
+          area: '1200 sqft',
+          owner: 'Admin',
+          image: 'house3pb.jpg',
+          beds: 2,
+          baths: 1,
+          garages: 1
+        },
+        '4063': {
+          title: '324 Tara Place (2), Punjab',
+          priceText: '₹1-5 Cr',
+          desc: 'Renovated property with modern fittings and garden.',
+          address: '324 Tara Place, Punjab',
+          location: 'Tara Place, Punjab',
+          type: 'House',
+          area: '1800 sqft',
+          owner: 'Admin',
+          image: 'house4pb.jpg',
+          beds: 3,
+          baths: 2,
+          garages: 1
+        },
+        '4064': {
+          title: '502 Lakeview Drive, Punjab',
+          priceText: '₹5-12 Cr',
+          desc: 'Spacious 4BR with scenic views and renovated kitchen.',
+          address: '502 Lakeview Drive, Punjab',
+          location: 'Lakeview, Punjab',
+          type: 'House',
+          area: '4200 sqft',
+          owner: 'Admin',
+          image: 'house5pb.jpg',
+          beds: 4,
+          baths: 4,
+          garages: 2
+        },
+        '4065': {
+          title: 'Premium Estate, Punjab',
+          priceText: '₹5-10 Cr',
+          desc: 'Large estate with high-end finishes and extra land.',
+          address: 'Premium Estate, Punjab',
+          location: 'Punjab',
+          type: 'House',
+          area: '5000 sqft',
+          owner: 'Admin',
+          image: 'house6pb.jpg',
+          beds: 6,
+          baths: 5,
+          garages: 4
+        },
+        // Plots shown on state.html (no beds/baths/garages)
+        '5060': {
+          title: 'Mansa Plot, Punjab',
+          priceText: '₹5 Cr',
+          desc: 'Open plot in Mansa suitable for development.',
+          address: 'Mansa, Punjab',
+          location: 'Mansa, Punjab',
+          type: 'Plot',
+          area: '5000 sqft',
+          owner: 'Admin',
+          image: 'https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7'
+        },
+        '5061': {
+          title: 'Dera Bassi Plot, Punjab',
+          priceText: '₹5 Cr',
+          desc: 'Well-located plot near Dera Bassi.',
+          address: 'Dera Bassi, Punjab',
+          location: 'Dera Bassi, Punjab',
+          type: 'Plot',
+          area: '5000 sqft',
+          owner: 'Admin',
+          image: 'https://th.bing.com/th/id/OIP.fjA63g4LynWtnfeCIwuO0wHaEK?w=265&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7'
+        },
+        '5062': {
+          title: 'Tara Place Plot, Punjab',
+          priceText: '₹5 Cr',
+          desc: 'Plot in Tara Place area with easy access to roads.',
+          address: 'Tara Place, Punjab',
+          location: 'Tara Place, Punjab',
+          type: 'Plot',
+          area: '5000 sqft',
+          owner: 'Admin',
+          image: 'https://th.bing.com/th/id/OIP.8XehqTzGtglzlbPglw_jxQHaEJ?w=328&h=184&c=7&r=0&o=5&dpr=1.3&pid=1.7'
+        },
+        '5063': {
+          title: 'Central Plot, Punjab',
+          priceText: '₹5 Cr',
+          desc: 'Central plot suitable for residential or commercial use.',
+          address: 'Central, Punjab',
+          location: 'Punjab',
+          type: 'Plot',
+          area: '5000 sqft',
+          owner: 'Admin',
+          image: 'https://th.bing.com/th/id/OIP.t5si8dD57J5rZX4fWK5jagAAAA?w=224&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7'
+        },
+        '5064': {
+          title: 'South Plot, Punjab',
+          priceText: '₹4 Cr',
+          desc: 'Affordable plot in a growing suburb.',
+          address: 'South Area, Punjab',
+          location: 'Punjab',
+          type: 'Plot',
+          area: '5000 sqft',
+          owner: 'Admin',
+          image: 'https://th.bing.com/th/id/OIP.S-nsr8yVkJzy9AFgomOHYwAAAA?w=230&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7'
+        },
+        '5065': {
+          title: 'West Plot, Punjab',
+          priceText: '₹2 Cr',
+          desc: 'Budget-friendly plot for quick possession.',
+          address: 'West Area, Punjab',
+          location: 'Punjab',
+          type: 'Plot',
+          area: '5000 sqft',
+          owner: 'Admin',
+          image: 'https://th.bing.com/th/id/OIP.5k9mVM1IqxncdzJL8fA5jgHaFj?w=254&h=191&c=7&r=0&o=5&dpr=1.3&pid=1.7'
+        }
+      };
+
+      // Helper to set fields from an object
+      function applyData(d, idFromParams) {
+        if (!d) return;
+        if (d.title) document.getElementById('prop-title').textContent = d.title;
+        if (d.title) document.getElementById('breadcrumb-title').textContent = d.title;
+        if (d.desc) document.getElementById('prop-desc').textContent = d.desc;
+        if (d.address) document.getElementById('prop-address').textContent = d.address;
+        if (d.priceText) document.getElementById('prop-price').textContent = d.priceText;
+        if (idFromParams) document.getElementById('quick-id').textContent = idFromParams;
+        if (d.location) document.getElementById('quick-location').textContent = d.location;
+        if (d.type) document.getElementById('quick-type').textContent = d.type;
+        if (d.area) document.getElementById('quick-area').textContent = d.area;
+        // Set beds/baths/garages if present (use '-' when not available)
+        document.getElementById('quick-beds').textContent = d.beds !== undefined ? d.beds : '-';
+        document.getElementById('quick-bath').textContent = d.baths !== undefined ? d.baths : '-';
+        document.getElementById('quick-garage').textContent = d.garages !== undefined ? d.garages : '-';
+        if (d.owner) {
+          // keep owner usage for future if needed
+        }
+        if (d.image) document.getElementById('prop-image').src = d.image;
+      }
+
+      // First prefer explicit query params (these come from adm/state pages)
+      const q = {
+        title: params.get('title'),
+        desc: params.get('desc'),
+        address: params.get('address'),
+        priceText: params.get('priceText'),
+        image: params.get('image'),
+        owner: params.get('owner'),
+        location: params.get('location') || params.get('district'),
+        type: params.get('type'),
+        area: params.get('area'),
+        beds: params.get('beds'),
+        baths: params.get('baths'),
+        garages: params.get('garages')
+      };
+
+      // if any important param exists, use params to populate
+      if (q.title || q.desc || q.image || q.priceText || q.owner) {
+        const fromQuery = {
+          title: q.title,
+          desc: q.desc,
+          address: q.address,
+          priceText: q.priceText,
+          image: q.image,
+          owner: q.owner,
+          location: q.location,
+          type: q.type,
+          area: q.area,
+          beds: q.beds !== null ? q.beds : undefined,
+          baths: q.baths !== null ? q.baths : undefined,
+          garages: q.garages !== null ? q.garages : undefined
+        };
+        applyData(fromQuery, houseId);
+      } else if (houseId && DATA[houseId]) {
+        applyData(DATA[houseId], houseId);
+      } else if (houseId) {
+        document.getElementById('breadcrumb-title').textContent = 'Property ' + houseId;
+        document.getElementById('quick-id').textContent = houseId;
+      }
+    })();
+  </script>
+</body>
+</html>

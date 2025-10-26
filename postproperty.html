@@ -69,26 +69,35 @@
         </div>
     </main>
 
-    <script>
-        let selectedPage = "sell.html"; // Default
+   <script>
+        let selectedPage = "sell.html"; // Default
 
-        // Handle button selection
-        document.querySelectorAll('.optionBtn').forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelectorAll('.optionBtn').forEach(btn => {
-                    btn.classList.remove('bg-blue-500', 'text-white');
-                    btn.classList.add('bg-gray-200', 'text-gray-700');
-                });
-                this.classList.remove('bg-gray-200', 'text-gray-700');
-                this.classList.add('bg-blue-500', 'text-white');
-                selectedPage = this.dataset.value;
-            });
-        });
+        // Handle button selection (No change here)
+        document.querySelectorAll('.optionBtn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.optionBtn').forEach(btn => {
+                    btn.classList.remove('bg-blue-500', 'text-white');
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                this.classList.add('bg-blue-500', 'text-white');
+                selectedPage = this.dataset.value;
+            });
+        });
 
-        // Redirect on Start button click
-        document.getElementById('startBtn').addEventListener('click', function() {
-            window.location.href = selectedPage;
-        });
-    </script>
+        // --- UPDATED LOGIC HERE ---
+        document.getElementById('startBtn').addEventListener('click', function() {
+            // Check if a user is logged in. We assume login sets 'isLoggedIn' to 'true' in localStorage.
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+            if (isLoggedIn) {
+                // If logged in, go directly to the selected page
+                window.location.href = selectedPage;
+            } else {
+                // If not logged in, go to login page and pass the intended destination as a URL parameter
+                window.location.href = `login.html?redirect=${selectedPage}`;
+            }
+        });
+    </script>
 </body>
 </html>
