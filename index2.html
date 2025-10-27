@@ -55,9 +55,12 @@
                 <a href="postproperty.html">Post Property</a>
                 <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
             </button>
-            <button class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
-                <a href="login.html">Login/SignUp</a>
+            <div class="gap-10">
+            <img src="image.png" class="w-8 absolute z-50 top-6 icon right-50 rounded-3xl">
+            <button id="login" class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2 relative z-40">
+                <a href="login.html">Login</a>
             </button>
+            </div>
           </div>
     </div>
 
@@ -75,9 +78,12 @@
                 <a href="postproperty.html">Post Property</a>
                 <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
             </button>
-            <button class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
-                <a href="login.html">Login/SignUp</a>
+          <div class="gap-10">
+            <img src="image.png" class="w-8 absolute z-50 top-6 icon right-50 rounded-3xl">
+            <button id="login" class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2 relative z-40">
+                <a href="login.html">Login</a>
             </button>
+            </div>
           </div>
     </div>
   <main class="flex-1 bg-gradient-to-br from-blue-100 via-green-100 to-pink-200">
@@ -88,7 +94,7 @@
                 <h3 class="text-gray-600 font-bold text-lg">Rent Sell Purchase. All at your fingertips.</h3>
                 <div class="relative w-full md:w-2/3 mt-4">
                     <input type="text" placeholder="What's Your email" class="w-full h-full p-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <button class="text-black bg-yellow-300 p-2 rounded-lg whitespace-nowrap absolute bottom-1 right-1">Get Started for
+                    <button class="text-black bg-yellow-300 p-2 rounded-lg whitespace-nowrap absolute bottom-1 right-1">Get Started for free
                 </div>
                 <div>
                     <p class="font-bold italic text-gray-600 text-2xl mt-2">"Simplifying property, one click at a time."</p>
@@ -393,6 +399,17 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("Navbar rounding error:", err);
   }
 });
+
+const storedname = sessionStorage.getItem("username");
+const picture = sessionStorage.getItem("pic");
+
+  if (storedname) {
+    document.getElementById("login").innerText = storedname;
+  }
+
+  if (picture) {
+    document.querySelector(".icon").src = picture;
+  }
 </script>
 
 </html>

@@ -49,9 +49,12 @@
         <a href="postproperty.html">Post Property</a>
         <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
       </button>
-      <button class="bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
-        <a href="login.html">Login/SignUp</a>
-      </button>
+      <div class="gap-10">
+            <img src="image.png" class="w-8 absolute z-50 top-6 icon right-50 rounded-3xl">
+            <button id="login" class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2 relative z-40">
+                <a href="login.html">Login</a>
+            </button>
+            </div>
     </div>
   </div>
 
@@ -594,6 +597,17 @@
 
       window.location.href = 'viewdetailsrent.html?' + params.toString();
   });
+
+  const storedname = sessionStorage.getItem("username");
+const picture = sessionStorage.getItem("pic");
+
+  if (storedname) {
+    document.getElementById("login").innerText = storedname;
+  }
+
+  if (picture) {
+    document.querySelector(".icon").src = picture;
+  }0
   </script>
 </body>
 </html>
