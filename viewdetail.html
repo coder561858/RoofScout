@@ -38,6 +38,8 @@
       <p class="mt-4 text-gray-700"><span class="font-semibold">Address:</span> <span id="prop-address">Unknown</span></p>
     </div>
 
+    
+
     <div class="w-full lg:w-1/3 border-2 border-gray-400 p-4 rounded-lg shadow-sm">
       <h3 class="text-xl font-semibold mb-4 flex justify-center items-center">Quick Summary</h3>
       <ul class="space-y-2 text-gray-700">
@@ -190,6 +192,7 @@
     const timeMenu = document.getElementById("timeMenu");
     const request = document.getElementById("Requestbtn");
     const send = document.getElementById("submit2");
+    const requestStatusMessage = document.getElementById('requestStatus');
 
     // Show time and request button after clicking "Request a Tour"
     dropdown.addEventListener("click", (e) => {
@@ -230,6 +233,61 @@
         alert("Please select a valid time!");
       } else {
         alert("Request Successful for " + selectedTime + "!");
+        // **** START: Code to ADD inside the 'request' button's 'else' block ****
+
+// Get property details needed for the application
+const currentPropertyId = document.getElementById('quick-id')?.textContent || Date.now().toString();
+const currentPropertyTitle = document.getElementById('prop-title')?.textContent || 'Unknown Property';
+const currentPropertyType = document.getElementById('quick-type')?.textContent || 'Unknown';
+const requestStatusMessage = document.getElementById('requestStatus'); // Find status element
+
+// Check if user has ALREADY applied for THIS property
+const appliedProperties = JSON.parse(localStorage.getItem('appliedProperties')) || [];
+const alreadyApplied = appliedProperties.some(app => app.propertyId === currentPropertyId);
+
+if (!alreadyApplied) {
+    // Only save if not already applied
+    console.log('Saving application for property ID:', currentPropertyId);
+
+    // 1. Create the application object
+    const newApplication = {
+        propertyId: currentPropertyId,
+        title: currentPropertyTitle,
+        propertyType: currentPropertyType,
+        appliedDate: new Date().toISOString(),
+        status: 'Pending' // Initial status
+    };
+
+    // 2. Get existing applications from localStorage (already done above)
+    // 3. Add the new application
+    appliedProperties.push(newApplication);
+
+    // 4. Save the updated list back to localStorage
+    localStorage.setItem('appliedProperties', JSON.stringify(appliedProperties));
+
+    // 5. Update UI (optional: show message, disable button)
+    console.log('Application Saved:', newApplication);
+    if(requestStatusMessage) {
+        requestStatusMessage.textContent = 'Application submitted successfully!';
+        requestStatusMessage.classList.remove('hidden');
+    }
+    // Optionally disable the request button after applying
+    request.textContent = 'Applied';
+    request.disabled = true;
+
+} else {
+    // Already applied, maybe show a different message
+    console.log('Already applied for property ID:', currentPropertyId);
+     if(requestStatusMessage) {
+        requestStatusMessage.textContent = 'You have already applied for this property.';
+        requestStatusMessage.classList.remove('hidden');
+        requestStatusMessage.classList.replace('text-green-700','text-blue-700'); // Change color
+    }
+    request.textContent = 'Already Applied';
+    request.disabled = true;
+}
+
+// **** END: Code to ADD inside the 'request' button's 'else' block ****
       }
     });
 

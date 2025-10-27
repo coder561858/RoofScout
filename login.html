@@ -63,7 +63,7 @@
         <button 
           type="submit" 
           class="w-full  bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 ">
-          <a href="userProfile.html">Sign In</a>
+          <a href="userdashboard.html">Sign In</a>
         </button>
       </form>
       
@@ -123,12 +123,12 @@
         return;
       }
 
-      // Check for admin credentials
+      // Check for admin credentials only
       if (username === adminUsername && password === adminPassword) {
         window.location.href = 'admindashbo.html';
       } else {
         // If not admin but fields are filled, redirect to user dashboard
-        window.location.href = 'userProfile.html';
+        window.location.href = 'userdashboard.html';
       }
     });
   });
