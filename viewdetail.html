@@ -8,7 +8,8 @@
 </head>
 <body class="bg-white text-gray-800">
 
-  <div class="sticky top-0 z-50 flex gap-10 h-20 p-4 items-center bg-white shadow-lg">
+  <!-- Header -->
+  <div class="sticky top-0 z-50 flex gap-6 h-20 p-4 items-center bg-white shadow-lg">
     <div class="flex items-center">
       <img src="LogoRS.png" alt="Logo" class="h-16 w-16 mr-2 hidden sm:block">
       <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
@@ -16,6 +17,7 @@
     </div>
   </div>
 
+  <!-- Breadcrumb -->
   <div class="px-6 py-3 text-sm text-gray-600">
     <a href="index.html" class="hover:text-black">Home</a> /
     <a href="allproperties.html" class="hover:text-black">Properties</a> /
@@ -23,22 +25,22 @@
   </div>
 
   <!-- Property Image -->
-  <section class="w-1/2 mx-auto mt-4">
-    <img id="prop-image" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994" alt="Property" class="w-full h-96 object-cover">
+  <section class="w-full md:w-1/2 mx-auto mt-4">
+    <img id="prop-image" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994" alt="Property" class="w-full h-96 object-cover rounded-lg shadow-md">
   </section>
 
-  <!-- Price and Description -->
-  <section class="p-8 flex flex-col lg:flex-row gap-8">
+  <!-- Price & Description -->
+  <section class="p-6 md:p-8 flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
     <div class="flex-1">
       <div id="prop-price" class="flex items-center text-green-600 text-3xl font-bold mb-4">₹ 1000 <span class="text-base text-gray-500 ml-2">/month</span></div>
       <h2 id="prop-title" class="text-2xl font-semibold mb-2">Property Description</h2>
-      <p id="prop-desc" class="text-gray-600 leading-relaxed">
-        Default description. Clicked card info will populate here when available.
-      </p>
+      <p id="prop-desc" class="text-gray-600 leading-relaxed">Default description. Clicked card info will populate here when available.</p>
       <p class="mt-4 text-gray-700"><span class="font-semibold">Address:</span> <span id="prop-address">Unknown</span></p>
     </div>
 
-    <div class="w-full lg:w-1/3 border-2 border-gray-400 p-4">
+    
+
+    <div class="w-full lg:w-1/3 border-2 border-gray-400 p-4 rounded-lg shadow-sm">
       <h3 class="text-xl font-semibold mb-4 flex justify-center items-center">Quick Summary</h3>
       <ul class="space-y-2 text-gray-700">
         <li><span class="font-semibold">Property ID:</span> <span id="quick-id">-</span></li>
@@ -53,8 +55,258 @@
     </div>
   </section>
 
+  <!-- Dealer & Enquiry -->
+  <div class="max-w-6xl mx-auto bg-white p-8 md:p-10 shadow-lg rounded-2xl flex flex-col md:flex-row gap-10 my-10">
+    
+    <!-- Dealer Details -->
+    <div class="w-full md:w-5/12 pr-6 md:border-r border-gray-200 space-y-4">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">Owner Details</h2>
+
+      <div class="flex items-start space-x-4">
+        <div class="w-[80px] h-[100px] flex-shrink-0 rounded-md overflow-hidden shadow-sm">
+         <img src="image.png" class="max-w-[90px] absolute z-50 icon rounded-2xl">
+        </div>
+        
+
+        <div class="flex flex-col space-y-1">
+          <h3 class="text-lg font-bold text-blue-600">BOB</h3>
+          <button class="bg-teal-500 hover:bg-teal-600 text-white font-medium py-1.5 px-4 rounded text-sm mt-1 transition duration-150">
+            View Phone Number
+          </button>
+        </div>
+      </div>
+
+      <div class="pt-3 space-y-2 text-sm text-gray-700 leading-relaxed">
+        <p><span class="font-semibold text-gray-600">Properties Listed:</span> <span class="font-bold text-gray-900">8</span></p>
+        <p><span class="font-semibold text-gray-600">Localities:</span> <span class="text-gray-800">Kalwa, Baran, Hardaspur, Heera Bagh</span></p>
+        <p><span class="font-semibold text-gray-600">Address:</span> <span class="text-gray-800">A Tarik Adalat Bazar, Patiala</span></p>
+      </div>
+    </div>
+
+    <!-- Enquiry Form -->
+    <div class="w-full md:w-7/12 space-y-6">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-2 border-b pb-2">Send Enquiry to Owner</h2>
+
+      <form id="enquiryForm" class="space-y-5 text-sm">
+
+        <!-- User type and reason -->
+        <div class="flex flex-wrap items-center gap-6 text-gray-700">
+          <span class="font-medium">You are</span>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="user_type" value="individual">
+            <span>Individual</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="user_type" value="dealer" class="text-blue-600 focus:ring-blue-500">
+            <span>Dealer</span>
+          </label>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-6 text-gray-700">
+          <span class="font-medium">Your reason to buy is</span>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="reason_to_buy" value="investment">
+            <span>Investment</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="reason_to_buy" value="self_use">
+            <span>Self Use</span>
+          </label>
+        </div>
+
+        <!-- Name & Message -->
+        <div class="flex flex-col md:flex-row gap-4">
+          <input id="name" type="text" name="name" placeholder="Your Name" class="w-full md:w-5/12 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 h-1/2">
+          <div class="relative w-full md:w-7/12">
+            <textarea id="area" name="message" placeholder="I am interested in this property." class="w-full h-32 border border-gray-300 p-2 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150"></textarea>
+            <span class="absolute bottom-1 right-2 text-xs text-gray-400">Max 400 chars</span>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <select name="country_code" class="sm:w-2/12 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <option value="+91">IND (+91)</option>
+            <option value="+1">US (+1)</option>
+            <option value="+44">UK (+44)</option>
+          </select>
+          <input type="tel" name="phone" placeholder="Phone Number" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150">
+        </div>
+
+        <!-- Terms -->
+        <div class="text-xs text-gray-600">
+          <label class="flex items-start space-x-2">
+            <input type="checkbox" checked class="mt-1 text-blue-600 focus:ring-blue-500">
+            <span>I agree to the 
+              <a href="#" class="text-blue-600 hover:underline font-medium">Terms & Conditions</a> and 
+              <a href="#" class="text-blue-600 hover:underline font-medium">Privacy Policy</a>.
+            </span>
+          </label>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex flex-wrap gap-4 items-center">
+          <button type="submit" id="submit2" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-8 rounded-md text-sm shadow-lg transition duration-200">
+            Send Email & SMS
+          </button>
+
+          <!-- Request Tour -->
+          <div class="relative inline-block">
+            <button type="button" id="dropdownBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-md font-semibold transition duration-200">
+              Request a Tour
+            </button>
+            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-56 bg-gray-800 text-white rounded-md shadow-lg z-10">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-700">Today</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-700">Tomorrow</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-700">Next Week</a>
+            </div>
+          </div>
+
+          <!-- Time button (hidden initially) -->
+          <div id="timeWrapper" class="relative inline-block hidden">
+            <button type="button" id="timeBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-md font-semibold transition duration-200">
+              Select Time
+            </button>
+            <div id="timeMenu" class="hidden absolute right-0 mt-2 w-56 bg-gray-800 text-white rounded-md shadow-lg z-10">
+              <a class="block px-4 py-2 hover:bg-gray-700 cursor-pointer">10:00 AM</a>
+              <a class="block px-4 py-2 hover:bg-gray-700 cursor-pointer">12:30 PM</a>
+              <a class="block px-4 py-2 hover:bg-gray-700 cursor-pointer">03:00 PM</a>
+              <a class="block px-4 py-2 hover:bg-gray-700 cursor-pointer">05:30 PM</a>
+            </div>
+          </div>
+
+          <!-- Request button -->
+          <button id="Requestbtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-md font-semibold transition duration-200 hidden">Request</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
   <script>
-    // read query params and populate the page
+
+    const dropdown = document.getElementById("dropdownBtn");
+    const menu = document.getElementById("dropdownMenu");
+    const timeWrapper = document.getElementById("timeWrapper");
+    const timeBtn = document.getElementById("timeBtn");
+    const timeMenu = document.getElementById("timeMenu");
+    const request = document.getElementById("Requestbtn");
+    const send = document.getElementById("submit2");
+    const requestStatusMessage = document.getElementById('requestStatus');
+
+    // Show time and request button after clicking "Request a Tour"
+    dropdown.addEventListener("click", (e) => {
+      e.preventDefault();
+      menu.classList.toggle("hidden");
+      timeWrapper.classList.remove("hidden");
+      request.classList.remove("hidden");
+    });
+
+    // Tour selection
+    menu.querySelectorAll("a").forEach(option => {
+      option.addEventListener("click", (e) => {
+        e.preventDefault();
+        dropdown.textContent = option.textContent;
+        menu.classList.add("hidden");
+      });
+    });
+
+    // Time dropdown toggle
+    timeBtn.addEventListener("click", () => {
+      timeMenu.classList.toggle("hidden");
+    });
+
+    // Time selection
+    timeMenu.querySelectorAll("a").forEach(option => {
+      option.addEventListener("click", (e) => {
+        e.preventDefault();
+        timeBtn.textContent = option.textContent;
+        timeMenu.classList.add("hidden");
+      });
+    });
+
+    // Request button click
+    request.addEventListener("click", (e) => {
+      e.preventDefault();
+      const selectedTime = timeBtn.textContent.trim();
+      if (selectedTime === "Select Time") {
+        alert("Please select a valid time!");
+      } else {
+        alert("Request Successful for " + selectedTime + "!");
+        // **** START: Code to ADD inside the 'request' button's 'else' block ****
+
+// Get property details needed for the application
+const currentPropertyId = document.getElementById('quick-id')?.textContent || Date.now().toString();
+const currentPropertyTitle = document.getElementById('prop-title')?.textContent || 'Unknown Property';
+const currentPropertyType = document.getElementById('quick-type')?.textContent || 'Unknown';
+const requestStatusMessage = document.getElementById('requestStatus'); // Find status element
+
+// Check if user has ALREADY applied for THIS property
+const appliedProperties = JSON.parse(localStorage.getItem('appliedProperties')) || [];
+const alreadyApplied = appliedProperties.some(app => app.propertyId === currentPropertyId);
+
+if (!alreadyApplied) {
+    // Only save if not already applied
+    console.log('Saving application for property ID:', currentPropertyId);
+
+    // 1. Create the application object
+    const newApplication = {
+        propertyId: currentPropertyId,
+        title: currentPropertyTitle,
+        propertyType: currentPropertyType,
+        appliedDate: new Date().toISOString(),
+        status: 'Pending' // Initial status
+    };
+
+    // 2. Get existing applications from localStorage (already done above)
+    // 3. Add the new application
+    appliedProperties.push(newApplication);
+
+    // 4. Save the updated list back to localStorage
+    localStorage.setItem('appliedProperties', JSON.stringify(appliedProperties));
+
+    // 5. Update UI (optional: show message, disable button)
+    console.log('Application Saved:', newApplication);
+    if(requestStatusMessage) {
+        requestStatusMessage.textContent = 'Application submitted successfully!';
+        requestStatusMessage.classList.remove('hidden');
+    }
+    // Optionally disable the request button after applying
+    request.textContent = 'Applied';
+    request.disabled = true;
+
+} else {
+    // Already applied, maybe show a different message
+    console.log('Already applied for property ID:', currentPropertyId);
+     if(requestStatusMessage) {
+        requestStatusMessage.textContent = 'You have already applied for this property.';
+        requestStatusMessage.classList.remove('hidden');
+        requestStatusMessage.classList.replace('text-green-700','text-blue-700'); // Change color
+    }
+    request.textContent = 'Already Applied';
+    request.disabled = true;
+}
+
+// **** END: Code to ADD inside the 'request' button's 'else' block ****
+      }
+    });
+
+    // Send Email & SMS
+    send.addEventListener('click', (e) => {
+  e.preventDefault(); 
+
+  const nameInput = document.getElementById("name").value.trim();
+  const messageInput = document.getElementById("area").value.trim();
+
+  if (nameInput === "" || messageInput === "") {
+    alert("Please fill in both Name and Message before sending.");
+    return; // Stop execution
+  }
+
+  alert("Message sent successfully!");
+});
+
+
     (function () {
       const params = new URLSearchParams(window.location.search);
       const houseId = params.get('houseId');
@@ -276,6 +528,22 @@
         document.getElementById('quick-id').textContent = houseId;
       }
     })();
+
+  dropdown.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const nameInput = document.getElementById("name").value.trim();
+  const messageInput = document.getElementById("area").value.trim();
+
+  if (nameInput === "" || messageInput === "") {
+    alert("Please enter your Name and Message before requesting a tour.");
+    return; // Stop request tour
+  }
+
+  alert("Tour request submitted successfully!");
+});
+    
   </script>
+
 </body>
 </html>

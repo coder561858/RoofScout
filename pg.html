@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>List Your PG (Functional)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
     rel="stylesheet"
 />
 </head>
-<body class="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-100 min-h-screen">
+<body class="bg-gradient-to-br from-blue-100 via-green-100 to-pink-200 ">
     <div class="flex items-center justify-center my-10 ">
     <div class="w-full md:w-[50%] bg-white border-0 shadow-2xl rounded-lg">
         <div class=" flex items-center justify-center text-2xl md:text-4xl font-bold pt-4 ">
@@ -20,6 +20,7 @@
             <p class="text-gray-600">Fill out the details below to list your Paying Guest accommodation</p>
         </div>
 
+        <!-- Section 1: Basic Information -->
         <div class="bg-blue-100 shadow-lg m-4 rounded-lg">
         <div class="text-2xl mt-4 p-4 text-gray-700 font-bold">
             <div class="flex gap-2">
@@ -27,7 +28,7 @@
             <p>Basic Information</p>
         </div>
         </div>
-
+        <!-- IDs "pgname" and "address" are already here. Perfect. -->
         <div class="flex flex-col text-gray-600 px-4 font-semibold">
             <label for="pgname">PG Name / Title</label>
             <input type="text" id="pgname" class="border-2 rounded h-12 p-2">
@@ -39,7 +40,7 @@
         </div>
 
 
-        <!-- room aur price details -->
+        <!-- Section 2: Room & Pricing Details -->
          <div class="bg-green-100 shadow-lg m-4 pb-4 rounded-lg">
          <div class="text-2xl text-gray-700 font-bold p-4 mt-4">
             <div class="flex gap-2">
@@ -48,35 +49,34 @@
         </div>
          </div>
          <div class="flex flex-col md:flex-row gap-4 px-4">
+            <!-- IDs "bestfor", "stype", and "price" are here. Great. -->
             <div class="flex flex-col w-full">
             <label for="bestfor" class="text-gray-600 font-semibold">Best For</label>
             <select name="" id="bestfor" class="border-2 rounded h-12 p-2">
-                <option value="">Boys only</option>
-                <option value="">Girls only</option>
-                <option value="">Boys only</option>
+                <option value="boys">Boys only</option>
+                <option value="girls">Girls only</option>
+                <option value="coliving">Co-Living (Unisex)</option>
             </select>
             </div>
 
             <div class="flex flex-col w-full">
             <label for="stype" class="text-gray-600 font-semibold">Sharing Type</label>
             <select name="" id="stype" class="border-2 rounded h-12 p-2">
-                <option value="">Single</option>
-                <option value="">Double</option>
-                <option value="">Triple</option>
-                <option value="">4 or more</option>
+                <option value="single">Single</option>
+                <option value="double">Double</option>
+                <option value="triple">Triple</option>
+                <option value="4+">4 or more</option>
             </select>
             </div>
 
             <div class="flex flex-col sm:flex-col w-full">
             <label for="price" class="text-gray-600 font-semibold">Price per Bed (₹)</label>
             <input type="text" id="price" class="border-2 rounded h-12 p-2">
-            <!-- arrows laane ke liye type="number" min="0" step="100" -->
-             <!-- agar range lagani ho type="range min="2000" max="15000" step="500" -->
             </div>
          </div>
         </div>
 
-         <!-- amenities wgera -->
+         <!-- Section 3: Amenities -->
         <div class="bg-yellow-100 shadow-lg m-4 rounded-lg ">
          <div class="text-2xl text-gray-700 font-bold px-4 pt-4 mt-4"> 
             <div class="flex gap-2">
@@ -84,6 +84,7 @@
             <p>Amenities & Services</p>
         </div>
          </div>
+         <!-- All checkbox IDs are here. Perfect. -->
          <div class="grid grid-cols-1 md:grid-cols-3 p-4 gap-4">
             <label for="food" class="flex gap-2"><input type="checkbox" id="food">Food Included</label>
             <label for="wifi" class="flex gap-2"><input type="checkbox" id="wifi">Wi-Fi</label>
@@ -91,30 +92,109 @@
             <label for="laundry" class="flex gap-2"><input type="checkbox" id="laundry">Laundry Service</label>
             <label for="power" class="flex gap-2"><input type="checkbox" id="power">Power Backup</label>
             <label for="housekeeping" class="flex gap-2"><input type="checkbox" id="housekeeping">Housekeeping</label>
-            
          </div>
         </div>
 
-         <!-- photo section -->
-          <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-100 m-4">
-         <div class="text-2xl text-gray-700 font-bold px-4 mt-4"> 
+         <!-- Section 4: Upload Photos -->
+           <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-100 m-4">
+           <div class="text-2xl text-gray-700 font-bold px-4 mt-4"> 
             <div class="flex gap-2">
              <i class="ri-image-add-line"></i>
             <p>Upload Photos</p>
         </div>
-         </div>
-         <div class="text-blue-600 p-4 py-4">
-        <input type="file" class="file:border-2 file:rounded file:text-white file:bg-black">
+           </div>
+           <div class="text-blue-600 p-4 py-4">
+            <!-- STEP 1: Added id="pgPhotos" -->
+        <input type="file" id="pgPhotos" class="file:border-2 file:rounded file:text-white file:bg-black" multiple>
         </div>
     </div>
 
-        <!-- button -->
-        <div class="w-full md:w-1/2 mx-auto flex justify-center px-6 pb-8">
-          <button class="w-full md:w-[50%] inline-flex items-center justify-center gap-2 rounded-xl bg-green-400 px-6 py-3 text-white font-semibold shadow-lg hover:shadow-xl ">
+         <!-- Section 5: Submit Button -->
+         <div class="w-full md:w-1/2 mx-auto flex justify-center px-6 pb-8">
+            <!-- STEP 1: Added id="submitBtn" -->
+          <button id="submitBtn" class="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-green-400 px-6 py-3 text-white font-semibold shadow-lg hover:shadow-xl ">
             Submit Property
           </button>
-        </div>
+         </div>
     </div>
     </div>
+
+    <!-- ========================================================== -->
+    <!-- STEP 2: All our JavaScript goes in here -->
+    <!-- ========================================================== -->
+    <script>
+    // --- JavaScript for your PG Page (Now Saves Data!) ---
+
+    // Find all the elements (same as before)
+    const pgNameInput = document.getElementById('pgname');
+    const addressInput = document.getElementById('address');
+    const bestForSelect = document.getElementById('bestfor');
+    const sharingTypeSelect = document.getElementById('stype');
+    const priceInput = document.getElementById('price');
+    const foodCheck = document.getElementById('food');
+    const wifiCheck = document.getElementById('wifi');
+    const acCheck = document.getElementById('ac');
+    const laundryCheck = document.getElementById('laundry');
+    const powerCheck = document.getElementById('power');
+    const housekeepingCheck = document.getElementById('housekeeping');
+    const photoInput = document.getElementById('pgPhotos');
+    const submitButton = document.getElementById('submitBtn');
+
+    submitButton.addEventListener('click', function() {
+        // Read all the values (same as before)
+        const pgName = pgNameInput.value;
+        const address = addressInput.value;
+        const bestFor = bestForSelect.value;
+        const sharingType = sharingTypeSelect.value;
+        const price = priceInput.value;
+        const amenities = {
+            food: foodCheck.checked,
+            wifi: wifiCheck.checked,
+            ac: acCheck.checked,
+            laundry: laundryCheck.checked,
+            power: powerCheck.checked,
+            housekeeping: housekeepingCheck.checked
+        };
+        const photos = photoInput.files; // We won't save the actual files in localStorage, just the count
+
+        // --- NEW: Save the data to localStorage ---
+
+        // 1. Create an object for this new property listing
+        const newProperty = {
+            id: Date.now(), // Use timestamp as a unique ID
+            type: 'PG', // Identify the property type
+            title: pgName,
+            address: address,
+            details: `Best for ${bestFor}, ${sharingType} sharing`,
+            price: price,
+            amenities: amenities, // Storing the object
+            photoCount: photos.length,
+            status: 'Pending Approval' // Add a default status
+        };
+
+        // 2. Get existing properties from localStorage (or start with an empty list)
+        // localStorage stores strings, so we use JSON.parse() to turn it back into an array
+        let existingProperties = JSON.parse(localStorage.getItem('userProperties')) || [];
+
+        // 3. Add the new property to the list
+        existingProperties.push(newProperty);
+
+        // 4. Save the updated list back to localStorage
+        // We use JSON.stringify() to turn the array into a string for storage
+        localStorage.setItem('userProperties', JSON.stringify(existingProperties));
+
+        // --- End of NEW saving code ---
+
+        // Give user feedback
+        console.log("PG Listing Submitted & Saved:", newProperty);
+        alert("PG Listing Submitted and Saved!");
+
+        // Optional: Clear the form after submission
+        // pgNameInput.value = '';
+        // addressInput.value = '';
+        // ... etc. for all fields
+    });
+</script>
 </body>
 </html>
+

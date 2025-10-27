@@ -55,9 +55,14 @@
                 <a href="postproperty.html">Post Property</a>
                 <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
             </button>
-            <button class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
-                <a href="login.html">Login/SignUp</a>
+            <div class="gap-10">
+            <img src="image.png" class="w-10 absolute top-5 z-50 icon rounded-2xl">
+            <button id="login" class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2 relative z-40">
+              
+                <a href="login.html">Login</a>
             </button>
+            </div>
+            
           </div>
     </div>
 
@@ -75,8 +80,8 @@
                 <a href="postproperty.html">Post Property</a>
                 <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
             </button>
-            <button class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
-                <a href="login.html">Login/SignUp</a>
+            <button id="login" class="flex bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
+                <a href="login.html">Login</a>
             </button>
           </div>
     </div>
@@ -90,7 +95,7 @@
                 <h3 class="text-gray-600 font-bold text-lg">Rent Sell Purchase. All at your fingertips.</h3>
                 <div class="relative w-full md:w-2/3 mt-4">
                     <input type="text" placeholder="What's Your email" class="w-full h-full p-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <button class="text-black bg-yellow-300 p-2 rounded-lg whitespace-nowrap absolute bottom-1 right-1">Get Started for
+                    <button class="text-black bg-yellow-300 p-2 rounded-lg whitespace-nowrap absolute bottom-1 right-1">Get Started for free
                 </div>
                 <div>
                     <p class="font-bold italic text-gray-600 text-2xl mt-2">"Simplifying property, one click at a time."</p>
@@ -100,7 +105,14 @@
                 <img src="newhomeproperty.png" class="rounded-lg  w-full max-w-lg object-contain" alt="Property" />
             </div>
         </section>
-
+        <!-- video  -->
+        <section class="w-full  flex justify-center items-center py-12 px-4">
+        <video class="w-full max-h-[70vh] object-fill" autoplay loop muted playsinline>
+            <source src="RSvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+<!-- video ends -->
         <section class="grid grid-cols-1 md:grid-cols-3 gap-6 p-10 py-0 ">
           <div class="w-full h-64 p-6 rounded-xl shadow-md flex flex-col items-center justify-center transition-transform duration-300 hover:scale-105 bg-green-200 py-0">
            <h2 class="text-4xl font-bold text-gray-700 counter" data-target="5000">0</h2>
@@ -148,7 +160,7 @@
             <div class="flex flex-row items-center justify-between px-8 mb-6">
                 <h1 class="font-bold italic text-gray-900 text-xl">OUR PROPERTIES</h1>
                 <div class="flex flex-row items-center gap-2 transition-transform duration-300 hover:scale-105 cursor-pointer">
-                    <a href="allproperties.html" class="font-bold text-lg m-0 text-gray-900">All Properties ></a>
+                    <a href="allproperties.html" class="font-bold text-2xl m-0 text-red-800 underline">All Properties -></a>
                 </div>
             </div>
 
@@ -352,12 +364,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const lgBreakpoint = 1024; 
       
       // Removed duplicate "rounded-3xl" from your original array
-      const addClasses = [
+       const addClasses = [
           'rounded-3xl', 'w-5/6', 'ml-[148px]', "rounded-5xl", 
-          "shadow-2xl", 'bg-gray-200/20', 'backdrop-blur-xl', 
-          'border-2', 'border-blue-800', 'mt-8'
-        ];
-      const removeClasses = ["rounded-none", "shadow-lg", 'bg-white'];
+          "shadow-2xl", 'bg-gray-200/20', 'backdrop-blur-lg' ,'border-gray-200/40','border-b-2', 'top-4'];
+      const removeClasses = ["rounded-none", "shadow-lg", 'bg-white','top-0'];
 
       function updateNavbar() {
         // Check if we are on a large screen
@@ -395,6 +405,27 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("Navbar rounding error:", err);
   }
 });
+// ...
+
+const logindiv = document.getElementById("login");
+const storedname = sessionStorage.getItem("loggedUser"); // ✅ Correct key
+
+if (storedname) {
+  // Replace "Login" text with username
+  logindiv.innerHTML = storedname;
+  sessionStorage.setItem("loginText", storedname);
+} else {
+  sessionStorage.setItem("loginText", "Login");
+
+}
+
+
+logindiv.addEventListener('click', () => {
+
+});
+
+// ...
+
 </script>
 
 </html>
