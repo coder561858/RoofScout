@@ -19,72 +19,68 @@
          }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-100 via-green-100 to-pink-200 font-sans">
+<!-- **** UPDATED: Restored original body background gradient **** -->
+<body class="bg-gradient-to-br from-blue-100 via-green-100 to-pink-200 font-sans min-h-screen">
 
-    <!-- Top Navigation Bar -->
-    <header class=" bg-white shadow-lg shadow-gray-200/20 shadow-md mb-10">
+    <!-- Top Navigation Bar (Keeping the dark theme as provided by user) -->
+    <header class=" bg-white shadow-lg text-white shadow-md mb-10">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             <div class="flex items-center text-xl font-bold">
+                 <!-- Ensure logo links point correctly --> 
                 <h1 class="font-bold text-2xl text-yellow-500 mr-1"><a href="index.html">Roof</a></h1>
                 <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
             </div>
             <div class="flex items-center space-x-4">
-                <!-- ADDED ID for user name display in navbar -->
-                <span id="navUserName" class="text-sm">User</span>
-                <button class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-md text-sm transition-colors">Logout</button>
-               
+                <span id="navUserName" class="text-sm text-gray-300 font-medium">User</span>
+                <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm transition-colors">Logout</button>
+                  <!-- Removed Search Icon for simplicity --> 
             </div>
         </nav>
     </header>
 
     <!-- Main Dashboard Content Area -->
-    <main class="h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+     <!-- Adjusted padding for gradient background --> 
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <!-- User Info Card -->
+         <!-- User Info Card (Kept bg-white as it's the card) --> 
         <div class="bg-white rounded-lg shadow-lg p-6 mb-8 flex flex-col md:flex-row items-center md:items-start gap-6">
             <div class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-md flex-shrink-0">
-                <!-- ADDED ID for profile image -->
                 <img id="dashboardProfileImage" src="https://avatar.iran.liara.run/public/boy?username=Default" alt="User Profile" class="w-full h-full object-cover">
             </div>
             <div class="flex-grow text-center md:text-left">
-                 <!-- ADDED IDs for dynamic content -->
                 <h2 id="dashboardUserName" class="text-2xl font-bold text-gray-800 mb-1">User Name</h2>
                 <p id="dashboardUserAddress" class="text-gray-600 text-sm md:text-base">Address details will appear here.</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mt-4 text-sm md:text-base">
                     <div class="flex flex-col">
                         <span class="font-semibold text-gray-700">Phone:</span>
-                        <!-- ADDED ID -->
                         <span id="dashboardUserPhone" class="text-gray-800">Not Available</span>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-semibold text-gray-700">Mobile:</span>
-                         <!-- Reusing Phone ID for simplicity, can make unique if needed -->
                         <span id="dashboardUserMobile" class="text-gray-800">Not Available</span>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-semibold text-gray-700">Email:</span>
-                        <!-- ADDED ID -->
                         <span id="dashboardUserEmail" class="text-gray-800">Not Available</span>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-semibold text-gray-700">Password:</span>
                         <span class="text-gray-800">********</span>
                     </div>
-                    <!-- Removed Location for simplicity, matches profile form -->
                 </div>
             </div>
         </div>
 
-        <!-- Sub-Navigation Tabs & Content Area -->
+     <!-- Sub-Navigation Tabs & Content Area (Kept bg-white) --> 
         <div class="bg-white rounded-lg shadow-lg mb-8">
             <div class="flex flex-wrap border-b border-gray-200">
                 <button id="appliedHousesTab" class="tab-button active flex-grow md:flex-none py-3 px-6 text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors duration-200 rounded-tl-lg">Applied House</button>
                 <button id="propertiesTab" class="tab-button flex-grow md:flex-none py-3 px-6 text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors duration-200">Properties</button>
                 <a href="user-profile.html" id="editProfileLink" class="tab-link flex-grow md:flex-none py-3 px-6 text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors duration-200">Edit Profile</a>
-                <button id="deleteAccountTab" class="tab-button flex-grow md:flex-none py-3 px-6 text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors duration-200 rounded-tr-lg">Delete Account</button>
+               
             </div>
 
-            <!-- Content Area for Tabs -->
+             <!-- Content Area for Tabs --> 
             <div class="p-6">
                 <div id="appliedHousesContent" class="tab-content">
                     <h3 class="text-xl font-semibold mb-4">Your Applied Houses</h3>
@@ -93,16 +89,16 @@
                 <div id="propertiesContent" class="tab-content hidden">
                     <h3 class="text-xl font-semibold mb-4">Your Listed Properties</h3>
                     <p class="text-gray-600">Manage your properties that are currently listed for rent or sale.</p>
-                     <!-- Properties loaded by JS will appear here -->
+                 <!-- Properties loaded by JS will appear here --> 
                 </div>
                 
             </div>
         </div>
     </main>
 
+   
 
 
-    <!-- Updated JavaScript -->
     <script>
         // --- Find elements needed for dashboard display ---
         const navUserName = document.getElementById('navUserName');
@@ -112,6 +108,9 @@
         const dashboardUserMobile = document.getElementById('dashboardUserMobile'); // Assuming same as phone for now
         const dashboardUserEmail = document.getElementById('dashboardUserEmail');
         const dashboardProfileImage = document.getElementById('dashboardProfileImage');
+        // **** Find the Logout button ****
+        const logoutButton = document.getElementById('logoutBtn');
+
 
         // --- Load User Profile Data on Page Load ---
         function loadAndDisplayUserProfile() {
@@ -119,8 +118,7 @@
             const savedImage = localStorage.getItem('userProfileImage');
 
             if (savedProfile) {
-                console.log("Loading profile for dashboard:", savedProfile);
-                // Update text content, provide fallback if data is missing
+                // console.log("Loading profile for dashboard:", savedProfile);
                 navUserName.textContent = savedProfile.name || 'User';
                 dashboardUserName.textContent = savedProfile.name || 'User Name';
                 dashboardUserAddress.textContent = savedProfile.address || 'Address not set.';
@@ -128,21 +126,35 @@
                 dashboardUserMobile.textContent = savedProfile.phone || 'Not Available'; // Link to same data
                 dashboardUserEmail.textContent = savedProfile.email || 'Not Available';
             } else {
-                 console.log("No saved user profile found for dashboard.");
-                 // Keep default placeholder text
+                 // console.log("No saved user profile found for dashboard.");
             }
-
-            // Update profile image if saved
             if (savedImage) {
                 dashboardProfileImage.src = savedImage;
             } else {
-                 // Keep default avatar if no image saved
                  dashboardProfileImage.src = 'https://avatar.iran.liara.run/public/boy?username=Default';
             }
         }
-        // Run this function as soon as the page content is loaded
         document.addEventListener('DOMContentLoaded', loadAndDisplayUserProfile);
         // --- End Profile Load Logic ---
+
+
+        // **** Add Logout Functionality ****
+        if (logoutButton) {
+            logoutButton.addEventListener('click', function() {
+                // Remove login status from localStorage
+                localStorage.removeItem('isUserLoggedIn');
+                localStorage.removeItem('loggedInUserName');
+                // Optionally remove profile image too
+                // localStorage.removeItem('userProfileImage');
+                // Optionally remove saved profile details too
+                // localStorage.removeItem('userProfile');
+
+                // Give feedback and redirect
+                alert("You have been logged out.");
+                window.location.href = 'index.html'; // Redirect to homepage
+            });
+        }
+        // **** END Logout Functionality ****
 
 
         // --- Tab Switching Logic ---
@@ -150,52 +162,55 @@
         const tabContents = document.querySelectorAll('.tab-content');
         const propertiesContentDiv = document.getElementById('propertiesContent');
 
-        // Function to display properties (loads from localStorage)
         function displayUserProperties() {
-            propertiesContentDiv.innerHTML = '<h3 class="text-xl font-semibold mb-4">Your Listed Properties</h3>'; // Reset content
-            const userProperties = JSON.parse(localStorage.getItem('userProperties')) || [];
+             propertiesContentDiv.innerHTML = '<h3 class="text-xl font-semibold mb-4">Your Listed Properties</h3>'; // Reset content
+             const userProperties = JSON.parse(localStorage.getItem('userProperties')) || [];
 
-            if (userProperties.length === 0) {
-                propertiesContentDiv.innerHTML += '<p class="text-gray-600">You haven\'t listed any properties yet.</p>';
-                return;
-            }
+             if (userProperties.length === 0) {
+                 propertiesContentDiv.innerHTML += '<p class="text-gray-600">You haven\'t listed any properties yet.</p>';
+                 return;
+             }
 
-            userProperties.forEach(property => {
-                let editPageUrl = '';
-                switch (property.type) {
-                    case 'PG': editPageUrl = 'pg.html'; break;
-                    case 'Rent': editPageUrl = 'list-for-rent.html'; break;
-                    case 'Sell': editPageUrl = 'sell.html'; break;
-                    default: editPageUrl = '#';
-                }
-                const editLink = `${editPageUrl}?editId=${property.id}`;
+             userProperties.forEach(property => {
+                 let editPageUrl = '';
+                 switch (property.type) {
+                     case 'PG': editPageUrl = 'pg.html'; break;
+                     case 'Rent': editPageUrl = 'list-for-rent.html'; break;
+                     case 'Sell': editPageUrl = 'sell.html'; break;
+                     default: editPageUrl = '#';
+                 }
+                 const editLink = `${editPageUrl}?editId=${property.id}`;
 
-                // Generate the HTML for each property card
-                const propertyCardHTML = `
-                    <div class="border rounded-lg p-4 mb-4 flex flex-col sm:flex-row gap-4 items-center bg-gray-50 shadow-sm">
-                        <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-400 flex-shrink-0">
-                            <i class="ri-${property.type === 'PG' ? 'hotel-bed' : (property.type === 'Rent' ? 'building-2' : 'home-sale')}-line text-3xl"></i>
-                        </div>
-                        <div class="flex-grow text-center sm:text-left">
-                            <h4 class="font-bold text-lg text-gray-800">${property.title || 'N/A'}</h4>
-                            <p class="text-sm text-gray-600">${property.type} - ${property.details || 'N/A'}</p>
-                            <p class="text-sm text-gray-500">Price: ₹${property.price || 'N/A'}</p>
-                        </div>
-                        <div class="text-center sm:text-right flex-shrink-0 mt-2 sm:mt-0">
-                            <span class="text-xs font-semibold px-2 py-1 rounded-full ${
-                                property.status === 'Active' ? 'bg-green-100 text-green-700' :
-                                property.status === 'Rented' ? 'bg-red-100 text-red-700' :
-                                'bg-yellow-100 text-yellow-700'
-                            }">${property.status || 'Unknown'}</span>
-                            <a href="${editLink}" class="block text-xs text-blue-500 hover:underline mt-2">View/Edit</a>
-                        </div>
-                    </div>
-                `;
-                propertiesContentDiv.innerHTML += propertyCardHTML; // Add the card to the div
-            });
-         }
+                 const iconClass = property.type === 'PG' ? 'ri-hotel-bed' :
+                                   (property.type === 'Rent' ? 'ri-building-2' : 'ri-home-sale') + '-line';
 
-        // Add click listeners to tab buttons
+                 let statusClass = 'bg-yellow-100 text-yellow-700';
+                 if (property.status === 'Active') {
+                     statusClass = 'bg-green-100 text-green-700';
+                 } else if (property.status === 'Rented' || property.status === 'Sold') {
+                     statusClass = 'bg-red-100 text-red-700';
+                 }
+
+                 const propertyCardHTML = `
+                     <div class="border rounded-lg p-4 mb-4 flex flex-col sm:flex-row gap-4 items-center bg-gray-50 shadow-sm">
+                         <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-400 flex-shrink-0">
+                             <i class="${iconClass} text-3xl"></i>
+                         </div>
+                         <div class="flex-grow text-center sm:text-left">
+                             <h4 class="font-bold text-lg text-gray-800">${property.title || 'N/A'}</h4>
+                             <p class="text-sm text-gray-600">${property.type} - ${property.details || 'N/A'}</p>
+                             <p class="text-sm text-gray-500">Price: ₹${property.price || 'N/A'}</p>
+                         </div>
+                         <div class="text-center sm:text-right flex-shrink-0 mt-2 sm:mt-0">
+                             <span class="text-xs font-semibold px-2 py-1 rounded-full ${statusClass}">${property.status || 'Unknown'}</span>
+                             <a href="${editLink}" class="block text-xs text-blue-500 hover:underline mt-2">View/Edit</a>
+                         </div>
+                     </div>
+                 `;
+                 propertiesContentDiv.innerHTML += propertyCardHTML;
+             });
+          }
+
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -206,7 +221,7 @@
                 if (targetContentDiv) {
                      targetContentDiv.classList.remove('hidden');
                     if (targetContentId === 'propertiesContent') {
-                        displayUserProperties(); // Load properties when this tab is clicked
+                        displayUserProperties();
                     }
                 } else {
                     console.warn("Content div not found for tab:", button.id);
@@ -214,30 +229,27 @@
             });
         });
 
-        // Initial Load Logic: Show correct content and load properties if needed
-        const activeTabButton = document.querySelector('.tab-button.active');
-         if (activeTabButton && activeTabButton.id === 'propertiesTab') {
-              displayUserProperties(); // If properties is default, load them
-         } else if (activeTabButton && activeTabButton.classList.contains('tab-button')) {
-             // Show the content div for the initially active tab
-             const initialContentId = activeTabButton.id.replace('Tab', 'Content');
-             const initialContentDiv = document.getElementById(initialContentId);
-              if (initialContentDiv) {
+        // Initial Load Logic
+         const activeTabButton = document.querySelector('.tab-button.active');
+          if (activeTabButton && activeTabButton.id === 'propertiesTab') {
+               displayUserProperties();
+          } else if (activeTabButton && activeTabButton.classList.contains('tab-button')) {
+              const initialContentId = activeTabButton.id.replace('Tab', 'Content');
+              const initialContentDiv = document.getElementById(initialContentId);
+               if (initialContentDiv) {
+                   tabContents.forEach(content => content.classList.add('hidden'));
+                   initialContentDiv.classList.remove('hidden');
+               }
+          } else {
+               const firstContent = document.querySelector('.tab-content');
+               if(firstContent) {
                   tabContents.forEach(content => content.classList.add('hidden'));
-                  initialContentDiv.classList.remove('hidden');
-              }
-         } else {
-             // Fallback: Show the first content div if no tab is active
-              const firstContent = document.querySelector('.tab-content');
-              if(firstContent) {
-                 tabContents.forEach(content => content.classList.add('hidden'));
-                 firstContent.classList.remove('hidden');
-                 // Try to activate the corresponding button
-                 const firstButtonId = firstContent.id.replace('Content', 'Tab');
-                 const firstButton = document.getElementById(firstButtonId);
-                 if(firstButton && firstButton.classList.contains('tab-button')) firstButton.classList.add('active');
-              }
-         }
+                  firstContent.classList.remove('hidden');
+                  const firstButtonId = firstContent.id.replace('Content', 'Tab');
+                  const firstButton = document.getElementById(firstButtonId);
+                  if(firstButton && firstButton.classList.contains('tab-button')) firstButton.classList.add('active');
+               }
+          }
 
     </script>
 </body>
