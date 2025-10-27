@@ -1,107 +1,396 @@
-<!DOCTYPE html>
-<html lang="en">
+
+      <!DOCTYPE html>
+<html lang="en" class="h-full">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RoofScout Login Page</title>
+  <title>RoofScout - Login & Signup</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    .slide-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    
+    .slide-form {
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    
+    .slide-left {
+      transform: translateX(-100%);
+    }
+    
+    .slide-right {
+      transform: translateX(100%);
+    }
+    
+    .slide-center {
+      transform: translateX(0);
+      position: relative;
+    }
+    
+    .floating-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .professional-bg {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), 
+                  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    
+    .input-focus:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+      border-color: #667eea;
+    }
+    
+    .btn-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .professional-input {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #e2e8f0;
+      color: #1a202c;
+      transition: all 0.3s ease;
+    }
+    
+    .professional-input:focus {
+      background: rgba(255, 255, 255, 1);
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .professional-label {
+      color: #2d3748;
+      font-weight: 600;
+    }
+    
+    .professional-text {
+      color: #4a5568;
+    }
+    
+    .professional-heading {
+      color: #1a202c;
+      font-weight: 700;
+    }
+    
+    .gradient-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      color: white;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .gradient-button:hover {
+      background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .social-button {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #e2e8f0;
+      color: #4a5568;
+      transition: all 0.3s ease;
+    }
+    
+    .social-button:hover {
+      background: rgba(255, 255, 255, 1);
+      border-color: #667eea;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .link-text {
+      color: #667eea;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    
+    .link-text:hover {
+      color: #5a67d8;
+    }
+    
+    /* Ensure smooth sliding transitions */
+    .slide-form {
+      will-change: transform;
+    }
+    
+    /* Prevent form jumping during transitions */
+    .slide-container {
+      min-height: 500px;
+    }
+    
+    /* Ensure proper z-index layering */
+    .slide-center {
+      z-index: 2;
+    }
+    
+    .slide-left,
+    .slide-right {
+      z-index: 1;
+    }
+  </style>
 </head>
-<body class="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('Loginimage.jpg');">
+<body class="h-screen overflow-hidden flex flex-col bg-gradient-to-br from-blue-100 via-green-100 to-pink-200 bg-fixed relative">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div class="absolute -top-20 -left-20 w-72 h-72 bg-blue-200 rounded-full filter blur-xl opacity-40"></div>
+    <div class="absolute top-1/3 -right-24 w-80 h-80 bg-green-200 rounded-full filter blur-xl opacity-30"></div>
+    <div class="absolute -bottom-24 left-1/4 w-96 h-96 bg-pink-200 rounded-full filter blur-xl opacity-30"></div>
+    <div class="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-white rounded-full filter blur-xl opacity-20"></div>
+  </div>
 
-  <!-- Navbar -->
-  <header class="bg-white shadow-md p-4 flex justify-between items-center">
+  <header class="relative z-10 glass-effect shadow-lg p-4 flex justify-between items-center flex-none">
     <div class="flex items-center ml-12">
       <img src="logoRS.jpg" alt="RoofScout Logo" class="h-12 w-12 bg-cover">
-      <h1 class="font-bold text-2xl text-yellow-500 px-0"><a href="index.html">Roof</a></h1>
-      <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+      <h1 class="font-bold text-2xl text-blue-600 px-0"><a href="index.html">Roof</a></h1>
+      <h1 class="font-bold text-2xl text-gray-800"><a href="index.html">Scout</a></h1>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <div class="flex items-center justify-center px-4 sm:px-6 lg:px-8 min-h-screen">
-    <div class="bg-gray-100 rounded-2xl p-8 w-full max-w-md shadow-2xl">
-    <div class="space-y-6">
-      
-      <!-- Header -->
-      <div class="text-center">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h1>
-        <p class="text-gray-600">Sign in to your account</p>
-      </div>
-      
-      <!-- Form -->
-      <form class="space-y-5">
-        <!-- Username Field -->
-        <div>
-          <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
-          <input 
-            id="username"
-            type="text" 
-            placeholder="Enter your username" 
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg "
-            required
-          >
-        </div>
+  <div class="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="glass-effect rounded-3xl p-8 w-full max-w-md shadow-2xl floating-animation">
+      <div class="slide-container">
         
-        <!-- Password Field -->
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-          <input 
-            id="password" 
-            type="password" 
-            placeholder="Enter your password" 
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg " 
-            required
-          >
-        </div>
-        
-        <!-- Forgot Password -->
-        <div class="flex justify-end">
-          <a href="#" class="text-sm text-blue-600 hover:text-blue-800 transition-colors">Forgot password?</a>
-        </div>
-        
-        <!-- Login Button -->
-        <button 
+        <!-- Login Form -->
+        <div id="loginForm" class="slide-form slide-center">
+          <div class="space-y-6">
+            <!-- Header -->
+            <div class="text-center">
+              <h1 class="text-3xl font-bold professional-heading mb-2">Welcome Back</h1>
+              <p class="professional-text">Sign in to your account</p>
+            </div>
+            
+            <!-- Form -->
+            <form id="loginFormElement" class="space-y-5">
+              <!-- Username Field -->
+              <div>
+                <label for="loginUsername" class="block text-sm font-medium professional-label mb-2">Username</label>
+                <input 
+                  id="username"
+                  type="text" 
+                  placeholder="Enter your username" 
+                  class="w-full px-4 py-3 professional-input rounded-lg input-focus"
+                  required
+                >
+              </div>
+              
+              <!-- Password Field -->
+              <div>
+                <label for="loginPassword" class="block text-sm font-medium professional-label mb-2">Password</label>
+                <input 
+                  id="loginPassword" 
+                  type="password" 
+                  placeholder="Enter your password" 
+                  class="w-full px-4 py-3 professional-input rounded-lg input-focus"
+                  required
+                >
+              </div>
+              
+              <!-- Forgot Password -->
+              <div class="flex justify-end">
+                <a href="#" class="text-sm link-text">Forgot password?</a>
+              </div>
+              
+              <!-- Login Button -->
+              <button 
+          id="loginBtn"
           type="submit" 
           class="w-full  bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 ">
           <a href="userdashboard.html">Sign In</a>
         </button>
-      </form>
-      
-      <!-- Divider -->
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-gray-300"></div>
-        </div>
-        <div class="relative flex justify-center text-sm">
-          <span class="px-2 bg-white text-gray-500">Or continue with</span>
-        </div>
-      </div>
-      
-      <!-- Social Login -->
-      <div class="grid grid-cols-2 gap-3">
-        <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-lg bg-white">
-          <span class="text-red-500 font-bold text-lg mr-2">G</span>
-          <span class="font-medium text-gray-700">Google</span>
-        </button>
-        <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-lg bg-white">
-          <span class="text-blue-600 font-bold text-lg mr-2">f</span>
-          <span class="font-medium text-gray-700">Facebook</span>
-        </button>
-      </div>
-      
-      <!-- Sign Up Link -->
-      <div class="text-center">
-        <p class="text-gray-600">
-          Don't have an account? 
-          <a href="signup.html" class="text-blue-600 hover:text-blue-800 font-semibold transition-colors">Sign up</a>
-        </p>
-      </div>
 
+            </form>
+            
+            <!-- Divider -->
+            <div class="relative">
+              <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-white/30"></div>
+              </div>
+              <div class="relative flex justify-center text-sm">
+                <span class="px-2 bg-white text-gray-500">Or continue with</span>
+              </div>
+            </div>
+            
+            <!-- Social Login -->
+            <div class="grid grid-cols-2 gap-3">
+              <button class="flex items-center justify-center px-4 py-3 social-button rounded-lg">
+                <span class="text-red-500 font-bold text-lg mr-2">G</span>
+                <span class="font-medium">Google</span>
+              </button>
+              <button class="flex items-center justify-center px-4 py-3 social-button rounded-lg">
+                <span class="text-blue-600 font-bold text-lg mr-2">f</span>
+                <span class="font-medium">Facebook</span>
+              </button>
+            </div>
+            
+            <!-- Sign Up Link -->
+            <div class="text-center">
+              <p class="professional-text">
+                Don't have an account? 
+                <button onclick="switchToSignup()" class="link-text cursor-pointer">Sign up</button>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="slide-form slide-right">
+          <div class="space-y-6">
+            <!-- Header -->
+            <div class="text-center">
+              <h1 class="text-3xl font-bold professional-heading mb-2">Create Account</h1>
+              <p class="professional-text">Sign up for your account</p>
+            </div>
+            
+            <!-- Form -->
+            <form id="signupFormElement" class="space-y-5">
+              <!-- Username -->
+              <div>
+                <label for="signupUsername" class="block text-sm font-medium professional-label mb-2">Username</label>
+                <input 
+                  id="signupUsername"
+                  type="text" 
+                  placeholder="Enter your username" 
+                  class="w-full px-4 py-3 professional-input rounded-lg input-focus"
+                  required
+                >
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="signupEmail" class="block text-sm font-medium professional-label mb-2">Email</label>
+                <input 
+                  id="signupEmail"
+                  type="email" 
+                  placeholder="Enter your email" 
+                  class="w-full px-4 py-3 professional-input rounded-lg input-focus"
+                  required
+                >
+              </div>
+
+              <!-- Password -->
+              <div>
+                <label for="signupPassword" class="block text-sm font-medium professional-label mb-2">Password</label>
+                <input 
+                  id="signupPassword"
+                  type="password" 
+                  placeholder="Enter your password" 
+                  class="w-full px-4 py-3 professional-input rounded-lg input-focus"
+                  required
+                >
+              </div>
+
+              <!-- Confirm Password -->
+              <div>
+                <label for="confirmPassword" class="block text-sm font-medium professional-label mb-2">Confirm Password</label>
+                <input 
+                  id="confirmPassword"
+                  type="password" 
+                  placeholder="Confirm your password" 
+                  class="w-full px-4 py-3 professional-input rounded-lg input-focus"
+                  required
+                >
+              </div>
+
+              <!-- Submit Button -->
+              <button 
+                type="submit" 
+                class="w-full gradient-button py-3 px-4 rounded-lg btn-hover"
+              >
+                Sign Up
+              </button>
+            </form>
+
+            <!-- Sign In Link -->
+            <div class="text-center">
+              <p class="professional-text">
+                Already have an account? 
+                <button onclick="switchToLogin()" class="link-text cursor-pointer">Sign in</button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
+
+  
+
 
   <script>
+   let currentForm = 'login';
+
+    function switchToSignup() {
+      if (currentForm === 'login') {
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        
+        // Add transition classes
+        loginForm.classList.add('slide-left');
+        loginForm.classList.remove('slide-center');
+        
+        signupForm.classList.remove('slide-right');
+        signupForm.classList.add('slide-center');
+        
+        currentForm = 'signup';
+        
+        // Clear form fields after transition
+        setTimeout(() => {
+          document.getElementById('loginUsername').value = '';
+          document.getElementById('loginPassword').value = '';
+        }, 300);
+      }
+    }
+
+    function switchToLogin() {
+      if (currentForm === 'signup') {
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        
+        // Add transition classes
+        signupForm.classList.add('slide-right');
+        signupForm.classList.remove('slide-center');
+        
+        loginForm.classList.remove('slide-left');
+        loginForm.classList.add('slide-center');
+        
+        currentForm = 'login';
+        
+        // Clear form fields after transition
+        setTimeout(() => {
+          document.getElementById('signupUsername').value = '';
+          document.getElementById('signupEmail').value = '';
+          document.getElementById('signupPassword').value = '';
+          document.getElementById('confirmPassword').value = '';
+        }, 300);
+      }
+    }
+
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     const usernameInput = document.getElementById('username');
@@ -132,6 +421,21 @@
       }
     });
   });
+
+      document.getElementById("loginBtn").addEventListener("click", function(){
+      const username = document.getElementById("username").value.trim();
+
+      if(username === ""){
+        alert("Please enter your name.");
+        return;
+      }
+
+      // ✅ Store name from login
+      sessionStorage.setItem("loggedUser", username);
+
+      // ✅ Redirect to dashboard
+      window.location.href = "userdashboard.html";
+    });
 </script>
 
 </body>

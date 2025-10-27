@@ -54,9 +54,12 @@
                 <a href="postproperty.html">Post Property</a>
                 <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
             </button>
-            <button class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2">
-                <a href="login.html">Login/SignUp</a>
+             <div class="gap-10">
+            <img src="image.png" class="w-10 absolute right-40 z-50 icon rounded-2xl">
+            <button id="login" class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2 relative z-40">
+                <a href="login.html">Login</a>
             </button>
+            </div>
           </div>
     </div>
 
@@ -639,6 +642,23 @@
       // Navigate to the viewdetail page with all the data in the URL
       window.location.href = 'viewdetail.html?' + params.toString();
   });
+
+  const logindiv = document.getElementById("login");
+const storedname = sessionStorage.getItem("loggedUser"); // ✅ Correct key
+
+if (storedname) {
+  // Replace "Login" text with username
+  logindiv.innerHTML = storedname;
+  sessionStorage.setItem("loginText", storedname);
+} else {
+  sessionStorage.setItem("loginText", "Login");
+
+}
+
+
+logindiv.addEventListener('click', () => {
+
+});
 </script>
 </body>
 </html>

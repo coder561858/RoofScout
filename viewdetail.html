@@ -116,9 +116,9 @@
 
         <!-- Name & Message -->
         <div class="flex flex-col md:flex-row gap-4">
-          <input type="text" name="name" placeholder="Your Name" class="w-full md:w-5/12 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 h-1/2">
+          <input id="name" type="text" name="name" placeholder="Your Name" class="w-full md:w-5/12 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 h-1/2">
           <div class="relative w-full md:w-7/12">
-            <textarea name="message" placeholder="I am interested in this property." class="w-full h-32 border border-gray-300 p-2 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150"></textarea>
+            <textarea id="area" name="message" placeholder="I am interested in this property." class="w-full h-32 border border-gray-300 p-2 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150"></textarea>
             <span class="absolute bottom-1 right-2 text-xs text-gray-400">Max 400 chars</span>
           </div>
         </div>
@@ -293,9 +293,19 @@ if (!alreadyApplied) {
 
     // Send Email & SMS
     send.addEventListener('click', (e) => {
-      e.preventDefault(); 
-      alert("Message sent successfully!");
-    });
+  e.preventDefault(); 
+
+  const nameInput = document.getElementById("name").value.trim();
+  const messageInput = document.getElementById("area").value.trim();
+
+  if (nameInput === "" || messageInput === "") {
+    alert("Please fill in both Name and Message before sending.");
+    return; // Stop execution
+  }
+
+  alert("Message sent successfully!");
+});
+
 
     (function () {
       const params = new URLSearchParams(window.location.search);
@@ -518,6 +528,21 @@ if (!alreadyApplied) {
         document.getElementById('quick-id').textContent = houseId;
       }
     })();
+
+  dropdown.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const nameInput = document.getElementById("name").value.trim();
+  const messageInput = document.getElementById("area").value.trim();
+
+  if (nameInput === "" || messageInput === "") {
+    alert("Please enter your Name and Message before requesting a tour.");
+    return; // Stop request tour
+  }
+
+  alert("Tour request submitted successfully!");
+});
+    
   </script>
 
 </body>

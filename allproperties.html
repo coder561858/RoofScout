@@ -669,16 +669,22 @@
   }
 
 
-  const storedname = sessionStorage.getItem("username");
-const picture = sessionStorage.getItem("pic");
+const logindiv = document.getElementById("login");
+const storedname = sessionStorage.getItem("loggedUser"); // ✅ Correct key
 
-  if (storedname) {
-    document.getElementById("login").innerText = storedname;
-  }
+if (storedname) {
+  // Replace "Login" text with username
+  logindiv.innerHTML = storedname;
+  sessionStorage.setItem("loginText", storedname);
+} else {
+  sessionStorage.setItem("loginText", "Login");
 
-  if (picture) {
-    document.querySelector(".icon").src = picture;
-  }
+}
+
+
+logindiv.addEventListener('click', () => {
+
+});
 </script>
 
 </html>

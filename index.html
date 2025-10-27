@@ -56,8 +56,9 @@
                 <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
             </button>
             <div class="gap-10">
-            <img src="image.png" class="w-10 absolute right-40 z-50 icon rounded-2xl">
+            <img src="image.png" class="w-10 absolute top-5 z-50 icon rounded-2xl">
             <button id="login" class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2 relative z-40">
+              
                 <a href="login.html">Login</a>
             </button>
             </div>
@@ -406,23 +407,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // ...
 
-const logindiv = document.getElementById('login');
-const storedname = sessionStorage.getItem("username");
-const picture = sessionStorage.getItem("pic");
+const logindiv = document.getElementById("login");
+const storedname = sessionStorage.getItem("loggedUser"); // ✅ Correct key
 
 if (storedname) {
-
-logindiv.innerText = storedname;
-
-sessionStorage.setItem("loginText", storedname);
+  // Replace "Login" text with username
+  logindiv.innerHTML = storedname;
+  sessionStorage.setItem("loginText", storedname);
 } else {
+  sessionStorage.setItem("loginText", "Login");
 
-sessionStorage.setItem("loginText", "Login");
 }
 
-if (picture) {
-document.querySelector(".icon").src = picture;
-}
 
 logindiv.addEventListener('click', () => {
 
