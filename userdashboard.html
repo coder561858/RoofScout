@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - RoofScout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <style>
+        /* Custom styles if needed, e.g., for active tabs */
+        .tab-button.active {
+            background-color: #2563eb; /* blue-600 */
+            color: white;
+            font-weight: 600; /* semibold */
+        }
+        /* Style for the link tab */
+         .tab-link {
+             display: inline-block; /* Needed for padding and alignment */
+         }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-gray-900 text-white shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <div class="flex items-center text-xl font-bold">
+                <h1 class="font-bold text-2xl text-yellow-500 mr-1"><a href="index.html">Roof</a></h1>
+                <h1 class="font-bold text-2xl text-blue-400"><a href="index.html">Scout</a></h1>
+                <span class="ml-4 text-gray-400 text-sm hidden sm:block">User Dashboard</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- ADDED ID for user name display in navbar -->
+                <span id="navUserName" class="text-sm">User</span>
+                <button class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-md text-sm transition-colors">Logout</button>
+                <button class="text-gray-400 hover:text-white"><i class="ri-search-line text-lg"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Dashboard Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- User Info Card -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 flex flex-col md:flex-row items-center md:items-start gap-6">
+            <div class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-md flex-shrink-0">
+                <!-- ADDED ID for profile image -->
+                <img id="dashboardProfileImage" src="https://avatar.iran.liara.run/public/boy?username=Default" alt="User Profile" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-grow text-center md:text-left">
+                 <!-- ADDED IDs for dynamic content -->
+                <h2 id="dashboardUserName" class="text-2xl font-bold text-gray-800 mb-1">User Name</h2>
+                <p id="dashboardUserAddress" class="text-gray-600 text-sm md:text-base">Address details will appear here.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mt-4 text-sm md:text-base">
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-gray-700">Phone:</span>
+                        <!-- ADDED ID -->
+                        <span id="dashboardUserPhone" class="text-gray-800">Not Available</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-gray-700">Mobile:</span>
+                         <!-- Reusing Phone ID for simplicity, can make unique if needed -->
+                        <span id="dashboardUserMobile" class="text-gray-800">Not Available</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-gray-700">Email:</span>
+                        <!-- ADDED ID -->
+                        <span id="dashboardUserEmail" class="text-gray-800">Not Available</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-gray-700">Password:</span>
+                        <span class="text-gray-800">********</span>
+                    </div>
+                    <!-- Removed Location for simplicity, matches profile form -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-Navigation Tabs & Content Area -->
+        <div class="bg-white rounded-lg shadow-lg mb-8">
+            <div class="flex flex-wrap border-b border-gray-200">
+                <button id="appliedHousesTab" class="tab-button active flex-grow md:flex-none py-3 px-6 text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors duration-200 rounded-tl-lg">Applied House</button>
+                <button id="propertiesTab" class="tab-button flex-grow md:flex-none py-3 px-6 text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors duration-200">Properties</button>
+                <a href="user-profile.html" id="editProfileLink" class="tab-link flex-grow md:flex-none py-3 px-6 text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors duration-200">Edit Profile</a>
+                <button id="deleteAccountTab" class="tab-button flex-grow md:flex-none py-3 px-6 text-gray-700 hover:bg-gray-50 focus:outline-none transition-colors duration-200 rounded-tr-lg">Delete Account</button>
+            </div>
+
+            <!-- Content Area for Tabs -->
+            <div class="p-6">
+                <div id="appliedHousesContent" class="tab-content">
+                    <h3 class="text-xl font-semibold mb-4">Your Applied Houses</h3>
+                    <p class="text-gray-600">You haven't applied for any houses yet. Start browsing properties to find your next home!</p>
+                </div>
+                <div id="propertiesContent" class="tab-content hidden">
+                    <h3 class="text-xl font-semibold mb-4">Your Listed Properties</h3>
+                    <p class="text-gray-600">Manage your properties that are currently listed for rent or sale.</p>
+                     <!-- Properties loaded by JS will appear here -->
+                </div>
+                <div id="deleteAccountContent" class="tab-content hidden">
+                    <h3 class="text-xl font-semibold mb-4 text-red-700">Delete Account</h3>
+                    <p class="text-gray-600 mb-4">Are you sure you want to delete your account? This action cannot be undone.</p>
+                    <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition-colors">Confirm Account Deletion</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+             &copy; 2025 RoofScout. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Updated JavaScript -->
+    <script>
+        // --- Find elements needed for dashboard display ---
+        const navUserName = document.getElementById('navUserName');
+        const dashboardUserName = document.getElementById('dashboardUserName');
+        const dashboardUserAddress = document.getElementById('dashboardUserAddress');
+        const dashboardUserPhone = document.getElementById('dashboardUserPhone');
+        const dashboardUserMobile = document.getElementById('dashboardUserMobile'); // Assuming same as phone for now
+        const dashboardUserEmail = document.getElementById('dashboardUserEmail');
+        const dashboardProfileImage = document.getElementById('dashboardProfileImage');
+
+        // --- Load User Profile Data on Page Load ---
+        function loadAndDisplayUserProfile() {
+            const savedProfile = JSON.parse(localStorage.getItem('userProfile'));
+            const savedImage = localStorage.getItem('userProfileImage');
+
+            if (savedProfile) {
+                console.log("Loading profile for dashboard:", savedProfile);
+                // Update text content, provide fallback if data is missing
+                navUserName.textContent = savedProfile.name || 'User';
+                dashboardUserName.textContent = savedProfile.name || 'User Name';
+                dashboardUserAddress.textContent = savedProfile.address || 'Address not set.';
+                dashboardUserPhone.textContent = savedProfile.phone || 'Not Available';
+                dashboardUserMobile.textContent = savedProfile.phone || 'Not Available'; // Link to same data
+                dashboardUserEmail.textContent = savedProfile.email || 'Not Available';
+            } else {
+                 console.log("No saved user profile found for dashboard.");
+                 // Keep default placeholder text
+            }
+
+            // Update profile image if saved
+            if (savedImage) {
+                dashboardProfileImage.src = savedImage;
+            } else {
+                 // Keep default avatar if no image saved
+                 dashboardProfileImage.src = 'https://avatar.iran.liara.run/public/boy?username=Default';
+            }
+        }
+        // Run this function as soon as the page content is loaded
+        document.addEventListener('DOMContentLoaded', loadAndDisplayUserProfile);
+        // --- End Profile Load Logic ---
+
+
+        // --- Tab Switching Logic ---
+        const tabButtons = document.querySelectorAll('#appliedHousesTab, #propertiesTab, #deleteAccountTab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const propertiesContentDiv = document.getElementById('propertiesContent');
+
+        // Function to display properties (loads from localStorage)
+        function displayUserProperties() {
+            propertiesContentDiv.innerHTML = '<h3 class="text-xl font-semibold mb-4">Your Listed Properties</h3>'; // Reset content
+            const userProperties = JSON.parse(localStorage.getItem('userProperties')) || [];
+
+            if (userProperties.length === 0) {
+                propertiesContentDiv.innerHTML += '<p class="text-gray-600">You haven\'t listed any properties yet.</p>';
+                return;
+            }
+
+            userProperties.forEach(property => {
+                let editPageUrl = '';
+                switch (property.type) {
+                    case 'PG': editPageUrl = 'pg.html'; break;
+                    case 'Rent': editPageUrl = 'list-for-rent.html'; break;
+                    case 'Sell': editPageUrl = 'sell.html'; break;
+                    default: editPageUrl = '#';
+                }
+                const editLink = `${editPageUrl}?editId=${property.id}`;
+
+                // Generate the HTML for each property card
+                const propertyCardHTML = `
+                    <div class="border rounded-lg p-4 mb-4 flex flex-col sm:flex-row gap-4 items-center bg-gray-50 shadow-sm">
+                        <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-400 flex-shrink-0">
+                            <i class="ri-${property.type === 'PG' ? 'hotel-bed' : (property.type === 'Rent' ? 'building-2' : 'home-sale')}-line text-3xl"></i>
+                        </div>
+                        <div class="flex-grow text-center sm:text-left">
+                            <h4 class="font-bold text-lg text-gray-800">${property.title || 'N/A'}</h4>
+                            <p class="text-sm text-gray-600">${property.type} - ${property.details || 'N/A'}</p>
+                            <p class="text-sm text-gray-500">Price: ₹${property.price || 'N/A'}</p>
+                        </div>
+                        <div class="text-center sm:text-right flex-shrink-0 mt-2 sm:mt-0">
+                            <span class="text-xs font-semibold px-2 py-1 rounded-full ${
+                                property.status === 'Active' ? 'bg-green-100 text-green-700' :
+                                property.status === 'Rented' ? 'bg-red-100 text-red-700' :
+                                'bg-yellow-100 text-yellow-700'
+                            }">${property.status || 'Unknown'}</span>
+                            <a href="${editLink}" class="block text-xs text-blue-500 hover:underline mt-2">View/Edit</a>
+                        </div>
+                    </div>
+                `;
+                propertiesContentDiv.innerHTML += propertyCardHTML; // Add the card to the div
+            });
+         }
+
+        // Add click listeners to tab buttons
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                tabContents.forEach(content => content.classList.add('hidden'));
+                const targetContentId = button.id.replace('Tab', 'Content');
+                const targetContentDiv = document.getElementById(targetContentId);
+                if (targetContentDiv) {
+                     targetContentDiv.classList.remove('hidden');
+                    if (targetContentId === 'propertiesContent') {
+                        displayUserProperties(); // Load properties when this tab is clicked
+                    }
+                } else {
+                    console.warn("Content div not found for tab:", button.id);
+                }
+            });
+        });
+
+        // Initial Load Logic: Show correct content and load properties if needed
+        const activeTabButton = document.querySelector('.tab-button.active');
+         if (activeTabButton && activeTabButton.id === 'propertiesTab') {
+              displayUserProperties(); // If properties is default, load them
+         } else if (activeTabButton && activeTabButton.classList.contains('tab-button')) {
+             // Show the content div for the initially active tab
+             const initialContentId = activeTabButton.id.replace('Tab', 'Content');
+             const initialContentDiv = document.getElementById(initialContentId);
+              if (initialContentDiv) {
+                  tabContents.forEach(content => content.classList.add('hidden'));
+                  initialContentDiv.classList.remove('hidden');
+              }
+         } else {
+             // Fallback: Show the first content div if no tab is active
+              const firstContent = document.querySelector('.tab-content');
+              if(firstContent) {
+                 tabContents.forEach(content => content.classList.add('hidden'));
+                 firstContent.classList.remove('hidden');
+                 // Try to activate the corresponding button
+                 const firstButtonId = firstContent.id.replace('Content', 'Tab');
+                 const firstButton = document.getElementById(firstButtonId);
+                 if(firstButton && firstButton.classList.contains('tab-button')) firstButton.classList.add('active');
+              }
+         }
+
+    </script>
+</body>
+</html>
+
