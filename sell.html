@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RoofScout — List Property</title>
+    <title>RoofScout — List Property (Functional)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
   </head>
-  <body class="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-100 min-h-screen">
+  <body class="bg-gradient-to-br from-blue-100 via-green-100 to-pink-200 min-h-screen">
     <div class="flex items-start justify-center py-10">
       <!-- max-w controls desktop width, w-full ensures full width on small screens -->
       <div class="max-w-4xl w-full bg-white rounded-lg shadow-2xl mx-4">
@@ -37,6 +37,7 @@
           <div class="md:flex md:space-x-4">
             <div class="flex flex-col w-full p-4">
               <label for="property-title" class="text-gray-700 font-semibold">Property Title</label>
+              <!-- ID is already here -->
               <input
                 id="property-title"
                 type="text"
@@ -47,6 +48,7 @@
 
             <div class="flex flex-col w-full p-4">
               <label for="listing-type" class="text-gray-700 font-semibold">Property Type</label>
+              <!-- ID is already here -->
               <select id="listing-type" class="border-2 rounded h-12 p-2 w-full">
                 <option value="plot">Plot / Land</option>
                 <option value="flat">Flat / Apartment</option>
@@ -58,6 +60,7 @@
 
           <div class="p-4">
             <label for="address" class="text-gray-700 font-semibold">Full Address</label>
+            <!-- ID is already here -->
             <textarea
               id="address"
               placeholder="Enter the full property address"
@@ -80,27 +83,32 @@
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-4 pb-4">
             <div class="flex flex-col">
               <label for="price" class="text-gray-700 font-semibold">Price (in ₹)</label>
+              <!-- ID is already here -->
               <input id="price" type="text" class="border-2 rounded h-12 p-2 w-full" />
             </div>
 
             <div class="flex flex-col">
               <label for="bedrooms" class="text-gray-700 font-semibold">Bedrooms</label>
+              <!-- ID is already here -->
               <input id="bedrooms" type="text" class="border-2 rounded h-12 p-2 w-full" />
             </div>
 
             <div class="flex flex-col">
               <label for="bathrooms" class="text-gray-700 font-semibold">Bathrooms</label>
+              <!-- ID is already here -->
               <input id="bathrooms" type="text" class="border-2 rounded h-12 p-2 w-full" />
             </div>
           </div>
 
           <div class="p-4">
             <label for="size" class="text-gray-700 font-semibold">Total Size (in sq. ft.)</label>
+            <!-- ID is already here -->
             <input id="size" type="text" class="border-2 rounded h-12 p-2 w-full" />
           </div>
 
           <div class="p-4 pb-6">
             <label for="description" class="text-gray-700 font-semibold">Description</label>
+            <!-- ID is already here -->
             <textarea
               id="description"
               placeholder="Tell us more about your property..."
@@ -120,12 +128,14 @@
           </div>
 
           <div class="p-4">
-            <!-- allow multiple images, accept images only -->
+            <!-- ID is already here -->
             <input id="photos" name="photos" type="file" multiple accept="image/*" class="w-full md:w-auto" />
           </div>
 
           <div class="flex justify-center px-6 pb-8">
+            <!-- Ensure the button has the ID -->
             <button
+              id="submitBtn"
               class="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-xl
                      bg-gradient-to-r from-emerald-500 to-green-600 px-6 py-3 text-white font-semibold
                      shadow-lg hover:shadow-xl active:scale-[.99] focus:outline-none focus:ring-4
@@ -139,5 +149,136 @@
 
       </div>
     </div>
+
+    <!-- ========================================================== -->
+    <!-- REPLACED SCRIPT BLOCK with Save & Edit Logic -->
+    <!-- ========================================================== -->
+     <script>
+        // --- JavaScript for the Sell Property Page (Handles Save & Edit) ---
+
+        // CONCEPT 1: Find all the HTML elements
+        const titleInput = document.getElementById('property-title');
+        const typeSelect = document.getElementById('listing-type');
+        const addressInput = document.getElementById('address');
+        const priceInput = document.getElementById('price');
+        const bedroomsInput = document.getElementById('bedrooms');
+        const bathroomsInput = document.getElementById('bathrooms');
+        const sizeInput = document.getElementById('size');
+        const descriptionInput = document.getElementById('description');
+        const photoInput = document.getElementById('photos');
+        const submitButton = document.getElementById('submitBtn'); // Ensure your button has id="submitBtn"
+
+        // --- EDITING LOGIC ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const editId = urlParams.get('editId');
+        let isEditing = false;
+
+        if (editId) {
+            console.log("Editing mode (Sell Property). ID:", editId);
+            const userProperties = JSON.parse(localStorage.getItem('userProperties')) || [];
+            const propertyToEdit = userProperties.find(prop => prop.id === Number(editId));
+
+            if (propertyToEdit && propertyToEdit.type === 'Sell') { // Check type matches
+                isEditing = true;
+                console.log("Property found, populating form:", propertyToEdit);
+
+                // Populate form fields
+                titleInput.value = propertyToEdit.title || '';
+                typeSelect.value = propertyToEdit.propertyType || ''; // Assuming you save the value like 'flat', 'villa' etc.
+                addressInput.value = propertyToEdit.address || '';
+                priceInput.value = propertyToEdit.price || '';
+                bedroomsInput.value = propertyToEdit.bedrooms || '';
+                bathroomsInput.value = propertyToEdit.bathrooms || '';
+                sizeInput.value = propertyToEdit.size || '';
+                descriptionInput.value = propertyToEdit.description || '';
+                // Cannot pre-fill file input
+
+                submitButton.textContent = 'Update Property'; // Change button text
+                 // Add the arrow back
+                submitButton.innerHTML = 'Update Property <span class="text-white/90">→</span>';
+            } else {
+                console.error("Sell property with ID not found or type mismatch:", editId);
+                // Optionally alert the user
+                // alert("Error: Could not find the property to edit.");
+            }
+        }
+        // --- END EDITING LOGIC ---
+
+        // CONCEPT 2: Listen for the submit button click
+        submitButton.addEventListener('click', function() {
+
+            // CONCEPT 3: Read all the values when clicked
+            const title = titleInput.value;
+            const type = typeSelect.value; // e.g., 'flat', 'villa'
+            const address = addressInput.value;
+            const price = priceInput.value;
+            const bedrooms = bedroomsInput.value;
+            const bathrooms = bathroomsInput.value;
+            const size = sizeInput.value;
+            const description = descriptionInput.value;
+            const photos = photoInput.files;
+
+            // Get existing properties or initialize empty array
+            let existingProperties = JSON.parse(localStorage.getItem('userProperties')) || [];
+
+            if (isEditing) {
+                // UPDATE logic
+                const propertyIndex = existingProperties.findIndex(prop => prop.id === Number(editId));
+                if (propertyIndex > -1) {
+                    existingProperties[propertyIndex] = {
+                        ...existingProperties[propertyIndex], // Keep id, type, status
+                        title: title,
+                        propertyType: type, // Saving the type value
+                        address: address,
+                        price: price,
+                        bedrooms: bedrooms,
+                        bathrooms: bathrooms,
+                        size: size,
+                        description: description,
+                        // Recreate details string for consistency (optional)
+                        details: `${bedrooms} Bed, ${bathrooms} Bath, ${size} sqft`,
+                        photoCount: photos.length > 0 ? photos.length : existingProperties[propertyIndex].photoCount
+                    };
+                    console.log("Sell Property Updated:", existingProperties[propertyIndex]);
+                    alert("Property Updated Successfully!");
+                } else {
+                     console.error("Failed to find property to update.");
+                     alert("Error: Could not update property.");
+                     return;
+                }
+            } else {
+                // ADD logic (Create new property object)
+                const newProperty = {
+                    id: Date.now(),
+                    type: 'Sell', // Set type to 'Sell'
+                    title: title,
+                    propertyType: type, // Save the type value
+                    address: address,
+                    price: price,
+                    bedrooms: bedrooms,
+                    bathrooms: bathrooms,
+                    size: size,
+                    description: description,
+                     // Create a details string similar to PG/Rent for dashboard display
+                    details: `${bedrooms} Bed, ${bathrooms} Bath, ${size} sqft`,
+                    photoCount: photos.length,
+                    status: 'Pending Approval'
+                };
+                existingProperties.push(newProperty);
+                console.log("New Sell Property Saved:", newProperty);
+                alert("Property for Sale Submitted and Saved!");
+                window.location.href = 'userdashboard.html'; // Redirect to the user dashboard
+            }
+
+            // Save updated list back to localStorage
+            localStorage.setItem('userProperties', JSON.stringify(existingProperties));
+
+            // Optional: Redirect back to dashboard
+            // window.location.href = 'dashboard.html';
+        });
+
+
+    </script>
   </body>
 </html>
+
