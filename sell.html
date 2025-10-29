@@ -267,6 +267,7 @@
                 existingProperties.push(newProperty);
                 console.log("New Sell Property Saved:", newProperty);
                 alert("Property for Sale Submitted and Saved!");
+                window.location.href = 'userdashboard.html'; // Redirect to the user dashboard
             }
 
             // Save updated list back to localStorage
@@ -275,6 +276,7 @@
             // Optional: Redirect back to dashboard
             // window.location.href = 'dashboard.html';
         });
+
 
     </script>
   </body>

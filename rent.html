@@ -260,6 +260,7 @@
                 existingProperties.push(newProperty);
                 console.log("New Rent Property Saved:", newProperty);
                 alert("Property for Rent Submitted and Saved!");
+                window.location.href = 'userdashboard.html'; // Redirect to the user dashboard
             }
 
             localStorage.setItem('userProperties', JSON.stringify(existingProperties));
