@@ -52,7 +52,7 @@
                <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
            </button>
              <div class="gap-10">
-            <img src="image.png" class="w-10 absolute right-40 z-50 icon rounded-2xl">
+            <img src="image.png" class="w-10 absolute z-50 icon rounded-2xl">
             <button id="login" class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2 relative z-40">
                 <a href="login.html">Login</a>
             </button>
@@ -74,7 +74,7 @@
                  <sup class="text-xs text-black bg-green-400 rounded-md px-1">Free</sup>
              </button>
              <div class="gap-10">
-            <img src="image.png" class="w-10 absolute right-40 z-50 icon rounded-2xl">
+            <img src="image.png" class="w-10 absolute z-50 icon rounded-2xl">
             <button id="login" class=" bg-blue-500 text-white font-semibold rounded-md w-40 items-center px-4 py-2 relative z-40">
                 <a href="login.html">Login</a>
             </button>
@@ -535,34 +535,33 @@ document.querySelectorAll('.property-card').forEach(c => c.classList.remove('hid
       });
       
     // --- PART D: LOAD FEATURED PROPERTIES FROM AN API ---
-      async function loadApiProperties() {
-          const apiGrid = document.getElementById('api-property-grid');
-          const apiSpinner = document.getElementById('api-loading-spinner');
-          
-          // --- NEW: Helper arrays for generating realistic titles ---
-          const apiLocations = ['Downtown', 'Suburb', 'Riverside', 'Hilltop', 'Parkview', 'Central', 'Lakeview', 'City Center'];
-          const apiHouseDesc = ['Modern Villa', 'Cozy Apartment', 'Spacious Bungalow', 'Family Home', 'Luxury Flat'];
-          const apiPlotDesc = ['Residential Plot', 'Commercial Land', 'Investment Plot', 'Corner Lot'];
+     async function loadApiProperties() {
+       const apiGrid = document.getElementById('api-property-grid');
+       const apiSpinner = document.getElementById('api-loading-spinner');
+       
+       // --- NEW: Helper arrays for generating realistic titles ---
+       const apiLocations = ['Downtown', 'Suburb', 'Riverside', 'Hilltop', 'Parkview', 'Central', 'Lakeview', 'City Center'];
+       const apiHouseDesc = ['Modern Villa', 'Cozy Apartment', 'Spacious Bungalow', 'Family Home', 'Luxury Flat'];
+       const apiPlotDesc = ['Residential Plot', 'Commercial Land', 'Investment Plot', 'Corner Lot'];
 
-          try {
-              // 1. Fetch data from a free public API (JSONPlaceholder)
-              const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=9');
-              if (!response.ok) {
-                  throw new Error(`API request failed with status ${response.status}`);
-              }
-              const posts = await response.json();
+       try {
+         // 1. Fetch data from a free public API (JSONPlaceholder)
+         const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=9');
+         if (!response.ok) {
+           throw new Error(`API request failed with status ${response.status}`);
+         }
+         const posts = await response.json();
+         // 2. Transform the API data into our 'prop' format
+         const apiProperties = posts.map(post => {
+           const type = post.id % 2 === 0 ? 'house' : 'plot';
+          const price = (post.id * 7) % 46 + 5; // Generate a price in Thousands (5-50)
+           
+           // --- MODIFIED: Generate realistic title and matching image ---
+           let newTitle = '';
+let newImage = '';
+const location = apiLocations[post.id % apiLocations.length]; 
 
-              // 2. Transform the API data into our 'prop' format
-             const apiProperties = posts.map(post => {
-                  const type = post.id % 2 === 0 ? 'house' : 'plot';
-                 const price = (post.id * 7) % 46 + 5; // Generate a price in Thousands (5-50)
-                  
-                  // --- MODIFIED: Generate realistic title and matching image ---
-                  let newTitle = '';
-                  let newImage = '';
-                  const location = apiLocations[post.id % apiLocations.length]; 
-
-                if (type === 'house') {
+if (type === 'house') {
                 newTitle = `${apiHouseDesc[post.id % apiHouseDesc.length]} in ${location}`;
                 // --- ALTERNATIVE: Use loremflickr.com ---
                 newImage = `https://loremflickr.com/400/300/house,exterior?lock=${post.id}`;
@@ -572,33 +571,33 @@ document.querySelectorAll('.property-card').forEach(c => c.classList.remove('hid
                 newImage = `https://loremflickr.com/400/300/plot,land?lock=${post.id}`;
             }
 
-                  return {
-                      id: `API-${post.id}`,
-                      title: newTitle, // Use the new title
-                      priceText: `₹${price},000/month`,
-                      area: (post.userId * 300) + 1000, // Generate an area
-                      type: type,
-                      image: newImage, // Use the new image
-                      dataPrice: price // Price in Thousands for filtering
-                  };
-              });
+           return {
+             id: `API-${post.id}`,
+             title: newTitle, // Use the new title
+             priceText: `₹${price},000/month`,
+             area: (post.userId * 300) + 1000, // Generate an area
+             type: type,
+             image: newImage, // Use the new image
+             dataPrice: price // Price in Thousands for filtering
+           };
+         });
 
-              // 3. Render the properties using the *existing* function
-              let gridHtml = '';
-              apiProperties.forEach(prop => {
-                  gridHtml += createCardHtml(prop);
-              });
-              apiGrid.innerHTML = gridHtml;
+         // 3. Render the properties using the *existing* function
+         let gridHtml = '';
+         apiProperties.forEach(prop => {
+           gridHtml += createCardHtml(prop);
+         });
+         apiGrid.innerHTML = gridHtml;
 
-            // 4. Show grid, hide spinner
-              apiGrid.classList.remove('hidden');
-              apiSpinner.classList.add('hidden');
+        // 4. Show grid, hide spinner
+         apiGrid.classList.remove('hidden');
+         apiSpinner.classList.add('hidden');
 
-          } catch (error) {
-              console.error("Failed to load API properties:", error);
-              apiSpinner.innerHTML = '<p class="text-center col-span-3 text-red-600">Could not load featured properties.</p>';
-          }
-      }
+       } catch (error) {
+         console.error("Failed to load API properties:", error);
+         apiSpinner.innerHTML = '<p class="text-center col-span-3 text-red-600">Could not load featured properties.</p>';
+       }
+     }
 
       // Call the new function to load API data
       loadApiProperties();
