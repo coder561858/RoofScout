@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Login1() {
+function Login() {
   const [isActive, setIsActive] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -162,4 +162,4 @@ function Login1() {
   );
 }
 
-export default Login1;
+export default Login;
