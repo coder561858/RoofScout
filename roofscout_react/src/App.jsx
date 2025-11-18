@@ -1,25 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import UserDashboard from './pages/UserDashboard';
-import AdminDashboard from './pages/AdminDashboard';
-import AdmPropt from './pages/AdmPropt';
-import AdmHouses from './pages/AdmHouses';
-import AdmClient1 from './pages/AdmClient1';
-import AdmPayment from './pages/AdmPayment';
-import AdmTenant from './pages/AdmTenant';
-import AllProperties from './pages/AllProperties';
-import States from './pages/States';
-import StatesRent from './pages/StatesRent';
-import PostProperty from './pages/PostProperty';
-import ViewDetail from './pages/ViewDetail';
-import Sell from './pages/Sell';
-import Rent from './pages/Rent';
-import PG from './pages/PG';
-import UserProfile from './pages/UserProfile';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { PropertyProvider } from './contexts/PropertyContext';
-import './index.css';
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import UserDashboard from "./pages/UserDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdmPropt from "./pages/AdmPropt";
+import AdmHouses from "./pages/AdmHouses";
+import AdmClient1 from "./pages/AdmClient1";
+import AdmPayment from "./pages/AdmPayment";
+import AdmTenant from "./pages/AdmTenant";
+import AllProperties from "./pages/AllProperties";
+import States from "./pages/States";
+import StatesRent from "./pages/StatesRent";
+import PostProperty from "./pages/PostProperty";
+import ViewDetail from "./pages/ViewDetail";
+import Sell from "./pages/Sell";
+import Rent from "./pages/Rent";
+import PG from "./pages/PG";
+import UserProfile from "./pages/UserProfile";
+
+import AdmInvoice from "./pages/AdmInvoice";   // ✅ Correct file name
+
+import { PropertyProvider } from "./contexts/PropertyContext";
+import "./index.css";
 
 function App() {
   return (
@@ -42,6 +45,9 @@ function App() {
           <Route path="/AdmClient1" element={<AdmClient1 />} />
           <Route path="/AdmTenant" element={<AdmTenant />} />
           <Route path="/AdmPayment" element={<AdmPayment />} />
+
+          {/* INVOICE PAGE */}
+          <Route path="/AdmInvoice" element={<AdmInvoice />} />
 
           {/* PROPERTIES */}
           <Route path="/allproperties" element={<AllProperties />} />

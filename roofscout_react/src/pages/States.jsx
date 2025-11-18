@@ -1,4 +1,3 @@
-// src/pages/States.jsx
 import { useEffect, useState, useContext } from 'react';
 import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -22,11 +21,14 @@ function States() {
   // Load props from context and apply initial state filter
   useEffect(() => {
     const selectedState = (searchParams.get('state') || 'punjab').toLowerCase();
-    // Use context apiProperties but also include admin properties if needed - here we only show apiProperties for state page
-    const data = apiProperties.filter(p => {
-      const st = String(p.state || p.district || '').toLowerCase();
-      return st.includes(selectedState);
-    }).filter(p => !hiddenIds.includes(p.id));
+
+    const data = apiProperties
+      .filter((p) => {
+        const st = String(p.state || p.district || '').toLowerCase();
+        return st.includes(selectedState);
+      })
+      .filter((p) => !hiddenIds.includes(p.id));
+
     setFilteredProperties(data);
     setPage(1);
   }, [apiProperties, searchParams, hiddenIds]);
@@ -42,7 +44,8 @@ function States() {
   // Apply Filters
   const applyFilters = () => {
     const selectedState = (searchParams.get('state') || 'punjab').toLowerCase();
-    let filtered = (apiProperties || []).filter(prop => {
+
+    let filtered = (apiProperties || []).filter((prop) => {
       const st = String(prop.state || prop.district || '').toLowerCase();
       if (!st.includes(selectedState)) return false;
 
@@ -70,7 +73,15 @@ function States() {
     const state = (searchParams.get('state') || 'punjab').toLowerCase();
     setFilters({ type: 'all', price: 'all' });
     setSortType("none");
-    setFilteredProperties(apiProperties.filter(p => String(p.state || p.district || '').toLowerCase().includes(state) && !hiddenIds.includes(p.id)));
+
+    setFilteredProperties(
+      apiProperties.filter(
+        (p) =>
+          String(p.state || p.district || '').toLowerCase().includes(state) &&
+          !hiddenIds.includes(p.id)
+      )
+    );
+
     setPage(1);
   };
 
@@ -100,7 +111,7 @@ function States() {
               <label className="block mb-1 font-semibold">Property Type</label>
               <select
                 value={filters.type}
-                onChange={e => setFilters({ ...filters, type: e.target.value })}
+                onChange={(e) => setFilters({ ...filters, type: e.target.value })}
                 className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white"
               >
                 <option value="all">All</option>
@@ -114,7 +125,7 @@ function States() {
               <label className="block mb-1 font-semibold">Price Range</label>
               <select
                 value={filters.price}
-                onChange={e => setFilters({ ...filters, price: e.target.value })}
+                onChange={(e) => setFilters({ ...filters, price: e.target.value })}
                 className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white"
               >
                 <option value="all">All</option>
@@ -130,7 +141,7 @@ function States() {
               <label className="block mb-1 font-semibold">Sort By</label>
               <select
                 value={sortType}
-                onChange={e => setSortType(e.target.value)}
+                onChange={(e) => setSortType(e.target.value)}
                 className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white"
               >
                 <option value="none">Default</option>
@@ -163,8 +174,9 @@ function States() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
 
           {paginatedData.map((prop, idx) => (
-            <div key={idx}
-             className="border rounded-2xl shadow p-4 bg-gray-200 dark:bg-gray-900 hover:shadow-xl hover:-translate-y-1 transition"
+            <div
+              key={idx}
+              className="border rounded-2xl shadow p-4 bg-gray-200 dark:bg-gray-900 hover:shadow-xl hover:-translate-y-1 transition"
             >
               <img src={prop.image} className="w-full h-48 object-cover rounded" />
               <h2 className="text-xl font-semibold mt-2">{prop.title}</h2>
@@ -172,9 +184,23 @@ function States() {
               <p className="font-bold mt-1">Area: {prop.area} sq ft</p>
               <p className="text-sm">Type: {prop.type?.toUpperCase()}</p>
 
+              {/* UPDATED COMPLETE VIEW DETAILS */}
               <button
                 onClick={() =>
-                  navigate(`/viewdetail?houseId=${prop.id}&title=${prop.title}&priceText=${prop.priceText}&image=${prop.image}&area=${prop.area}&type=${prop.type}`)
+                  navigate(
+                    `/viewdetail?houseId=${prop.id}` +
+                    `&title=${encodeURIComponent(prop.title)}` +
+                    `&priceText=${encodeURIComponent(prop.priceText)}` +
+                    `&image=${encodeURIComponent(prop.image)}` +
+                    `&area=${encodeURIComponent(prop.area)}` +
+                    `&type=${encodeURIComponent(prop.type)}` +
+                    `&owner=${encodeURIComponent(prop.owner || '')}` +
+                    `&desc=${encodeURIComponent(prop.description || '')}` +
+                    `&beds=${encodeURIComponent(prop.beds || '')}` +
+                    `&baths=${encodeURIComponent(prop.baths || '')}` +
+                    `&garages=${encodeURIComponent(prop.garages || '')}` +
+                    `&district=${encodeURIComponent(prop.district || prop.state || '')}`
+                  )
                 }
                 className="mt-3 bg-blue-600 text-white px-3 py-2 rounded"
               >

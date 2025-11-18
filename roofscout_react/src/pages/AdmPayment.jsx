@@ -40,8 +40,9 @@ function AdmPayment() {
     localStorage.setItem('bills', JSON.stringify(bills));
   }, [bills]);
 
+  // FIXED: Navigate to AdminInvoice
   const handleViewBill = (bill) => {
-    navigate('/adm-viewbill', { state: { bill } });
+    navigate('/AdmInvoice', { state: { bill } });
   };
 
   return (
@@ -113,8 +114,7 @@ function AdmPayment() {
       </div>
 
       <div className="flex">
-
-        {/* SIDEBAR — EXACT FROM AdmHouses */}
+        {/* SIDEBAR */}
         <aside className={`transition-all duration-300 ${
           collapsed ? 'w-20' : 'w-72'
         } bg-gray-900 min-h-screen p-4 text-white`}>
@@ -146,70 +146,54 @@ function AdmPayment() {
             <SidebarItem to="/AdmTenant" icon={<User />} text="Tenants" collapsed={collapsed} />
             <SidebarItem to="/AdmPayment" icon={<CreditCard />} text="Payment" collapsed={collapsed} active />
           </nav>
-
         </aside>
 
         {/* MAIN CONTENT */}
         <main className="flex-1 p-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.35 }}
-            >
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-extrabold">Bill Table</h2>
+            <p className="text-sm text-gray-500">Manage bill cycles, payments and history.</p>
+          </div>
 
-              <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-2xl font-extrabold">Bill Table</h2>
-                <p className="text-sm text-gray-500">Manage bill cycles, payments and history.</p>
-              </div>
+          <div className={`p-6 rounded-xl shadow ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+            <table className="min-w-full text-sm divide-y divide-gray-200 dark:divide-gray-700">
 
-              <div className={`p-6 rounded-xl shadow ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-                <table className="min-w-full text-sm divide-y divide-gray-200 dark:divide-gray-700">
+              <thead className="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th className="px-4 py-3 text-left">Bill No</th>
+                  <th className="px-4 py-3 text-left">Date</th>
+                  <th className="px-4 py-3 text-left">Amount</th>
+                  <th className="px-4 py-3 text-left">Status</th>
+                  <th className="px-4 py-3 text-left">Action</th>
+                </tr>
+              </thead>
 
-                  <thead className="bg-gray-50 dark:bg-gray-900">
-                    <tr>
-                      <th className="px-4 py-3 text-left">Bill No</th>
-                      <th className="px-4 py-3 text-left">Date</th>
-                      <th className="px-4 py-3 text-left">Amount</th>
-                      <th className="px-4 py-3 text-left">Status</th>
-                      <th className="px-4 py-3 text-left">Action</th>
-                    </tr>
-                  </thead>
-
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {bills.map(bill => (
-                      <motion.tr
-                        key={bill.id}
-                        whileHover={{ scale: 1.01 }}
-                        className="cursor-pointer"
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                {bills.map(bill => (
+                  <motion.tr key={bill.id} whileHover={{ scale: 1.01 }} className="cursor-pointer">
+                    <td className="px-4 py-3">{bill.id}</td>
+                    <td className="px-4 py-3">{bill.from} → {bill.to}</td>
+                    <td className="px-4 py-3 font-semibold">₹{bill.amount.toFixed(2)}</td>
+                    <td className={`px-4 py-3 font-semibold ${
+                      bill.status === 'Paid' ? 'text-green-500' : 'text-red-500'
+                    }`}>
+                      {bill.status}
+                    </td>
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={() => handleViewBill(bill)}
+                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center gap-2"
                       >
-                        <td className="px-4 py-3">{bill.id}</td>
-                        <td className="px-4 py-3">{bill.from} → {bill.to}</td>
-                        <td className="px-4 py-3 font-semibold">₹{bill.amount.toFixed(2)}</td>
-                        <td className={`px-4 py-3 font-semibold ${
-                          bill.status === 'Paid' ? 'text-green-500' : 'text-red-500'
-                        }`}>
-                          {bill.status}
-                        </td>
-                        <td className="px-4 py-3">
-                          <button
-                            onClick={() => handleViewBill(bill)}
-                            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center gap-2"
-                          >
-                            <FileText size={16} /> View
-                          </button>
-                        </td>
-                      </motion.tr>
-                    ))}
-                  </tbody>
+                        <FileText size={16} /> View
+                      </button>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
 
-                </table>
-              </div>
+            </table>
+          </div>
 
-            </motion.div>
-          </AnimatePresence>
         </main>
 
       </div>
@@ -217,7 +201,6 @@ function AdmPayment() {
   );
 }
 
-/* --- SidebarItem (Exact copy from AdmHouses) --- */
 function SidebarItem({ to = '#', icon, text, collapsed, active }) {
   return (
     <Link
