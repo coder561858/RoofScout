@@ -4,10 +4,12 @@ import React, { createContext, useEffect, useState } from "react";
 export const PropertyContext = createContext();
 
 const API_URLS = [
-  "https://mocki.io/v1/1cec7da3-3a48-4c04-b874-2a20acf7e63e",
-  "https://mocki.io/v1/70c72499-a443-4fe4-9c74-714824d37ff4",
-  "https://mocki.io/v1/3687324e-18cc-4c72-a6dd-dd7279223666",
-  "https://mocki.io/v1/61c4110e-fad8-45c5-b073-762f866cc904"
+  "https://mocki.io/v1/8cff4a13-7311-4327-9a6f-01484c672b7d",
+  "https://mocki.io/v1/a3ca5164-e5de-4893-bada-b6ed13e9a8ad",
+  "https://mocki.io/v1/1dd0141d-4b4c-43d0-8971-88df7e6b9a23",
+  "https://mocki.io/v1/b917348c-b57e-47bc-a614-86ee31b4efcb",
+  "https://mocki.io/v1/4c0c8ad9-bd27-4923-b517-3cf54376b680"
+
 ];
 
 const ADMIN_SEED = [
