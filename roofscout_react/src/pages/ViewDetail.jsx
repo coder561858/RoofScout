@@ -234,7 +234,7 @@ function ViewDetail() {
           <p className="mt-2">{propertyData.desc}</p>
 
           <p className="mt-4">
-            <strong>Address:</strong> {propertyData.address}
+            <strong>Address:</strong> {propertyData.title}
           </p>
         </div>
 
@@ -286,7 +286,7 @@ function ViewDetail() {
                     className="bg-gray-300 dark:bg-gray-700 px-3 py-1 rounded text-xs"
                     onClick={() => setPhoneVisible(false)}
                   >
-                    Undo
+                    Hide
                   </button>
                 </div>
               )}
@@ -370,7 +370,7 @@ function ViewDetail() {
               type="submit"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2.5 rounded-md"
             >
-              Send Email & SMS
+              Apply Property
             </button>
           </form>
         </div>
@@ -382,3 +382,5 @@ function ViewDetail() {
 }
 
 export default ViewDetail;
+
+
