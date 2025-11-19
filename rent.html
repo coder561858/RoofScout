@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Property for Rent (Functional)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
+<body class="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-100 min-h-screen">
+    <div class="flex items-center justify-center py-10 px-4">
+
+        <div class="w-full md:w-1/2 bg-white rounded-lg shadow-2xl">
+
+            <div class="text-center p-6">
+                <h1 class="text-2xl md:text-4xl font-bold bg-gradient-to-r from-blue-700 via-indigo-600 to-fuchsia-600 bg-clip-text text-transparent">List Your Property for Rent</h1>
+                <p class="text-gray-600 mt-2">Provide the details below to find the perfect tenant.</p>
+            </div>
+
+            <!-- Section 1: Property Details -->
+            <div class="bg-blue-100 shadow-lg m-4 rounded-lg p-4">
+                <div class="text-2xl text-gray-700 font-bold flex items-center gap-2">
+                    <i class="ri-home-heart-line"></i>
+                    <p>Property Details</p>
+                </div>
+                <hr class="my-3 border-blue-200">
+
+                <div class="flex flex-col md:flex-row w-full gap-4">
+                    <div class="w-full flex flex-col">
+                        <label for="propertyTitle" class="font-semibold text-gray-600 mb-1">Property Title</label>
+                        <input type="text" id="propertyTitle" placeholder="e.g., Modern 2BHK Apartment" class="p-2 border-2 rounded h-12">
+                    </div>
+                    <div class="flex flex-col w-full">
+                        <label for="propertyType" class="font-semibold text-gray-600 mb-1">Property Type</label>
+                        <select id="propertyType" class="border-2 h-12 rounded p-2">
+                            <option>Apartment / Flat</option>
+                            <option>Independent House / Villa</option>
+                            <option>Builder Floor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex flex-col mt-4">
+                    <label for="propertyAddress" class="font-semibold text-gray-600 mb-1">Full Address</label>
+                    <textarea id="propertyAddress" rows="3" class="border-2 p-2 rounded" placeholder="Enter full address including city and pin code"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 2: Rental & Configuration -->
+            <div class="bg-green-100 shadow-lg m-4 rounded-lg p-4">
+                <div class="text-2xl text-gray-700 font-bold flex items-center gap-2">
+                    <i class="ri-price-tag-3-line"></i>
+                    <p>Rental & Configuration</p>
+                </div>
+                <hr class="my-3 border-green-200">
+
+                <div class="flex flex-col md:flex-row w-full gap-4">
+                    <div class="flex flex-col w-full">
+                        <label for="bhkType" class="font-semibold text-gray-600 mb-1">BHK Type</label>
+                        <select id="bhkType" class="border-2 rounded h-12 p-2">
+                            <option>1 BHK</option>
+                            <option>2 BHK</option>
+                            <option>3 BHK</option>
+                            <option>4+ BHK</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col w-full">
+                        <label for="furnishingStatus" class="font-semibold text-gray-600 mb-1">Furnishing</label>
+                        <select id="furnishingStatus" class="border-2 rounded h-12 p-2">
+                            <option>Semi-Furnished</option>
+                            <option>Fully-Furnished</option>
+                            <option>Unfurnished</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4 mt-4">
+                    <div class="flex flex-col w-full">
+                        <label for="monthlyRent" class="font-semibold text-gray-600 mb-1">Monthly Rent (₹)</label>
+                        <input type="text" id="monthlyRent" class="border-2 rounded h-12 p-2">
+                    </div>
+                    <div class="flex flex-col w-full">
+                        <label for="securityDeposit" class="font-semibold text-gray-600 mb-1">Security Deposit (₹)</label>
+                        <input type="text" id="securityDeposit" class="border-2 rounded h-12 p-2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Amenities -->
+            <div class="bg-yellow-100 shadow-lg m-4 rounded-lg p-4">
+                <div class="text-2xl text-gray-700 font-bold flex items-center gap-2">
+                    <i class="ri-service-line"></i>
+                    <p>Amenities</p>
+                </div>
+                <hr class="my-3 border-yellow-200">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Ensure these IDs are unique if copy-pasting from other files -->
+                    <label class="flex items-center gap-2"><input type="checkbox" id="amenityParkingRent"> Parking</label>
+                    <label class="flex items-center gap-2"><input type="checkbox" id="amenityACRent"> Air Conditioning</label>
+                    <label class="flex items-center gap-2"><input type="checkbox" id="amenityBackupRent"> Power Backup</label>
+                    <label class="flex items-center gap-2"><input type="checkbox" id="amenityKitchenRent"> Modular Kitchen</label>
+                    <label class="flex items-center gap-2"><input type="checkbox" id="amenitySecurityRent"> Gated Security</label>
+                    <label class="flex items-center gap-2"><input type="checkbox" id="amenityBalconyRent"> Balcony</label>
+                </div>
+            </div>
+
+            <!-- Section 4: Upload Photos -->
+            <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-100 m-4 p-4">
+                <div class="text-2xl text-gray-700 font-bold flex items-center gap-2">
+                    <i class="ri-image-add-line"></i>
+                    <p>Upload Photos</p>
+                </div>
+                <hr class="my-3 border-purple-200">
+                <div class="mt-4">
+                    <input type="file" id="propertyPhotos" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" multiple/>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="w-full flex justify-center p-6">
+                <button id="submitBtn" class="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 px-8 py-3 text-white font-semibold shadow-lg hover:shadow-xl">
+                    Submit Property
+                    <span class="text-white/90">→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- REPLACED SCRIPT BLOCK with Save & Edit Logic -->
+    <!-- ========================================================== -->
+    <script>
+        // --- JavaScript for the List-for-Rent Page (Handles Save & Edit) ---
+
+        // CONCEPT 1: Find all the HTML elements
+        const titleInput = document.getElementById('propertyTitle');
+        const typeSelect = document.getElementById('propertyType');
+        const addressInput = document.getElementById('propertyAddress');
+        const bhkSelect = document.getElementById('bhkType');
+        const furnishingSelect = document.getElementById('furnishingStatus');
+        const rentInput = document.getElementById('monthlyRent');
+        const depositInput = document.getElementById('securityDeposit');
+        // Find Amenities Checkboxes (using the unique IDs we defined in HTML)
+        const parkingCheck = document.getElementById('amenityParkingRent');
+        const acCheck = document.getElementById('amenityACRent');
+        const backupCheck = document.getElementById('amenityBackupRent');
+        const kitchenCheck = document.getElementById('amenityKitchenRent');
+        const securityCheck = document.getElementById('amenitySecurityRent');
+        const balconyCheck = document.getElementById('amenityBalconyRent');
+        const photoInput = document.getElementById('propertyPhotos');
+        const submitButton = document.getElementById('submitBtn');
+
+         // --- EDITING LOGIC ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const editId = urlParams.get('editId');
+        let isEditing = false;
+
+        if (editId) {
+            console.log("Editing mode (Rent Property). ID:", editId);
+            const userProperties = JSON.parse(localStorage.getItem('userProperties')) || [];
+            const propertyToEdit = userProperties.find(prop => prop.id === Number(editId));
+
+            if (propertyToEdit && propertyToEdit.type === 'Rent') { // Check type matches
+                isEditing = true;
+                console.log("Property found, populating form:", propertyToEdit);
+
+                // Populate form fields
+                titleInput.value = propertyToEdit.title || ''; // Use empty string as fallback
+                typeSelect.value = propertyToEdit.propertyType || '';
+                addressInput.value = propertyToEdit.address || '';
+                bhkSelect.value = propertyToEdit.bhk || '';
+                furnishingSelect.value = propertyToEdit.furnishing || '';
+                rentInput.value = propertyToEdit.price || ''; // Rent is stored in 'price'
+                depositInput.value = propertyToEdit.deposit || ''; // Use the 'deposit' field
+
+                // Populate checkboxes (ensure amenities object exists)
+                if (propertyToEdit.amenities) {
+                    parkingCheck.checked = propertyToEdit.amenities.parking || false;
+                    acCheck.checked = propertyToEdit.amenities.ac || false;
+                    backupCheck.checked = propertyToEdit.amenities.backup || false;
+                    kitchenCheck.checked = propertyToEdit.amenities.kitchen || false;
+                    securityCheck.checked = propertyToEdit.amenities.security || false;
+                    balconyCheck.checked = propertyToEdit.amenities.balcony || false;
+                }
+                // Cannot pre-fill file input
+
+                submitButton.textContent = 'Update Property'; // Change button text
+                 // Add the arrow back if you want it
+                submitButton.innerHTML = 'Update Property <span class="text-white/90">→</span>';
+            } else {
+                console.error("Rent property with ID not found or type mismatch:", editId);
+                // alert("Error: Could not find the property to edit.");
+            }
+        }
+        // --- END EDITING LOGIC ---
+
+        // CONCEPT 2: Listen for the submit button click
+        submitButton.addEventListener('click', function() {
+
+            // CONCEPT 3: Read all the values
+            const title = titleInput.value;
+            const type = typeSelect.value;
+            const address = addressInput.value;
+            const bhk = bhkSelect.value;
+            const furnishing = furnishingSelect.value;
+            const rent = rentInput.value;
+            const deposit = depositInput.value;
+            const amenities = { // Read from correct IDs
+                parking: parkingCheck.checked,
+                ac: acCheck.checked,
+                backup: backupCheck.checked,
+                kitchen: kitchenCheck.checked,
+                security: securityCheck.checked,
+                balcony: balconyCheck.checked
+            };
+            const photos = photoInput.files;
+
+            let existingProperties = JSON.parse(localStorage.getItem('userProperties')) || [];
+
+            if (isEditing) {
+                // UPDATE logic
+                const propertyIndex = existingProperties.findIndex(prop => prop.id === Number(editId));
+                if (propertyIndex > -1) {
+                    existingProperties[propertyIndex] = {
+                        ...existingProperties[propertyIndex], // Keep id, type, status
+                        title: title,
+                        propertyType: type,
+                        address: address,
+                        bhk: bhk,
+                        furnishing: furnishing,
+                        price: rent, // Storing rent in 'price' field
+                        deposit: deposit, // Storing deposit
+                        amenities: amenities,
+                        // Recreate details string for consistency
+                        details: `${bhk}, ${furnishing}`,
+                        photoCount: photos.length > 0 ? photos.length : existingProperties[propertyIndex].photoCount
+                    };
+                    console.log("Rent Property Updated:", existingProperties[propertyIndex]);
+                    alert("Property Updated Successfully!");
+                } else {
+                     console.error("Failed to find property to update.");
+                     alert("Error: Could not update property.");
+                     return;
+                }
+            } else {
+                // ADD logic
+                const newProperty = {
+                    id: Date.now(),
+                    type: 'Rent', // Set type to 'Rent'
+                    title: title,
+                    propertyType: type,
+                    address: address,
+                    bhk: bhk,
+                    furnishing: furnishing,
+                    price: rent, // Use 'price' for rent amount
+                    deposit: deposit, // Store deposit
+                    amenities: amenities,
+                    details: `${bhk}, ${furnishing}`, // Create details string
+                    photoCount: photos.length,
+                    status: 'Pending Approval'
+                };
+                existingProperties.push(newProperty);
+                console.log("New Rent Property Saved:", newProperty);
+                alert("Property for Rent Submitted and Saved!");
+                window.location.href = 'userdashboard.html'; // Redirect to the user dashboard
+            }
+
+            localStorage.setItem('userProperties', JSON.stringify(existingProperties));
+
+            // Optional: Redirect
+            // window.location.href = 'userdashboard.html';
+        });
+    </script>
+</body>
+</html>
+

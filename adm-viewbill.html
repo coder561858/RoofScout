@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Invoice - RoofScout</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Navbar -->
+  <div class="flex justify-between items-center bg-gray-700 text-white p-4 shadow">
+    <div class="flex items-center space-x-2">
+      <img src="logoRS.jpg" class="h-10 w-10 rounded-full" alt="">
+      <span class="font-bold text-yellow-400 text-xl">Roof</span><span class="font-bold text-blue-500 text-xl">Scout</span>
+    </div>
+    <div>
+      <span>Admin</span> |
+      <a href="index.html" class="hover:text-blue-400">Logout</a>
+    </div>
+  </div>
+
+  <!-- Invoice Container -->
+  <div class="max-w-3xl mx-auto mt-10 bg-white rounded-lg shadow-lg p-8">
+    <h1 class="text-3xl font-semibold mb-4">INVOICE</h1>
+
+    <div class="text-gray-700 mb-6">
+      <p><strong>Ganga Sagar house 388, Nashik</strong></p>
+      <p id="produceDate"></p>
+      <p id="invoiceNo"></p>
+      <p><strong>Tenant:</strong> Rohit Sharma</p>
+      <p><strong>Status:</strong> <span id="billStatus" class="font-bold"></span></p>
+    </div>
+
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-gray-200 text-left">
+          <th class="p-2">Description</th>
+          <th class="p-2">Rate</th>
+          <th class="p-2">Time</th>
+          <th class="p-2">Price</th>
+        </tr>
+      </thead>
+      <tbody id="invoiceBody"></tbody>
+      <tfoot>
+        <tr class="border-t">
+          <td colspan="3" class="text-right p-2 font-semibold">Total Price</td>
+          <td id="totalPrice" class="p-2 font-semibold"></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="flex space-x-3">
+      <button id="markPaid" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Mark as Paid</button>
+      <button id="markUnpaid" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Mark as Unpaid</button>
+      <button id="deleteBill" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Delete</button>
+      <a href="adm-payment.html" class="ml-auto text-blue-600 underline font-semibold">Back to Bills</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const selectedBill = JSON.parse(localStorage.getItem('selectedBill'));
+
+      if (!selectedBill) {
+        document.body.innerHTML = "<h1 class='text-center mt-20 text-red-500 text-2xl'>No bill selected!</h1>";
+        return;
+      }
+
+      document.getElementById('produceDate').textContent = `Produce Date: ${selectedBill.from}`;
+      document.getElementById('invoiceNo').textContent = `Invoice No: ${selectedBill.billNo}`;
+      document.getElementById('billStatus').textContent = selectedBill.status;
+      document.getElementById('billStatus').className =
+        selectedBill.status === 'Paid' ? 'text-green-600 font-bold' : 'text-red-600 font-bold';
+      document.getElementById('totalPrice').textContent = `₱${selectedBill.amount}`;
+
+      document.getElementById('invoiceBody').innerHTML = `
+        <tr>
+          <td class="p-2">H. Rent</td>
+          <td class="p-2">₱${selectedBill.amount}</td>
+          <td class="p-2">1 month</td>
+          <td class="p-2">₱${selectedBill.amount}</td>
+        </tr>
+        <tr>
+          <td class="p-2">L. Charge</td>
+          <td class="p-2">₱0.0</td>
+          <td class="p-2">0</td>
+          <td class="p-2">₱0.0</td>
+        </tr>
+      `;
+
+      // === Buttons ===
+      document.getElementById('markPaid').addEventListener('click', () => updateStatus('Paid'));
+      document.getElementById('markUnpaid').addEventListener('click', () => updateStatus('Unpaid'));
+      document.getElementById('deleteBill').addEventListener('click', deleteBill);
+
+      function updateStatus(status) {
+        const bills = JSON.parse(localStorage.getItem('bills')) || [];
+        const index = bills.findIndex(b => b.billNo === selectedBill.billNo);
+        if (index !== -1) {
+          bills[index].status = status;
+          localStorage.setItem('bills', JSON.stringify(bills));
+          selectedBill.status = status;
+          localStorage.setItem('selectedBill', JSON.stringify(selectedBill));
+          document.getElementById('billStatus').textContent = status;
+          document.getElementById('billStatus').className =
+            status === 'Paid' ? 'text-green-600 font-bold' : 'text-red-600 font-bold';
+          alert(`Bill marked as ${status}`);
+        }
+      }
+
+      function deleteBill() {
+        let bills = JSON.parse(localStorage.getItem('bills')) || [];
+        bills = bills.filter(b => b.billNo !== selectedBill.billNo);
+        localStorage.setItem('bills', JSON.stringify(bills));
+        localStorage.removeItem('selectedBill');
+        alert('Bill deleted successfully');
+        window.location.href = 'adm-payment.html';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Properties</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
+    <style>
+      body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+  <!-- Navbar -->
+  <div class="nav flex justify-between h-20 items-center shadow-lg p-4 bg-gray-700">
+    <div class="flex items-center text-4xl font-bold">
+      <img src="logoRS.jpg" alt="RoofScout Logo" class="h-16 w-16 mr-2 rounded-full">
+      <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+      <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+    </div>
+    <div class="flex space-x-4 text-white">
+      <span>Admin</span>
+      <a href="index.html" class="hover:text-blue-400">Logout</a>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside class="bg-gray-900 text-white w-64 min-h-screen p-4 space-y-4">
+      <a href="admindashbo.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-circle-info text-blue-700"></i><span>Info</span>
+      <a href="adm-houses.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-house text-blue-400"></i><span>Houses</span>
+      </a>
+      <a href="adm-client1.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-user text-purple-400"></i><span>Buyer/Seller</span>
+      </a>
+      <a href="adm-propt.html" class="flex items-center gap-3 bg-gray-700 p-2 rounded">
+        <i class="fa-regular fa-building text-amber-400"></i><span>Properties</span>
+      </a>
+      <a href="adm-tenant.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-user text-cyan-400"></i><span>Tenants</span>
+      </a>
+      <a href="adm-payment.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-regular fa-money-bill-1 text-green-500"></i><span>Payment</span>
+      </a>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 container mx-auto p-4 sm:p-6 lg:p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Available Properties</h1>
+        <p class="text-gray-500 mt-1">Browse and manage Property listings.</p>
+      </header>
+
+      <div class="space-y-12">
+        <!-- Property Card 1 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 property-card"
+             data-house-id="4060" data-price="50" data-area="1200" data-type="house">
+          <div class="grid grid-cols-1 md:grid-cols-3">
+            <div class="md:col-span-1">
+              <img class="h-full w-full object-cover" src="house1pb.jpg" alt="Exterior of a white modern house">
+            </div>
+            <div class="p-8 md:col-span-2 card-content">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2 card-title">324 Tara Place, Pune</h2>
+              <p class="text-gray-600 leading-relaxed mb-6 card-desc">
+                Citadel Apartments is among the best located and best maintained properties in Rohnert Park, where a veritable hotbed of development is set in a family-oriented, values-focused neighborhood community...
+              </p>
+              <div class="grid grid-cols-2 gap-x-6 gap-y-4 mb-6 text-sm card-details">
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">House ID</span>
+                  <span class="font-semibold text-gray-800 house-id">4060</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">Owner Name</span>
+                  <span class="font-semibold text-gray-800 owner-name">Admin</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">District</span>
+                  <span class="font-semibold text-gray-800 district">Pune</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">Date</span>
+                  <span class="font-semibold text-gray-800 date">2022-11-18</span>
+                </div>
+              </div>
+              <div class="flex items-center space-x-3 mt-4 action-buttons">
+                <button class="btn-view inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors shadow-sm">
+                  View Details
+                </button>
+                <button class="btn-edit inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200 transition-colors">
+                  Edit
+                </button>
+                <button class="btn-delete inline-flex items-center px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-md hover:bg-red-100 transition-colors">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Card 2 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 property-card"
+             data-house-id="4061" data-price="100" data-area="1800" data-type="house">
+          <div class="grid grid-cols-1 md:grid-cols-3">
+            <div class="md:col-span-1">
+              <img class="h-full w-full object-cover" src="https://th.bing.com/th/id/OIP.rtBKbxWD-cO_JbfK9Rl8KgHaFj?w=222&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Exterior of a white modern house">
+            </div>
+            <div class="p-8 md:col-span-2 card-content">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2 card-title">410 Garden Row, Pune</h2>
+              <p class="text-gray-600 leading-relaxed mb-6 card-desc">
+                Comfortable family home with modern amenities and a bright courtyard...
+              </p>
+              <div class="grid grid-cols-2 gap-x-6 gap-y-4 mb-6 text-sm card-details">
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">House ID</span>
+                  <span class="font-semibold text-gray-800 house-id">4061</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">Owner Name</span>
+                  <span class="font-semibold text-gray-800 owner-name">Admin</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">District</span>
+                  <span class="font-semibold text-gray-800 district">Pune</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">Date</span>
+                  <span class="font-semibold text-gray-800 date">2022-11-18</span>
+                </div>
+              </div>
+              <div class="flex items-center space-x-3 mt-4 action-buttons">
+                <button class="btn-view inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors shadow-sm">
+                  View Details
+                </button>
+                <button class="btn-edit inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200 transition-colors">
+                  Edit
+                </button>
+                <button class="btn-delete inline-flex items-center px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-md hover:bg-red-100 transition-colors">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- more cards -->
+      <div class="space-y-12 mt-8">
+        <!-- Property Card 3 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 property-card"
+             data-house-id="4062" data-price="500" data-area="4200" data-type="house">
+          <div class="grid grid-cols-1 md:grid-cols-3">
+            <div class="md:col-span-1">
+              <img class="h-full w-full object-cover" src="house5ch.jpg" alt="Exterior of a white modern house">
+            </div>
+            <div class="p-8 md:col-span-2 card-content">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2 card-title">502 Lakeview Drive, Pune</h2>
+              <p class="text-gray-600 leading-relaxed mb-6 card-desc">
+                Spacious 4BR with scenic views and renovated kitchen...
+              </p>
+              <div class="grid grid-cols-2 gap-x-6 gap-y-4 mb-6 text-sm card-details">
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">House ID</span>
+                  <span class="font-semibold text-gray-800 house-id">4062</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">Owner Name</span>
+                  <span class="font-semibold text-gray-800 owner-name">Admin</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">District</span>
+                  <span class="font-semibold text-gray-800 district">Pune</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">Date</span>
+                  <span class="font-semibold text-gray-800 date">2022-11-18</span>
+                </div>
+              </div>
+              <div class="flex items-center space-x-3 mt-4 action-buttons">
+                <button class="btn-view inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors shadow-sm">
+                  View Details
+                </button>
+                <button class="btn-edit inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200 transition-colors">
+                  Edit
+                </button>
+                <button class="btn-delete inline-flex items-center px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-md hover:bg-red-100 transition-colors">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Card 4 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 property-card"
+             data-house-id="4063" data-price="450" data-area="5000" data-type="house">
+          <div class="grid grid-cols-1 md:grid-cols-3">
+            <div class="md:col-span-1">
+              <img class="h-full w-full object-cover" src="https://th.bing.com/th/id/OIP.8XehqTzGtglzlbPglw_jxQHaEJ?w=328&h=184&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Exterior of a white modern house">
+            </div>
+            <div class="p-8 md:col-span-2 card-content">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2 card-title">211 Cedar Lane, Pune</h2>
+              <p class="text-gray-600 leading-relaxed mb-6 card-desc">
+                Cozy bungalow with ample garden and parking space...
+              </p>
+              <div class="grid grid-cols-2 gap-x-6 gap-y-4 mb-6 text-sm card-details">
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">House ID</span>
+                  <span class="font-semibold text-gray-800 house-id">4063</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">Owner Name</span>
+                  <span class="font-semibold text-gray-800 owner-name">Admin</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">District</span>
+                  <span class="font-semibold text-gray-800 district">Pune</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-gray-500 font-medium">Date</span>
+                  <span class="font-semibold text-gray-800 date">2022-11-18</span>
+                </div>
+              </div>
+              <div class="flex items-center space-x-3 mt-4 action-buttons">
+                <button class="btn-view inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors shadow-sm">
+                  View Details
+                </button>
+                <button class="btn-edit inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200 transition-colors">
+                  Edit
+                </button>
+                <button class="btn-delete inline-flex items-center px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-md hover:bg-red-100 transition-colors">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+<script>
+  // Delegated event handling for view, edit, save, cancel, delete
+  document.addEventListener('click', function (e) {
+    const viewBtn = e.target.closest('.btn-view');
+    const editBtn = e.target.closest('.btn-edit');
+    const deleteBtn = e.target.closest('.btn-delete');
+    const saveBtn = e.target.closest('.btn-save');
+    const cancelBtn = e.target.closest('.btn-cancel');
+
+    if (viewBtn) {
+      const card = viewBtn.closest('.property-card');
+      if (!card) {
+        window.location.href = 'viewdetail.html';
+        return;
+      }
+      const id = card.dataset.houseId || '';
+      const title = card.querySelector('.card-title')?.textContent?.trim() || '';
+      const desc = card.querySelector('.card-desc')?.textContent?.trim() || '';
+      const owner = card.querySelector('.owner-name')?.textContent?.trim() || '';
+      const district = card.querySelector('.district')?.textContent?.trim() || '';
+      const imgEl = card.querySelector('img');
+      const image = imgEl ? imgEl.src : '';
+      const area = card.dataset.area || '';
+      const type = card.dataset.type || '';
+      // build querystring with available values
+      const params = new URLSearchParams();
+      if (id) params.set('houseId', id);
+      if (title) params.set('title', title);
+      if (desc) params.set('desc', desc);
+      if (owner) params.set('owner', owner);
+      if (district) params.set('district', district);
+      if (image) params.set('image', image);
+      if (area) params.set('area', area);
+      if (type) params.set('type', type);
+      // optional price text if you add data-price-text to cards
+      if (card.dataset.priceText) params.set('priceText', card.dataset.priceText);
+      window.location.href = 'viewdetail.html?' + params.toString();
+       return;
+    }
+
+    if (deleteBtn) {
+      const card = deleteBtn.closest('.property-card');
+      const id = card?.dataset?.houseId;
+      const confirmMsg = id ? `Are you sure you want to delete house ${id}?` : 'Are you sure you want to delete this house?';
+      if (confirm(confirmMsg)) {
+        card.remove();
+      }
+      return;
+    }
+
+    if (editBtn) {
+      const card = editBtn.closest('.property-card');
+      startEdit(card);
+      return;
+    }
+
+    if (saveBtn) {
+      const card = saveBtn.closest('.property-card');
+      applySave(card);
+      return;
+    }
+
+    if (cancelBtn) {
+      const card = cancelBtn.closest('.property-card');
+      cancelEdit(card);
+      return;
+    }
+  });
+
+  function startEdit(card) {
+    if (!card) return;
+    if (card.dataset.editing === 'true') return;
+    const content = card.querySelector('.card-content');
+    if (!content) return;
+    card.dataset.originalContent = content.innerHTML;
+    card.dataset.editing = 'true';
+
+    const title = content.querySelector('.card-title')?.textContent?.trim() || '';
+    const desc = content.querySelector('.card-desc')?.textContent?.trim() || '';
+    const houseId = content.querySelector('.house-id')?.textContent?.trim() || card.dataset.houseId || '';
+    const owner = content.querySelector('.owner-name')?.textContent?.trim() || '';
+    const district = content.querySelector('.district')?.textContent?.trim() || '';
+    const date = content.querySelector('.date')?.textContent?.trim() || '';
+
+    content.innerHTML = `
+      <label class="block mb-2">
+        <span class="text-sm text-gray-600">Title</span>
+        <input type="text" name="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="${escapeHtml(title)}">
+      </label>
+      <label class="block mb-4">
+        <span class="text-sm text-gray-600">Description</span>
+        <textarea name="desc" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">${escapeHtml(desc)}</textarea>
+      </label>
+
+      <div class="grid grid-cols-2 gap-x-6 gap-y-4 mb-6 text-sm">
+        <label class="flex flex-col">
+          <span class="text-gray-500 font-medium">House ID</span>
+          <input name="houseId" class="font-semibold text-gray-800 mt-1 rounded-md border-gray-300 shadow-sm" value="${escapeHtml(houseId)}">
+        </label>
+        <label class="flex flex-col">
+          <span class="text-gray-500 font-medium">Owner Name</span>
+          <input name="owner" class="font-semibold text-gray-800 mt-1 rounded-md border-gray-300 shadow-sm" value="${escapeHtml(owner)}">
+        </label>
+        <label class="flex flex-col">
+          <span class="text-gray-500 font-medium">District</span>
+          <input name="district" class="font-semibold text-gray-800 mt-1 rounded-md border-gray-300 shadow-sm" value="${escapeHtml(district)}">
+        </label>
+        <label class="flex flex-col">
+          <span class="text-gray-500 font-medium">Date</span>
+          <input type="date" name="date" class="font-semibold text-gray-800 mt-1 rounded-md border-gray-300 shadow-sm" value="${escapeHtml(date)}">
+        </label>
+      </div>
+
+      <div class="flex items-center space-x-3 mt-4 action-buttons">
+        <button class="btn-save inline-flex items-center px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-md hover:bg-green-600 transition-colors shadow-sm">
+          Save
+        </button>
+        <button class="btn-cancel inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200 transition-colors">
+          Cancel
+        </button>
+      </div>
+    `;
+  }
+
+  function applySave(card) {
+    if (!card || card.dataset.editing !== 'true') return;
+    const content = card.querySelector('.card-content');
+    if (!content) return;
+
+    const title = content.querySelector('input[name="title"]')?.value?.trim() || '';
+    const desc = content.querySelector('textarea[name="desc"]')?.value?.trim() || '';
+    const houseId = content.querySelector('input[name="houseId"]')?.value?.trim() || '';
+    const owner = content.querySelector('input[name="owner"]')?.value?.trim() || '';
+    const district = content.querySelector('input[name="district"]')?.value?.trim() || '';
+    const date = content.querySelector('input[name="date"]')?.value?.trim() || '';
+
+    if (houseId) card.dataset.houseId = houseId;
+
+    content.innerHTML = `
+      <h2 class="text-2xl font-bold text-gray-900 mb-2 card-title">${escapeHtml(title || 'Untitled')}</h2>
+      <p class="text-gray-600 leading-relaxed mb-6 card-desc">${escapeHtml(desc || '')}</p>
+      <div class="grid grid-cols-2 gap-x-6 gap-y-4 mb-6 text-sm card-details">
+        <div class="flex flex-col">
+          <span class="text-gray-500 font-medium">House ID</span>
+          <span class="font-semibold text-gray-800 house-id">${escapeHtml(houseId)}</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-gray-500 font-medium">Owner Name</span>
+          <span class="font-semibold text-gray-800 owner-name">${escapeHtml(owner)}</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-gray-500 font-medium">District</span>
+          <span class="font-semibold text-gray-800 district">${escapeHtml(district)}</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-gray-500 font-medium">Date</span>
+          <span class="font-semibold text-gray-800 date">${escapeHtml(date)}</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-3 mt-4 action-buttons">
+        <button class="btn-view inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors shadow-sm">
+          View Details
+        </button>
+        <button class="btn-edit inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200 transition-colors">
+          Edit
+        </button>
+        <button class="btn-delete inline-flex items-center px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-md hover:bg-red-100 transition-colors">
+          Remove
+        </button>
+      </div>
+    `;
+    delete card.dataset.originalContent;
+    delete card.dataset.editing;
+  }
+
+  function cancelEdit(card) {
+    if (!card) return;
+    if (card.dataset.originalContent) {
+      const content = card.querySelector('.card-content');
+      if (content) content.innerHTML = card.dataset.originalContent;
+    }
+    delete card.dataset.originalContent;
+    delete card.dataset.editing;
+  }
+
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+</script>
+</body>
+</html>

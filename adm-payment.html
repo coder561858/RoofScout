@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoofScout-Payment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="nav flex justify-between h-20 items-center shadow-lg p-4 bg-gray-700">
+    <div class="flex items-center text-4xl font-bold">
+      <img src="logoRS.jpg" alt="RoofScout Logo" class="h-16 w-16 mr-2 rounded-full">
+      <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+      <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+    </div>
+    <div class="flex space-x-4 text-white">
+      <span>Admin</span>
+      <a href="index.html" class="hover:text-blue-400">Logout</a>
+    </div>
+  </div>
+
+  <div class="flex">
+    <aside class="bg-gray-900 text-white w-64 min-h-screen p-4 space-y-4">
+      <a href="admindashbo.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-circle-info text-blue-700"></i><span>Info</span>
+      </a>
+      <a href="adm-houses.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-house text-blue-400"></i><span>Houses</span>
+      </a>
+      <a href="adm-client1.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-user text-purple-400"></i><span>Buyer/Seller</span>
+      </a>
+      <a href="adm-propt.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-regular fa-building text-amber-400"></i><span>Properties</span>
+      </a>
+      <a href="adm-tenant.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-user text-cyan-400"></i><span>Tenants</span>
+      </a>
+      <a href="adm-payment.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded bg-gray-700">
+        <i class="fa-regular fa-money-bill-1 text-green-500"></i><span>Payment</span>
+      </a>
+    </aside>
+
+    <main class="flex-1 p-10">
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-800">BILL TABLE</h2>
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-200 text-left text-gray-700">
+              <th class="py-3 px-4">Bill No</th>
+              <th class="py-3 px-4">Date</th>
+              <th class="py-3 px-4">Amount</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4">Action</th>
+            </tr>
+          </thead>
+          <tbody id="billTableBody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const defaultBills = [
+        { billNo: 'Bill_5852', from: '19 Nov,2022', to: '19 Dec,2022', amount: 45.0, status: 'Unpaid' },
+        { billNo: 'Bill_3207', from: '19 Dec,2022', to: '19 Jan,2023', amount: 45.0, status: 'Unpaid' },
+        { billNo: 'Bill_5472', from: '19 Jan,2023', to: '19 Feb,2023', amount: 45.0, status: 'Paid' }
+      ];
+
+      // Load bills
+      
+      let storedBills = JSON.parse(localStorage.getItem('bills'));
+      let bills = (storedBills && storedBills.length > 0) ? storedBills : defaultBills;
+      const tableBody = document.getElementById('billTableBody');
+      tableBody.innerHTML = '';
+
+      // Render rows
+      bills.forEach((bill, index) => {
+        const row = document.createElement('tr');
+        row.className = 'border-b hover:bg-gray-100';
+        row.innerHTML = `
+          <td class="py-3 px-4">${bill.billNo}</td>
+          <td class="py-3 px-4">${bill.from} <span class="mx-1 text-gray-500">to</span> ${bill.to}</td>
+          <td class="py-3 px-4">₱${bill.amount}</td>
+          <td class="py-3 px-4 font-semibold ${bill.status === 'Paid' ? 'text-green-600' : 'text-red-500'}">${bill.status}</td>
+          <td class="py-3 px-4">
+            <button data-index="${index}" class="view-bill bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700">View Bill</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+      // Handle view bill click
+      document.querySelectorAll('.view-bill').forEach(button => {
+        button.addEventListener('click', e => {
+          const index = e.target.getAttribute('data-index');
+          const selectedBill = bills[index];
+          localStorage.setItem('selectedBill', JSON.stringify(selectedBill));
+          window.location.href = 'adm-viewbill.html';
+        });
+      });
+
+      // Store bills back (in case defaults were used)
+      localStorage.setItem('bills', JSON.stringify(bills));
+    });
+  </script>
+</body>
+</html>

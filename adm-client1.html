@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Client Library - RoofScout</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Navbar -->
+   <div class="nav flex justify-between h-20 items-center shadow-lg p-4 bg-gray-700">
+    <div class="flex items-center text-4xl font-bold">
+      <img src="logoRS.jpg" alt="RoofScout Logo" class="h-16 w-16 mr-2 rounded-full">
+      <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+      <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+    </div>
+    <div class="flex space-x-4 text-white">
+      <span>Admin</span>
+      <a href="index.html" class="hover:text-blue-400">Logout</a>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="flex">
+     <!-- Sidebar -->
+    <aside class="bg-gray-900 text-white w-64 min-h-screen p-4 space-y-4">
+      <a href="admindashbo.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-circle-info text-blue-700"></i><span>Info</span>
+      <a href="adm-houses.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-house text-blue-400"></i><span>Houses</span>
+      </a>
+      <a href="adm-client1.html" class="flex items-center gap-3 bg-gray-700 p-2 rounded ">
+        <i class="fa-solid fa-user text-purple-400"></i><span>Buyer/Seller</span>
+      </a>
+      <a href="adm-propt.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-regular fa-building text-amber-400"></i><span>Properties</span>
+      </a>
+      <a href="adm-tenant.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-solid fa-user text-cyan-400"></i><span>Tenants</span>
+      </a>
+      <a href="adm-payment.html" class="flex items-center gap-3 hover:bg-gray-700 p-2 rounded">
+        <i class="fa-regular fa-money-bill-1 text-green-500"></i><span>Payment</span>
+      </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 bg-white">
+
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-gray-700">All Client Library</h2>
+        <input type="text" id="searchInput" placeholder="Search The User..." class="border border-gray-400 bg-gray-100 focus:outline-none focus:border-blue-500 p-1 text-sm w-64">
+      </div>
+
+      <p class="text-gray-500 mb-4 text-sm">User Details...</p>
+
+      <!-- Layout with table + details -->
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Table Section -->
+        <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+          <table id="clientTable" class="min-w-full text-sm">
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th class="px-4 py-2 border">ID</th>
+                <th class="px-4 py-2 border">Name</th>
+                <th class="px-4 py-2 border">Photo</th>
+                <th class="px-4 py-2 border">Email</th>
+              </tr>
+            </thead>
+            <tbody id="clientList"></tbody>
+          </table>
+        </div>
+
+        <!-- Details Section -->
+        <div id="clientDetails" class="p-6 border border-gray-200 rounded-lg shadow-sm bg-gray-50 text-gray-700 hidden">
+          <h3 class="text-xl font-semibold mb-2">Select a client to view details</h3>
+          <p class="text-gray-500">Click on any row from the left table.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Dummy data for clients
+    const clients = [
+      { id: 1, name: "Admin", email: "Admin@gmail.com", photo: "https://i.pravatar.cc/100?img=1", phone: "8978675689", location: "Nashik, Dindori", gender: "Male", type: "Admin", dob: "2000-05-13" },
+      { id: 2, name: "Raman Desai", email: "raman@gmail.com", photo: "https://i.pravatar.cc/100?img=2", phone: "6789675678", location: "Nashik, Dindori", gender: "Male", type: "Agent", dob: "1999-11-21" },
+      { id: 3, name: "Suhas Pande", email: "suhas@gmail.com", photo: "https://i.pravatar.cc/100?img=3", phone: "7869678967", location: "Nashik, Dindori", gender: "Male", type: "Student", dob: "2002-08-10" },
+      { id: 4, name: "Swati Misra", email: "swati@gmail.com", photo: "https://i.pravatar.cc/100?img=4", phone: "8465757575", location: "Pune, Goreg", gender: "Female", type: "Tenant", dob: "2001-03-02" },
+      { id: 5, name: "Rohit Sharma", email: "Rohit@gmail.com", photo: "https://i.pravatar.cc/100?img=5", phone: "7789855757", location: "Nashik, Niphad", gender: "Male", type: "Student", dob: "2002-11-13" }
+    ];
+
+    const clientList = document.getElementById("clientList");
+    const clientDetails = document.getElementById("clientDetails");
+
+    // Render client list
+    const renderTable = (list) => {
+      clientList.innerHTML = "";
+      list.forEach(client => {
+        const tr = document.createElement("tr");
+        tr.classList = "hover:bg-gray-50 cursor-pointer";
+        tr.innerHTML = `
+          <td class="px-4 py-2 border">${client.id}</td>
+          <td class="px-4 py-2 border">${client.name}</td>
+          <td class="px-4 py-2 border"><img src="${client.photo}" class="h-10 w-10 rounded-full"></td>
+          <td class="px-4 py-2 border">${client.email}</td>
+        `;
+        tr.addEventListener("click", () => showDetails(client));
+        clientList.appendChild(tr);
+      });
+    };
+
+    // Show client details
+    const showDetails = (client) => {
+      clientDetails.classList.remove("hidden");
+      clientDetails.innerHTML = `
+        <div class="flex items-center space-x-6">
+          <img src="${client.photo}" alt="${client.name}" class="h-40 w-40 rounded-lg object-cover shadow">
+          <div>
+            <h2 class="text-2xl font-bold text-gray-800">${client.name}</h2>
+            <p class="text-sm text-blue-600">${client.location}</p>
+            <p><strong>Birth Date:</strong> ${client.dob}</p>
+            <p><strong>Gender:</strong> ${client.gender}</p>
+            <p><strong>Type:</strong> ${client.type}</p>
+            <p><strong>Phone:</strong> ${client.phone}</p>
+            <p><strong>Email:</strong> ${client.email}</p>
+            <div class="mt-4 flex space-x-3">
+              <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-sm">Cancel Agreement</button>
+              <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">Show Owner</button>
+              <button class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 text-sm">Is Check</button>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 text-gray-600 text-sm leading-relaxed">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos tempora praesentium neque voluptatem voluptate modi? Labore provident ex voluptatum deserunt.</p>
+        </div>
+      `;
+    };
+
+    // Search functionality
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      const term = e.target.value.toLowerCase();
+      const filtered = clients.filter(c => c.name.toLowerCase().includes(term));
+
+      renderTable(filtered);
+
+      // Hide details if search is cleared or no results
+      if (term === "" || filtered.length === 0) {
+        clientDetails.classList.add("hidden");
+      }
+    });
+
+    // Initial render
+    renderTable(clients);
+  </script>
+</body>
+</html>

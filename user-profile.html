@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile (Functional)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-green-100 to-pink-200 min-h-screen">
+    <!-- navbar -->
+     <header class="bg-white shadow-md ">
+         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+             <div class="flex items-center text-4xl font-bold">
+             <h1 class="font-bold text-2xl text-yellow-500"><a href="index.html">Roof</a></h1>
+             <h1 class="font-bold text-2xl text-blue-600"><a href="index.html">Scout</a></h1>
+             </div>
+         </nav>
+     </header>
+
+    <div class="flex items-start justify-center min-h-screen py-10 px-4">
+        <!-- Made responsive -->
+        <div class=" w-full md:w-[60%] lg:w-[50%] bg-white border-0 shadow-2xl rounded-lg ">
+            <div class="p-6 text-center">
+                <h1 class="text-2xl md:text-3xl font-bold">Edit Your Profile</h1>
+                <p class="text-gray-600">Update your photo and personal details here.</p>
+            </div>
+            <hr class="mx-4">
+
+            <!-- Made responsive: stack vertically on mobile, row on desktop -->
+            <div class="w-full flex flex-col md:flex-row p-4 md:p-8 gap-8">
+                <!-- left wali pfp -->
+                <div class="w-full md:w-1/2 flex flex-col items-center">
+                    <div class="bg-gray-100 border-0 shadow-md h-[150px] w-[150px] rounded-full overflow-hidden">
+                        <!-- Added classes to make image fit -->
+                        <img id="profileImagePreview" src="https://avatar.iran.liara.run/public/boy?username=Ash" alt="User Avatar" class="h-full w-full object-cover">
+                    </div>
+                    <div class="mt-4">
+                        <label for="pfp" class="text-gray-600 font-semibold bg-gray-200 hover:bg-gray-300 py-2 px-6 rounded-lg cursor-pointer">Choose File</label>
+                        <!-- ID is already here -->
+                        <input type="file" id="pfp" class=" hidden" accept="image/*">
+                    </div>
+                </div>
+
+                <!-- Right side form -->
+                <div class="w-full md:w-1/2 flex flex-col gap-4">
+                    <div class="flex flex-col">
+                        <label for="name" class="text-gray-700 font-semibold mb-1">Full Name</label>
+                        <!-- ID is already here -->
+                        <input type="text" id="name" class="border-2 p-2 rounded w-full">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="address" class="text-gray-700 font-semibold mb-1">Address</label>
+                         <!-- ID is already here -->
+                        <input type="text" id="address" class="border-2 p-2 rounded w-full">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="pno" class="text-gray-700 font-semibold mb-1">Phone Number</label>
+                         <!-- ID is already here -->
+                        <input type="tel" id="pno" class="border-2 p-2 rounded w-full">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="mail" class="text-gray-700 font-semibold mb-1">Email Address</label>
+                         <!-- ID is already here -->
+                        <input type="email" id="mail" class="border-2 p-2 rounded w-full">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="pass" class="text-gray-700 font-semibold mb-1">Change Password</label>
+                         <!-- ID is already here -->
+                        <input type="password" id="pass" class="border-2 p-2 rounded w-full" placeholder="Leave blank to keep current">
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mx-4">
+
+            <!-- Made responsive: Stack buttons on mobile -->
+            <div class="flex flex-col sm:flex-row justify-end p-4 gap-4">
+                <!-- STEP 1: Added IDs to buttons -->
+                <button id="backBtn" class="text-gray-700 font-semibold p-2 bg-gray-200 hover:bg-gray-300 rounded-xl w-full sm:w-auto">Back to Dashboard</button>
+                <button id="saveBtn" class="text-white font-semibold p-2 bg-blue-600 hover:bg-blue-700 rounded-xl w-full sm:w-auto">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- STEP 2: All our JavaScript goes in here -->
+    <!-- ========================================================== -->
+    <script>
+        // --- JavaScript for the User Profile Page ---
+
+        // Find the relevant HTML elements
+        const nameInput = document.getElementById('name');
+        const addressInput = document.getElementById('address');
+        const phoneInput = document.getElementById('pno');
+        const emailInput = document.getElementById('mail');
+        const passwordInput = document.getElementById('pass');
+        const photoInput = document.getElementById('pfp');
+        const profileImagePreview = document.getElementById('profileImagePreview'); // Image preview element
+        const saveButton = document.getElementById('saveBtn');
+        const backButton = document.getElementById('backBtn');
+
+        // --- Load existing data when page opens ---
+        // This makes the form remember previous saved details
+        function loadProfileData() {
+            const savedProfile = JSON.parse(localStorage.getItem('userProfile'));
+            if (savedProfile) {
+                console.log("Loading saved profile:", savedProfile);
+                nameInput.value = savedProfile.name || '';
+                addressInput.value = savedProfile.address || '';
+                phoneInput.value = savedProfile.phone || '';
+                emailInput.value = savedProfile.email || '';
+                // Load saved image if available
+                const savedImage = localStorage.getItem('userProfileImage');
+                if (savedImage) {
+                    profileImagePreview.src = savedImage;
+                }
+                // Do NOT load password
+            } else {
+                console.log("No saved profile data found.");
+            }
+        }
+        // Run the load function when the page is ready
+        document.addEventListener('DOMContentLoaded', loadProfileData);
+        // --- End Load Logic ---
+
+        // --- Handle Image Preview ---
+        photoInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImagePreview.src = e.target.result; // Show preview
+                }
+                reader.readAsDataURL(file); // Read file as Data URL
+            }
+        });
+        // --- End Image Preview ---
+
+
+        // Listen for a click on the "Save Changes" button
+        saveButton.addEventListener('click', function() {
+
+            // Read the values from the input fields
+            const name = nameInput.value;
+            const address = addressInput.value;
+            const phone = phoneInput.value;
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const photoFile = photoInput.files[0];
+
+            // --- Log data to console (same as before) ---
+            console.log("--- USER PROFILE UPDATE ---");
+            console.log("Full Name:", name);
+            console.log("Address:", address);
+            console.log("Phone:", phone);
+            console.log("Email:", email);
+            // ... (rest of console logs) ...
+
+            // --- *** SAVE DATA TO LOCALSTORAGE *** ---
+            // Create an object with the data we want to save
+            const userProfileData = {
+                name: name,
+                address: address,
+                phone: phone,
+                email: email
+                // IMPORTANT: NEVER save passwords directly in localStorage in a real app!
+            };
+            // Save the data object as a JSON string
+            localStorage.setItem('userProfile', JSON.stringify(userProfileData));
+            console.log("Basic profile data saved to localStorage.");
+
+            // --- Save Image Data Separately (as Base64 Data URL) ---
+            if (photoFile) {
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    // This function runs after the file is read
+                    localStorage.setItem('userProfileImage', reader.result); // Save the Data URL
+                    console.log("Profile image saved to localStorage.");
+                     alert("Profile changes saved!"); // Give feedback *after* image is saved
+                }
+                reader.readAsDataURL(photoFile); // Read the file
+            } else {
+                 alert("Profile changes saved!"); // Give feedback if no new image
+            }
+
+            // Don't save password to localStorage for security reasons.
+            // In a real app, password changes are handled differently (sent securely to a server).
+
+            // Clear the password field after saving attempt
+            passwordInput.value = '';
+
+        });
+
+        // Add functionality to the "Back to Dashboard" button
+        backButton.addEventListener('click', function() {
+            // Redirects the user to dashboard.html
+            window.location.href = 'userdashboard.html';
+        });
+
+    </script>
+</body>
+</html>
+
