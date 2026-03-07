@@ -281,20 +281,22 @@ function Sell() {
                       <label htmlFor="bedrooms" className={labelCls}>Bedrooms</label>
                       <input
                         id="bedrooms" type="number" min="0"
-                        placeholder="e.g., 3"
-                        className={inputCls}
+                        placeholder={formData.type === 'plot' ? "N/A" : "e.g., 3"}
+                        className={`${inputCls} ${formData.type === 'plot' ? 'bg-gray-100 dark:bg-gray-800' : ''}`}
                         value={formData.bedrooms}
                         onChange={handleChange}
+                        disabled={formData.type === 'plot'}
                       />
                     </div>
                     <div>
                       <label htmlFor="bathrooms" className={labelCls}>Bathrooms</label>
                       <input
                         id="bathrooms" type="number" min="0"
-                        placeholder="e.g., 2"
-                        className={inputCls}
+                        placeholder={formData.type === 'plot' ? "N/A" : "e.g., 2"}
+                        className={`${inputCls} ${formData.type === 'plot' ? 'bg-gray-100 dark:bg-gray-800' : ''}`}
                         value={formData.bathrooms}
                         onChange={handleChange}
+                        disabled={formData.type === 'plot'}
                       />
                     </div>
                   </div>

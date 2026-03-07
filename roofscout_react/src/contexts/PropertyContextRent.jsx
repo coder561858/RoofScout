@@ -85,7 +85,7 @@ export function RentProvider({ children }) {
         // 1. Fetch from our REAL Express backend (Only Rentals)
         let backendProperties = [];
         try {
-          const res = await fetch(`http://localhost:5000/api/properties?type=rent,pg&t=${Date.now()}`);
+          const res = await fetch(`http://localhost:5000/api/properties?listingType=Rent&t=${Date.now()}`);
           const data = await res.json();
           if (data.success) {
             backendProperties = data.properties.map(p => ({

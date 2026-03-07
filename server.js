@@ -137,9 +137,17 @@ app.get('/api/properties', (req, res) => {
 
     let results = [...db.properties];
 
-    if (state) results = results.filter(p => p.state.toLowerCase() === state.toLowerCase());
-    if (type) results = results.filter(p => p.type.toLowerCase() === type.toLowerCase());
-    if (listingType) results = results.filter(p => p.listingType.toLowerCase() === listingType.toLowerCase());
+    if (state) results = results.filter(p => p.state?.toLowerCase() === state.toLowerCase());
+
+    if (type) {
+      const types = type.toLowerCase().split(',');
+      results = results.filter(p => types.includes(p.type?.toLowerCase()));
+    }
+
+    if (listingType) {
+      const listingTypes = listingType.toLowerCase().split(',');
+      results = results.filter(p => listingTypes.includes(p.listingType?.toLowerCase()));
+    }
 
     if (sort === 'price-high') results.sort((a, b) => b.price - a.price);
     if (sort === 'price-low') results.sort((a, b) => a.price - b.price);

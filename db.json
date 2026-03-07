@@ -401,6 +401,61 @@
       },
       "userId": 8,
       "createdAt": "2026-03-06"
+    },
+    {
+      "id": 15,
+      "title": "Cozy 2BHK bandra apartment",
+      "type": "independent house / villa",
+      "listingType": "Rent",
+      "price": 30000,
+      "deposit": 8000,
+      "bhk": "2 BHK",
+      "furnishing": "Semi-Furnished",
+      "amenities": {
+        "parking": true,
+        "ac": true,
+        "backup": false,
+        "kitchen": false,
+        "security": false,
+        "balcony": false
+      },
+      "area": 0,
+      "bedrooms": 2,
+      "bathrooms": 0,
+      "state": "Punjab",
+      "address": "Patiala,Punjab",
+      "description": "2 BHK Semi-Furnished property for rent",
+      "status": "Available",
+      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+      "owner": {
+        "name": "Aadi",
+        "email": "aadi@gmail.com",
+        "phone": "9876543210"
+      },
+      "userId": 8,
+      "createdAt": "2026-03-07"
+    },
+    {
+      "id": 16,
+      "title": "White House ",
+      "type": "villa",
+      "listingType": "Sell",
+      "price": 10000000,
+      "area": 3000,
+      "bedrooms": 4,
+      "bathrooms": 4,
+      "state": "Punjab",
+      "address": "Patiala,Punjab",
+      "description": "...........",
+      "status": "Available",
+      "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800",
+      "owner": {
+        "name": "Aadi",
+        "email": "aadi@gmail.com",
+        "phone": "9876543210"
+      },
+      "userId": 8,
+      "createdAt": "2026-03-07"
     }
   ],
   "requests": [
@@ -461,7 +516,7 @@
     }
   ],
   "stats": {
-    "totalListed": 14,
+    "totalListed": 16,
     "totalSold": 0,
     "totalRented": 0,
     "revenue": 0

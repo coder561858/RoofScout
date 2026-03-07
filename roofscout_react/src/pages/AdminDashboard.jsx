@@ -51,8 +51,16 @@ function AdminDashboard() {
     const rentProps = getCombinedRentProperties({}) || [];
 
     // Filter out hidden, then filter to only "houses" (not plot)
-    const buys = buyProps.filter(p => !hiddenIds.includes(p.id) && (p.type || "").toLowerCase() !== "plot");
-    const rents = rentProps.filter(p => !hiddenRentIds.includes(p.id) && (p.type || "").toLowerCase() !== "plot");
+    const buys = buyProps.filter(p =>
+      !hiddenIds.includes(p.id) &&
+      (p.type || "").toLowerCase() !== "plot" &&
+      (p.district || p.state || p.location || "").toLowerCase() !== "pune"
+    );
+    const rents = rentProps.filter(p =>
+      !hiddenRentIds.includes(p.id) &&
+      (p.type || "").toLowerCase() !== "plot" &&
+      (p.district || p.state || p.location || "").toLowerCase() !== "pune"
+    );
 
     const map = new Map();
     buys.forEach(p => map.set(String(p.id), p));
@@ -166,7 +174,7 @@ function AdminDashboard() {
           <nav className="flex flex-col gap-2">
             <SidebarItem to="/AdminDashboard" icon={<Info />} text="Info" collapsed={collapsed} active />
             <SidebarItem to="/AdmHouses" icon={<Home />} text="Houses" collapsed={collapsed} />
-            <SidebarItem to="/AdmPropt" icon={<Building2 />} text="Properties" collapsed={collapsed} />
+            <SidebarItem to="/AdmPropt" icon={<Building2 />} text="Plots/Lands" collapsed={collapsed} />
           </nav>
 
           <div className="mt-8 text-xs text-gray-300">
@@ -203,7 +211,7 @@ function AdminDashboard() {
               {/* CARDS */}
               <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
                 <MiniStat title="Houses Listed" value={housesCount} />
-                <MiniStat title="Plots/Land Listed" value={plotsCount} />
+                <MiniStat title="Plots/Lands Listed" value={plotsCount} />
               </div>
 
               {/* CHARTS */}

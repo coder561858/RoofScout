@@ -125,18 +125,18 @@ function StatesRent() {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-cyan-50 to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
 
         {/* ── HERO ── */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-cyan-700 via-blue-700 to-indigo-700 py-12 px-6">
+        <div className="relative overflow-hidden bg-blue-600 dark:bg-teal-600 py-12 px-6">
           <div className="absolute -top-20 -left-20 w-80 h-80 bg-white/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/5 rounded-full blur-3xl" />
           <div className="relative max-w-6xl mx-auto text-center">
-            <p className="text-cyan-200 text-xs uppercase tracking-widest font-semibold mb-2">RoofScout — Rental Properties</p>
+            <p className="text-blue-200 text-xs uppercase tracking-widest font-semibold mb-2">RoofScout — Rental Properties</p>
             <h1 className="text-3xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-lg">
               Rentals in <span className="text-yellow-400">{stateName.charAt(0).toUpperCase() + stateName.slice(1)}</span>
             </h1>
-            <p className="text-cyan-100/80 mt-3 text-base">
+            <p className="text-blue-100/80 mt-3 text-base">
               {filteredProperties.length} rental listings found
             </p>
           </div>
@@ -176,7 +176,7 @@ function StatesRent() {
                 </select>
               </div>
               <div className="flex gap-2">
-                <button onClick={applyFilters} className="flex-1 py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all shadow-md text-sm">Apply</button>
+                <button onClick={applyFilters} className="flex-1 py-2.5 px-4 bg-blue-600 hover:bg-blue-500 dark:bg-teal-500 dark:hover:bg-teal-400 text-white font-semibold rounded-xl transition-all shadow-md text-sm">Apply</button>
                 <button onClick={clearFilters} className="flex-1 py-2.5 px-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl transition-all text-sm border border-gray-200 dark:border-gray-600">Clear</button>
               </div>
             </div>
@@ -209,7 +209,7 @@ function StatesRent() {
                   </div>
                   <button
                     onClick={() => navigate(`/viewdetail?houseId=${prop.id}&title=${encodeURIComponent(prop.title)}&priceText=${encodeURIComponent(formatRentPrice(prop.priceText))}&image=${encodeURIComponent(prop.image || "")}&area=${prop.area}&type=${prop.type}`)}
-                    className="w-full py-2.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 active:scale-[.98] transition-all shadow-md flex items-center justify-center gap-2"
+                    className="w-full py-2.5 rounded-xl font-semibold text-sm text-white bg-blue-600 hover:bg-blue-500 dark:bg-teal-500 dark:hover:bg-teal-400 active:scale-[.98] transition-all shadow-md flex items-center justify-center gap-2"
                   >View Details →</button>
                 </div>
               </div>
@@ -231,7 +231,7 @@ function StatesRent() {
               <button disabled={page === 1} onClick={() => setPage(page - 1)} className="px-5 py-2.5 rounded-xl bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 font-semibold text-sm hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">← Prev</button>
               <div className="flex gap-1.5">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
-                  <button key={p} onClick={() => setPage(p)} className={`w-9 h-9 rounded-xl text-sm font-bold transition-all ${p === page ? "bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-md" : "bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600"}`}>{p}</button>
+                  <button key={p} onClick={() => setPage(p)} className={`w-9 h-9 rounded-xl text-sm font-bold transition-all ${p === page ? "bg-blue-600 dark:bg-teal-500 text-white shadow-md shadow-blue-500/30 dark:shadow-teal-500/30" : "bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600"}`}>{p}</button>
                 ))}
               </div>
               <button disabled={page === totalPages} onClick={() => setPage(page + 1)} className="px-5 py-2.5 rounded-xl bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 font-semibold text-sm hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">Next →</button>

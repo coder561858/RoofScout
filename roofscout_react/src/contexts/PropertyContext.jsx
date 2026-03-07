@@ -85,7 +85,7 @@ export function PropertyProvider({ children }) {
     setRefreshTrigger(prev => prev + 1);
   };
 
-    const [mockiProperties, setMockiProperties] = useState([]);
+  const [mockiProperties, setMockiProperties] = useState([]);
 
   // Mocki Fetch (Once)
   useEffect(() => {
@@ -129,7 +129,7 @@ export function PropertyProvider({ children }) {
       try {
         let backendProperties = [];
         try {
-          const res = await fetch(`http://localhost:5000/api/properties?t=${Date.now()}`);
+          const res = await fetch(`http://localhost:5000/api/properties?listingType=Sell&t=${Date.now()}`);
           const data = await res.json();
           if (data.success) {
             backendProperties = data.properties.map(p => ({
