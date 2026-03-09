@@ -183,28 +183,6 @@
       "createdAt": "2026-03-04"
     },
     {
-      "id": 6,
-      "title": "Modern 2F",
-      "type": "plot",
-      "listingType": "Sell",
-      "price": 5000000,
-      "area": 1200,
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "state": "Punjab",
-      "address": "punjab",
-      "description": "",
-      "status": "Available",
-      "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800",
-      "owner": {
-        "name": "dead",
-        "email": "dead34@gmail.com",
-        "phone": "9876543210"
-      },
-      "userId": 7,
-      "createdAt": "2026-03-04"
-    },
-    {
       "id": 7,
       "title": "2BHK Apartment",
       "type": "apartment / flat",
@@ -456,6 +434,28 @@
       },
       "userId": 8,
       "createdAt": "2026-03-07"
+    },
+    {
+      "id": 17,
+      "title": "moderrr",
+      "type": "plot",
+      "listingType": "Sell",
+      "price": 5000000,
+      "area": 3000,
+      "bedrooms": 0,
+      "bathrooms": 0,
+      "state": "Punjab",
+      "address": "Punjab",
+      "description": "",
+      "status": "Available",
+      "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800",
+      "owner": {
+        "name": "Aadi",
+        "email": "aadi@gmail.com",
+        "phone": "9876543210"
+      },
+      "userId": 8,
+      "createdAt": "2026-03-09"
     }
   ],
   "requests": [

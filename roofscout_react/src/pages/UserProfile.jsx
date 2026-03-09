@@ -163,7 +163,13 @@ function UserProfile() {
                         id={id}
                         className={inputCls}
                         value={formData[key]}
-                        onChange={e => setFormData({ ...formData, [key]: e.target.value })}
+                        onChange={e => {
+                          let val = e.target.value;
+                          if (key === 'phone') {
+                            val = val.replace(/\D/g, '').slice(0, 10);
+                          }
+                          setFormData({ ...formData, [key]: val });
+                        }}
                         placeholder={placeholder}
                       />
                     </div>

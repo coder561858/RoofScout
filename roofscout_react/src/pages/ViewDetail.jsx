@@ -21,7 +21,8 @@ function ViewDetail() {
 
   const [propertyData, setPropertyData] = useState({
     title: '', priceText: '', desc: '', address: '', location: '', type: '',
-    area: '', beds: '', baths: '', garages: '', image: '', houseId: '', owner: 'Unknown'
+    area: '', beds: '', baths: '', garages: '', image: '', houseId: '', owner: 'Unknown',
+    ownerEmail: '', userId: ''
   });
 
   const [loggedUser, setLoggedUser] = useState('');
@@ -78,7 +79,8 @@ function ViewDetail() {
               baths: prop.bathrooms || prev.baths,
               image: prop.image || prev.image,
               owner: prop.owner?.name || prop.owner || prev.owner,
-              ownerEmail: prop.owner?.email || prev.ownerEmail
+              ownerEmail: prop.owner?.email || prev.ownerEmail,
+              userId: prop.userId || prev.userId
             }));
           }
         } catch (error) {
@@ -395,9 +397,26 @@ function ViewDetail() {
                       if (!isUserLoggedIn()) {
                         alert("Please login first to proceed with the transaction.");
                         navigate('/login');
-                      } else {
-                        navigate(`/property-payment/${propertyData.houseId}`, { state: { propertyData } });
+                        return;
                       }
+
+                      const { data: sessionData } = localAuth.getSession();
+                      const currentEmail = sessionData.session?.user?.email;
+                      const currentUserId = sessionData.session?.user?.id;
+                      const displayName = sessionData.session?.user?.name || sessionData.session?.user?.username || sessionStorage.getItem("loggedUser");
+
+                      const isOwner =
+                        (propertyData.userId && currentUserId && String(propertyData.userId) === String(currentUserId)) ||
+                        (propertyData.ownerEmail && currentEmail && propertyData.ownerEmail.toLowerCase() === currentEmail.toLowerCase()) ||
+                        (propertyData.owner?.email && currentEmail && propertyData.owner.email.toLowerCase() === currentEmail.toLowerCase()) ||
+                        (propertyData.owner && displayName && (typeof propertyData.owner === 'string' ? propertyData.owner : propertyData.owner.name).toLowerCase() === displayName.toLowerCase());
+
+                      if (isOwner) {
+                        alert("Hold on! You are the owner of this property. You cannot buy or rent your own listing.");
+                        return;
+                      }
+
+                      navigate(`/property-payment/${propertyData.houseId}`, { state: { propertyData } });
                     }}
                     className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-black text-lg py-4 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2"
                   >

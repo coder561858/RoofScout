@@ -101,6 +101,7 @@ function Rent() {
       balcony: false,
     }
   });
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     if (editId) {
@@ -126,6 +127,21 @@ function Rent() {
   const handleChange = (e) => setFormData({ ...formData, [e.target.id]: e.target.value });
   const handleAmenityToggle = (key) =>
     setFormData({ ...formData, amenities: { ...formData.amenities, [key]: !formData.amenities[key] } });
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size should be less than 5MB");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -155,7 +171,7 @@ function Rent() {
         address,
         description: `${bhk} ${furnishing} property for rent`,
         status: "Available",
-        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+        image: selectedImage || "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
         owner: {
           name: session.user.name || session.user.username,
           email: session.user.email,
@@ -359,9 +375,10 @@ function Rent() {
                   <div className={`border-2 border-dashed rounded-xl p-6 text-center transition-colors ${theme === 'dark' ? 'border-gray-600 hover:border-purple-400/60' : 'border-gray-300 hover:border-purple-400'
                     }`}>
                     <div className="text-4xl mb-2">📸</div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Upload property photos (optional)</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Upload property photo</p>
                     <input
-                      type="file" id="propertyPhotos" name="propertyPhotos" multiple
+                      type="file" id="propertyPhotos" name="propertyPhotos" accept="image/*"
+                      onChange={handleImageChange}
                       className="block w-full text-sm text-gray-500 dark:text-gray-400
                                   file:mr-4 file:py-2 file:px-5 file:rounded-full file:border-0
                                   file:text-sm file:font-semibold
@@ -370,6 +387,18 @@ function Rent() {
                                   dark:file:bg-purple-900/50 dark:file:text-purple-300
                                   dark:hover:file:bg-purple-800/50 cursor-pointer"
                     />
+                    {selectedImage && (
+                      <div className="mt-4 relative inline-block">
+                        <img src={selectedImage} alt="Preview" className="h-32 w-auto rounded-lg shadow-md border border-gray-200 dark:border-gray-600" />
+                        <button
+                          type="button"
+                          onClick={() => setSelectedImage(null)}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-lg hover:bg-red-600 transition-colors"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </SectionCard>
 

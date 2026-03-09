@@ -16,15 +16,48 @@ function PropertyPayment() {
     const [tenureYears, setTenureYears] = useState(15);
     const [isProcessing, setIsProcessing] = useState(false);
     const [theme, setTheme] = useTheme();
+    const [cardDetails, setCardDetails] = useState({ number: '', expiry: '', cvv: '', name: '' });
 
     // Load user
     const [loggedUser, setLoggedUser] = useState('Guest');
     useEffect(() => {
         const { data } = localAuth.getSession();
         if (data.session?.user) {
-            setLoggedUser(data.session.user.email || 'User');
+            const user = data.session.user;
+            const currentUsername = user.username || user.name || user.email || 'User';
+            setLoggedUser(currentUsername);
+
+            // Safety check: Prevents owners from buying their own property
+            const displayName = user.username || user.name || user.email || 'User';
+            const isOwner = (propertyData?.userId && String(propertyData.userId) === String(user.id)) ||
+                (propertyData?.owner?.email && user.email && propertyData.owner.email.toLowerCase() === user.email.toLowerCase()) ||
+                (propertyData?.ownerEmail && user.email && propertyData.ownerEmail.toLowerCase() === user.email.toLowerCase()) ||
+                (propertyData?.owner && displayName && (typeof propertyData.owner === 'string' ? propertyData.owner : propertyData.owner.name).toLowerCase() === displayName.toLowerCase());
+
+            if (isOwner) {
+                alert("You cannot buy or rent your own property!");
+                navigate('/userdashboard');
+            }
         }
-    }, []);
+    }, [propertyData, navigate]);
+
+    const handleCardInputChange = (e) => {
+        const { id, value } = e.target;
+        let val = value;
+        if (id === 'cardNumber') {
+            val = value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
+            setCardDetails(prev => ({ ...prev, number: val }));
+        } else if (id === 'expiry') {
+            val = value.replace(/\D/g, '');
+            if (val.length >= 2) val = val.slice(0, 2) + '/' + val.slice(2, 4);
+            setCardDetails(prev => ({ ...prev, expiry: val }));
+        } else if (id === 'cvv') {
+            val = value.replace(/\D/g, '').slice(0, 3);
+            setCardDetails(prev => ({ ...prev, cvv: val }));
+        } else if (id === 'cardName') {
+            setCardDetails(prev => ({ ...prev, name: val }));
+        }
+    };
 
     if (!propertyData) {
         return (
@@ -247,7 +280,7 @@ function PropertyPayment() {
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Card Number</label>
                                             <div className="relative">
-                                                <input required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 pl-12 focus:ring-2 focus:ring-blue-500 outline-none dark:text-white transition-all" />
+                                                <input required type="text" id="cardNumber" placeholder="0000 0000 0000 0000" value={cardDetails.number} onChange={handleCardInputChange} className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 pl-12 focus:ring-2 focus:ring-blue-500 outline-none dark:text-white transition-all" />
                                                 <CreditCard className="absolute left-4 top-3.5 text-gray-400" size={20} />
                                             </div>
                                         </div>
@@ -255,17 +288,17 @@ function PropertyPayment() {
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Expiry Date</label>
-                                                <input required type="text" placeholder="MM/YY" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none dark:text-white transition-all" />
+                                                <input required type="text" id="expiry" placeholder="MM/YY" value={cardDetails.expiry} onChange={handleCardInputChange} className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none dark:text-white transition-all" />
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CVC</label>
-                                                <input required type="password" placeholder="123" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none dark:text-white transition-all" />
+                                                <input required type="password" id="cvv" placeholder="123" value={cardDetails.cvv} onChange={handleCardInputChange} className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none dark:text-white transition-all" />
                                             </div>
                                         </div>
 
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Cardholder Name</label>
-                                            <input required type="text" placeholder="John Doe" className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none dark:text-white transition-all" />
+                                            <input required type="text" id="cardName" placeholder="John Doe" value={cardDetails.name} onChange={handleCardInputChange} className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none dark:text-white transition-all" />
                                         </div>
                                     </div>
 

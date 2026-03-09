@@ -13,6 +13,7 @@ function Payment() {
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [theme, setTheme] = useTheme();
   const [loggedUser, setLoggedUser] = useState('');
+  const [cardDetails, setCardDetails] = useState({ number: '', expiry: '', cvv: '', name: '' });
 
   // Helper function for localStorage
   const getStoredJSON = (key, defaultVal = []) => {
@@ -179,6 +180,24 @@ function Payment() {
     }, 2000); // 2 second delay
   };
 
+    const handleCardInputChange = (e) => {
+    const { id, value } = e.target;
+    let val = value;
+    if (id === 'cardNumber') {
+      val = value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
+      setCardDetails(prev => ({ ...prev, number: val }));
+    } else if (id === 'expiry') {
+      val = value.replace(/\D/g, '');
+      if (val.length >= 2) val = val.slice(0, 2) + '/' + val.slice(2, 4);
+      setCardDetails(prev => ({ ...prev, expiry: val }));
+    } else if (id === 'cvv') {
+      val = value.replace(/\D/g, '').slice(0, 3);
+      setCardDetails(prev => ({ ...prev, cvv: val }));
+    } else if (id === 'cardName') {
+      setCardDetails(prev => ({ ...prev, name: value }));
+    }
+  };
+
   if (loading) return <div className="flex h-screen items-center justify-center dark:bg-gray-900 dark:text-white">Loading...</div>;
 
   return (
@@ -273,21 +292,21 @@ function Payment() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Card Number</label>
-                    <input required type="text" placeholder="0000 0000 0000 0000" className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" />
+                    <input required type="text" id="cardNumber" placeholder="0000 0000 0000 0000" value={cardDetails.number} onChange={handleCardInputChange} className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" />
                   </div>
                   <div className="flex gap-4">
                     <div className="w-1/2">
                       <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Expiry</label>
-                      <input required type="text" placeholder="MM/YY" className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" />
+                      <input required type="text" id="expiry" placeholder="MM/YY" value={cardDetails.expiry} onChange={handleCardInputChange} className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" />
                     </div>
                     <div className="w-1/2">
                       <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">CVV</label>
-                      <input required type="password" placeholder="123" className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" />
+                      <input required type="password" id="cvv" placeholder="123" value={cardDetails.cvv} onChange={handleCardInputChange} className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Name on Card</label>
-                    <input required type="text" placeholder="John Doe" className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" />
+                    <input required type="text" id="cardName" placeholder="John Doe" value={cardDetails.name} onChange={handleCardInputChange} className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" />
                   </div>
                 </div>
               )}
